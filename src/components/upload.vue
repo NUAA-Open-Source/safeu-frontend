@@ -73,10 +73,10 @@
                 default: true
             },
             authServerUrl: {
-                default: 'http://106.14.124.144:2368'
+                default: ''
             },
             extensions: {
-                default: 'jpg,png,jpeg,mp4,mov,MP4,MOV'
+                default: 'jpg,png,jpeg,doc,xls,docx,pdf,ppt,pptx'
             },
             maxSize: {
                 default: '500mb'
@@ -91,6 +91,9 @@
                 default: Function
             },
             onFileUploaded: {
+                default: Function
+            },
+            onUploadComplete: {
                 default: Function
             },
             onSuccess: {
@@ -216,7 +219,6 @@
                     init: {
                         PostInit: () => {
                             that.uploader = myPlupload
-                            console.log('sfs-vue-aliyun-upload-init')
                             that.onInit(myPlupload)
                         },
                         FilesAdded: (up, files) => {
@@ -273,6 +275,9 @@
                         },
                         FileUploaded: (up, file, info) => {
                             that.onFileUploaded(up, file, info)
+                        },
+                        UploadComplete: (up, files) => {
+                            that.onUploadComplete(up, files)
                         },
                         Error: (up, err) => {
                             that.onError(up, err)
