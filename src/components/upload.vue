@@ -38,6 +38,7 @@
         data() {
             return {
                 fileList: [],
+                fileUUIDList: [],
                 ossFile: '',
                 accessid: '',
                 accesskey: '',
@@ -193,7 +194,7 @@
                     callback: this.callbackbody,
                 }
                 up.setOption({
-                    url: this.host,
+                    url: "http://" + this.host,
                     multipart_params: newMultipartParams,
                 });
                 up.start();
@@ -274,9 +275,18 @@
                             that.onProgress(file.id, file.percent)
                         },
                         FileUploaded: (up, file, info) => {
+                            that.fileUUIDList.push(JSON.parse(info.response).uuid)
                             that.onFileUploaded(up, file, info)
                         },
                         UploadComplete: (up, files) => {
+                            var xhr = new XMLHttpRequest()
+                            xhr.open("POST", "http://120.24.73.105:8080/api/upload/finish", true)
+                            xhr.onreadystatechange = function() {
+                                if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                                    console.log(JSON.parse(xhr.response).recode)
+                                }
+                            }
+                            xhr.send(JSON.stringify({"files": that.fileUUIDList}))
                             that.onUploadComplete(up, files)
                         },
                         Error: (up, err) => {
