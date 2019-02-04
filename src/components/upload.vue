@@ -1,4 +1,5 @@
 <template>
+    
     <a id="selectfiles" v-bind:class="['upload-container', fileList.length == 0 ? 'justify-content-center' : 'justify-content-space-between']">
         <div class="upload-nofiles-container" v-if="fileList.length == 0">
             <font-awesome-icon icon="cloud-upload-alt" size="4x"/>
@@ -24,7 +25,8 @@
             </div>
         </div>
         <div class="browse-more-button-container" v-if="fileList.length != 0">
-                <p class="browse-button">继续添加</p>
+            <p class="browse-button">继续添加</p>
+            <button class="start-upload-button" v-on:click.stop="$event.preventDefault();uploader.start()">开始上传</button>
         </div>
     </a>
 </template>

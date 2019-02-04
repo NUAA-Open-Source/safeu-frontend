@@ -47,6 +47,11 @@
 }
 
 .browse-more-button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     position: relative;
     bottom: 0;
 }
@@ -141,4 +146,13 @@
     border-radius: 6px;
     padding: 6px 12px 6px 12px;
     margin-top: 1em;
+}
+
+.start-upload-button {
+    border: 1px solid #3596ff;
+    color: #3596ff;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 6px 12px 6px 12px;
+    margin: 1em 0 1em 1em    
 }
