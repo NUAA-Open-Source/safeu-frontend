@@ -1,10 +1,30 @@
 <template>
-    <a id="selectfiles" class="upload-container">
+    <a id="selectfiles" v-bind:class="['upload-container', fileList.length == 0 ? 'justify-content-center' : 'justify-content-space-between']">
         <div class="upload-nofiles-container" v-if="fileList.length == 0">
             <font-awesome-icon icon="cloud-upload-alt" size="4x"/>
             <p class="upload-tip">拖拽上传</p>
             <p class="upload-tip">单次最多上传 20 个文件，总大小不超过 50M</p>
             <p class="browse-button">浏览文件夹</p>
+        </div>
+        <div class="upload-files-container" v-else>
+            <div class="upload-files">
+                <div class="upload-files-item" v-for="item in fileList" v-bind:key="item.id">
+                    <div class="upload-files-item-left">
+                        <img v-if="showPreview" :src="item.data_base64" style="width: 36px" />
+                    </div>
+                    <div class="upload-files-item-right">
+                        <p>{{item.name}}</p>
+                        <div class="upload-files-item-progress">
+                            <div class="progress-bar" v-bind:ref="'progress_'+item.id" style="width: 0">
+                            </div>
+                            <span v-bind:ref="'progress_txt_'+item.id">{{Math.floor(item.size/1024) + 'KB'}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="browse-more-button-container" v-if="fileList.length != 0">
+                <p class="browse-button">继续添加</p>
         </div>
     </a>
 </template>
