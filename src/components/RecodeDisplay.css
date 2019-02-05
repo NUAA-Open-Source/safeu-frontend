@@ -1,0 +1,29 @@
+.recode-container {
+    width: 60%;
+    height: 60%;
+    margin-left: 20%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.recode-top-hint {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.recode-box {
+    width: 160px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 20px 4px 20px;
+    border: 1px solid #cccccc;
+    border-radius: 12px;
+    font-size: 28px;
+    font-weight: 800;
+    color: #cd365f;
+}

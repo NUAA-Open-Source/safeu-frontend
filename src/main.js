@@ -5,6 +5,7 @@ import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import App from './App.vue'
 import UploadView from './UploadView.vue'
+import UploadedRecodeView from './UploadedRecodeView'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -21,8 +22,8 @@ Vue.config.productionTip = false
 let router = new VueRouter({
   routes: [
     {path: '/', component: UploadView},
+    {path: '/recode', component: UploadedRecodeView},
   ],
-  mode: 'history',
 })
 
 new Vue({

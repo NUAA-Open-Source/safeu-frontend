@@ -210,6 +210,9 @@
                 });
                 up.start();
             },
+            jumpToRecodeDiplay(recode) {
+                this.$router.push({path: '/recode', query: {code: recode}})
+            },
             upload() {
                 let that = this
                 let myPlupload = new plupload.Uploader({
@@ -291,10 +294,11 @@
                         },
                         UploadComplete: (up, files) => {
                             var xhr = new XMLHttpRequest()
-                            xhr.open("POST", "http://120.24.73.105:8080/api/upload/finish", true)
+                            xhr.open("POST", "", true)
                             xhr.onreadystatechange = function() {
                                 if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-                                    console.log(JSON.parse(xhr.response).recode)
+                                    var recode = JSON.parse(xhr.response).recode
+                                    that.jumpToRecodeDiplay(recode)
                                 }
                             }
                             xhr.send(JSON.stringify({"files": that.fileUUIDList}))
