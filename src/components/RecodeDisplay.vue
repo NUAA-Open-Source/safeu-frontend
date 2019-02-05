@@ -4,17 +4,20 @@
         <div class="recode-box">
             {{recode}}
         </div>
+        <vue-qr text="https://www.baidu.com"></vue-qr>
         <p>您可以保存或分享此二维码</p>
     </div>
 </template>
 
 <script>
-export default {
-    name: 'RecodeDisplay',
-    props: {
-        recode: String,
+    import VueQr from 'vue-qr';
+    export default {
+        components: {VueQr},
+        name: 'RecodeDisplay',
+        props: {
+            recode: String,
+        }
     }
-}
 </script>
 
 <style>
