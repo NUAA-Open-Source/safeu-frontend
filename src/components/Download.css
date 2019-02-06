@@ -14,7 +14,7 @@
     font-weight: 800;
 }
 
-.download-input {
+.download-recode-input {
     width: 160px;
     text-align: center;
     padding: 4px 20px 4px 20px;
@@ -24,6 +24,17 @@
     font-size: 28px;
     font-weight: 800;
     color: #cd365f;
+}
+
+.download-password-input {
+    margin-top: 20px;
+    padding: 4px 4px 4px 4px;
+    width: 160px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 20px;
+    outline: none;
+    text-align: center;
 }
 
 .download-button {
