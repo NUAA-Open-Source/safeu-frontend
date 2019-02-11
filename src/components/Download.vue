@@ -10,9 +10,14 @@
 <script>
 export default {
     name: "download",
+    props: {
+        code: {
+            default: ''
+        }
+    },
     data() {
         return {
-            recode: '',
+            recode: this.code,
             needpassword: false,
             password: '',
         }
