@@ -1,0 +1,25 @@
+.filelist-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    margin-top: 40px;
+    margin-left: 20%;
+    min-height: 50%;
+}
+
+.filelist-item {
+    width: 90%;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.download-files-item-btn a {
+    padding: 4px 4px;
+    color: white;
+    background: #1ab20a;
+    border-radius: 4px;
+}

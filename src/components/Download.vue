@@ -20,26 +20,41 @@ export default {
     methods: {
         display() {
             var sha256 = require("js-sha256").sha256
-            var password_sha256 = sha256(this.recode + sha256(this.password))
+            var password_sha256 = sha256(this.password)
             this.sendValidationRequest(password_sha256)
         },
 
         sendValidationRequest(password) {
             const xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("POST", "", true)
+            var that = this
+            xmlhttp.open("POST", "" + this.recode, true)
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                     if  (xmlhttp.status == 200) {
+                        console.log(xmlhttp.response)
                         var token = JSON.parse(xmlhttp.response).token
-                        var file_items = JSON.parse(xmlhttp.response).items
+                        var filelist = JSON.parse(xmlhttp.response).items
                         window.localStorage.setItem('token', token)
-                        this.$router.push({path: '/filelist', query: {files: file_items}})
-                    } else if (xmlhttp.status == 401) {
-                        this.needpassword = true
+                        that.$router.push({path: '/filelist', query: {filelist: filelist}})
+                    } else if (xmlhttp.status === 401) {
+                        that.needpassword = true
+                        console.log(xmlhttp.response)
+                        console.log(that.needpassword)
+                    } else {
+                        console.log(xmlhttp.response)
                     }
                 }
             }
-            xmlhttp.send(JSON.stringify({"password": password}))
+            if (that.needpassword) {
+                console.log(password)
+                xmlhttp.send(JSON.stringify({"password": password}))
+            } else {
+                xmlhttp.send(null)
+            }
+        },
+
+        setNeedPasswordTrue() {
+            this.needpassword = true
         }
     }
 }
