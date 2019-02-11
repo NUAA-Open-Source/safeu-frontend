@@ -10,7 +10,7 @@
                     <p>{{item.OriginalName}}</p>
                 </div>
                 <div class="download-files-item-btn">
-                    <a :href="item.Host">下载</a>
+                    <a v-on:click="downloadfile(item.Host, item.OriginalName)">下载</a>
                 </div>
             </div>
         </div>
@@ -30,7 +30,26 @@ export default {
         }
     },
     methods: {
-
+        downloadfile(url, filename) {
+            console.log(url)
+            var xhr = new XMLHttpRequest()
+            xhr.open("GET", url)
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xhr.responseType = "blob";
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var link = document.createElement('a');
+                    var file = new Blob([xhr.response], { type: '' });
+                    link.href = window.URL.createObjectURL(file);
+                    link.download = filename;
+                    link.click(); 
+                }
+            }
+            xhr.addEventListener("loadend", function(ev) {
+                console.log("下载完成")
+            });
+            xhr.send()
+        }
     }
 }
 </script>
