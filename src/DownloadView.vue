@@ -1,7 +1,7 @@
 <template>
     <div id="downloadview">
         <Navbar/>
-        <Download/>
+        <Download :code="this.$route.params.recode"/>
     </div>
 </template>
 
