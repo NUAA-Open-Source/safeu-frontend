@@ -7,7 +7,7 @@ import App from './App.vue'
 import UploadView from './UploadView.vue'
 import UploadedRecodeView from './UploadedRecodeView'
 import DownloadView from './DownloadView.vue'
-import Filelist from './Filelist.vue'
+import FilelistView from './FilelistView.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -25,7 +25,8 @@ let router = new VueRouter({
   mode: 'history',
   routes: [
     {path: '/download', component: DownloadView},
-    {path: '/filelist', component: Filelist},
+    {path: '/download/:recode', component: DownloadView},
+    {path: '/filelist', component: FilelistView},
     {path: '/', component: UploadView},
     {path: '/recode', component: UploadedRecodeView},
   ],
