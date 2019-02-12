@@ -32,6 +32,7 @@
 
 <script>
     import plupload from 'plupload'
+    import _global from '../Global.vue'
     export default {
         name: "upload",
         data() {
@@ -74,7 +75,7 @@
                 default: true
             },
             authServerUrl: {
-                default: ''
+                default: _global.domain_url + 'upload/policy'
             },
             extensions: {
                 default: 'jpg,png,jpeg,doc,xls,docx,pdf,ppt,pptx,xlsx'
@@ -166,6 +167,7 @@
                     const e = eval;
                     const obj = e(`(${body})`);
                     this.host = obj.host;
+                    this.ossDir = obj.dir;
                     this.policyBase64 = obj.policy;
                     this.accessid = obj.accessid;
                     this.signature = obj.signature;
@@ -318,10 +320,12 @@
                         },
                         UploadComplete: (up, files) => {
                             var xhr = new XMLHttpRequest()
-                            xhr.open("POST", "", true)
+                            xhr.open("POST", _global.domain_url + "upload/finish", true)
                             xhr.onreadystatechange = function() {
                                 if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
                                     var recode = JSON.parse(xhr.response).recode
+                                    var owner_token = JSON.parse(xhr.response).owner
+                                    window.localStorage.setItem('owner_token', owner_token)
                                     that.jumpToRecodeDiplay(recode)
                                 }
                             }

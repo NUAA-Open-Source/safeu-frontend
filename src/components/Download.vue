@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import _global from '../Global.vue'
 export default {
     name: "download",
     props: {
@@ -32,7 +33,7 @@ export default {
         sendValidationRequest(password) {
             const xmlhttp = new XMLHttpRequest();
             var that = this
-            xmlhttp.open("POST", "" + this.recode, true)
+            xmlhttp.open("POST", _global.domain_url + "validation/" + this.recode, true)
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                     if  (xmlhttp.status == 200) {
