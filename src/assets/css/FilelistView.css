@@ -8,6 +8,11 @@
     min-height: 50%;
 }
 
+.filelist-container-title {
+    font-size: 28px;
+    font-weight: bold;
+}
+
 .filelist-item {
     width: 90%;
     margin-left: 5%;
@@ -15,6 +20,18 @@
     flex-direction: row;
     justify-content: start;
     align-items: center;
+}
+
+.download-files-item-left {
+    width: 10%;
+}
+
+.download-files-item-name {
+    width: 80%;
+}
+
+.download-files-item-btn {
+    width: 10%;
 }
 
 .download-files-item-btn a {
