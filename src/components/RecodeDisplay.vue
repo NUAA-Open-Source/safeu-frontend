@@ -15,12 +15,11 @@
             <a v-on:click="moresetting">> 更多设置</a>
         </div>
         <div class="more-setting-container" v-else>
-            <p class="recode-top-hint">自定义设置</p>
-            <p>加密</p>
-            <input type="checkbox" v-model="is_need_password">
-            <input type="text" v-model="password" v-if="is_need_password">
-            <button v-on:click="back">返回</button>
-            <button v-on:click="submit">确定</button>
+            <p class="setting-top-hint">自定义设置</p>
+            <p class="setting-title">加密<input type="checkbox" v-model="is_need_password" style="margin-left: 8px;"></p>
+            <input class="setting-password-input" type="password" placeholder="请输入加密密码" v-model="password" v-if="is_need_password">
+            <button class="setting-back-btn" v-on:click="back">返回</button>
+            <button class="setting-confirm-btn" v-on:click="submit">确定</button>
         </div>
     </div>
     
@@ -45,6 +44,13 @@
                 password: '',
                 new_recode: this.recode,
             }
+        },
+        mounted() {
+            this.$notification.open({
+                message: '上传成功',
+                description: '您上传的文件默认可下载 10 次，如需修改可至更多设置中',
+                icon: <a-icon type="smile" style="color: #108ee9" />,
+                });
         },
         methods: {
             editrecode() {
