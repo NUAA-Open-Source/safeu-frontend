@@ -1,6 +1,6 @@
 .container {
     width: 60%;
-    height: 65%;
+    min-height: 65%;
     margin-left: 20%;
     margin-top: 5%;
     display: flex;
@@ -16,6 +16,11 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
+}
+
+.alert {
+    width: 160px;
+    margin-top: 8px;
 }
 
 .recode-top-hint {
