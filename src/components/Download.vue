@@ -45,8 +45,18 @@ export default {
                     } else if (xmlhttp.status === 401) {
                         that.needpassword = true
                         console.log(xmlhttp.response)
+                        var error = JSON.parse(xmlhttp.response).error
+                        
+                        if (error == "Cannot get the password") {
+                            that.$message.info("该文件加密，请输入密码")
+                        } else if (error == "The password is not correct") {
+                            that.$message.error("密码输入错误")
+                        }
+                        
+                        console.log(xmlhttp.response)
                         console.log(that.needpassword)
-                    } else {
+                    } else if (xmlhttp.status === 404) {
+                        that.$message.error("提取码错误")
                         console.log(xmlhttp.response)
                     }
                 }
