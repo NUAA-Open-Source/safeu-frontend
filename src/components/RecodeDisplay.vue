@@ -7,9 +7,6 @@
                 <a v-on:click="editrecode" v-if="!is_editting_recode">修改</a>
                 <a v-on:click="finisheditrecode" v-else>完成</a>
             </div>
-            <a-alert class="alert" message="设置成功" type="success" showIcon v-if="alert_style == 1"/>
-            <a-alert class="alert" message="该提取码已存在" type="error" showIcon v-else-if="alert_style == 2"/>
-            <a-alert class="alert" message="设置失败" type="error" showIcon v-else-if="alert_style == 3"/>
             <vue-qr :text="qrcode_url" style="margin-top: 8px"></vue-qr>
             <p>您可以保存或分享此二维码</p>
             <a v-on:click="moresetting">> 更多设置</a>
@@ -40,7 +37,6 @@
                 is_editting_recode: false,
                 is_more_setting: false,
                 is_need_password: false,
-                alert_style: 0,
                 password: '',
                 new_recode: this.recode,
             }
@@ -71,13 +67,12 @@
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState == XMLHttpRequest.DONE) {
                             if (xhr.status == 200) {
-                                that.alert_style = 1;
-                                
+                                that.$message.success('设置成功');
                             } else if (xhr.status == 400) {
                                 if (JSON.parse(xhr.response).message == "reCode Repeat") {
-                                    that.alert_style = 2;
+                                    that.$message.error('该提取码已存在')
                                 } else {
-                                    that.alert_style = 3;
+                                    that.$message.error('设置失败')
                                 }
                             }
                         }
@@ -99,10 +94,16 @@
                 var xhr = new XMLHttpRequest()
                 var sha256 = require("js-sha256").sha256
                 var password_sha256 = sha256(this.password)
+                var that = this
                 var user_token = window.localStorage.getItem('owner_token')
                 xhr.open("POST", _global.domain_url + "password/" + this.new_recode, true)
                 xhr.onreadystatechange = function() {
-                    console.log(xhr.response)
+                    if (xhr.readyState == XMLHttpRequest.DONE) {
+                        if (xhr.status == 200) {
+                            that.$message.success('设置成功')
+                            that.is_more_setting = false
+                        }
+                    }
                 }
                 xhr.send(JSON.stringify({"user_token":user_token, "Auth": password_sha256}))
             }
