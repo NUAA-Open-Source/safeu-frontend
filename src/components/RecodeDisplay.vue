@@ -15,6 +15,9 @@
             <p class="setting-top-hint">自定义设置</p>
             <p class="setting-title">加密<input type="checkbox" v-model="is_need_password" style="margin-left: 8px;"></p>
             <input class="setting-password-input" type="password" placeholder="请输入加密密码" v-model="password" v-if="is_need_password">
+            
+            <p class="setting-title" style="margin-top: 12px">下载次数</p>
+            <input class="setting-download-count-input" type="text" placeholder="请输入下载次数" v-model="download_count"> 
             <button class="setting-back-btn" v-on:click="back">返回</button>
             <button class="setting-confirm-btn" v-on:click="submit">确定</button>
         </div>
@@ -39,14 +42,13 @@
                 is_need_password: false,
                 password: '',
                 new_recode: this.recode,
+                download_count: 10,
+                downcount_setting_status: 0,
+                password_setting_status: 0,
             }
         },
-        mounted() {
-            this.$notification.open({
-                message: '上传成功',
-                description: '您上传的文件默认可下载 10 次，如需修改可至更多设置中',
-                icon: <a-icon type="smile" style="color: #108ee9" />,
-                });
+        created() {
+            console.log(this.$refs)
         },
         methods: {
             editrecode() {
@@ -91,21 +93,46 @@
             },
 
             submit() {
-                var xhr = new XMLHttpRequest()
+                var xhr_password = new XMLHttpRequest()
+                var xhr_downloadcount = new XMLHttpRequest()
                 var sha256 = require("js-sha256").sha256
                 var password_sha256 = sha256(this.password)
                 var that = this
                 var user_token = window.localStorage.getItem('owner_token')
-                xhr.open("POST", _global.domain_url + "password/" + this.new_recode, true)
-                xhr.onreadystatechange = function() {
-                    if (xhr.readyState == XMLHttpRequest.DONE) {
-                        if (xhr.status == 200) {
-                            that.$message.success('设置成功')
-                            that.is_more_setting = false
+                xhr_password.open("POST", _global.domain_url + "password/" + this.new_recode, true)
+                xhr_downloadcount.open("POST", _global.domain_url + "downCount/" + this.new_recode, true)
+                xhr_password.onreadystatechange = function() {
+                    if (xhr_password.readyState == XMLHttpRequest.DONE) {
+                        if (xhr_password.status == 200) {
+                            that.password_setting_status = 1
+                            if (that.password_setting_status == 1 && that.downcount_setting_status == 1) {
+                                that.$message.success('设置成功')
+                                that.is_more_setting = false    
+                            } else if (that.password_setting_status == 0) {
+                                that.$message.error('密码设置失败')
+                            } else if (that.downcount_setting_status == 0) {
+                                that.$message.error('下载次数设置失败')
+                            }
                         }
                     }
                 }
-                xhr.send(JSON.stringify({"user_token":user_token, "Auth": password_sha256}))
+                xhr_downloadcount.onreadystatechange = function() {
+                    if (xhr_downloadcount.readyState == XMLHttpRequest.DONE) {
+                        if (xhr_downloadcount.status == 200) {
+                            that.downcount_setting_status = 1
+                            if (that.password_setting_status == 1 && that.downcount_setting_status == 1) {
+                                that.$message.success('设置成功')
+                                that.is_more_setting = false    
+                            } else if (that.password_setting_status == 0) {
+                                that.$message.error('密码设置失败')
+                            } else if (that.downcount_setting_status == 0) {
+                                that.$message.error('下载次数设置失败')
+                            }
+                        }
+                    }
+                }
+                xhr_password.send(JSON.stringify({"user_token":user_token, "Auth": password_sha256}))
+                xhr_downloadcount.send(JSON.stringify({"new_down_count": that.download_count, "user_token": user_token}))
             }
         }
     }
