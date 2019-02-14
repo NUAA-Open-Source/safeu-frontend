@@ -74,7 +74,7 @@
     font-weight: 700;
 }
 
-.setting-password-input {
+.setting-password-input, .setting-download-count-input {
     width: 80%;
     border:0;
     border-bottom:1px solid #ccc;
@@ -99,4 +99,27 @@
     border-radius: 8px;
     background: #3596ff;
     color: white;
+}
+
+.download-count-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    align-self: flex-start;
+    margin-left: 10%;
+}
+
+.download-count-btn {
+    width: 80px;
+    height: 40px;
+    margin-right: 10px;
+    border: 1px solid #1ab20a;
+    border-radius: 4px;
+
+}
+
+.selected {
+    color: white;
+    background: #1ab20a;    
 }
