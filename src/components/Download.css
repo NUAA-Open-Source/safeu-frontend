@@ -27,11 +27,12 @@
 }
 
 .download-password-input {
+    height: 52px;
     margin-top: 20px;
     padding: 4px 4px 4px 4px;
     width: 160px;
     border: 1px solid #cccccc;
-    border-radius: 5px;
+    border-radius: 12px;
     font-size: 20px;
     outline: none;
     text-align: center;
