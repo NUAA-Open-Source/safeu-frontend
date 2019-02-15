@@ -1,0 +1,22 @@
+.buttons-container {
+    text-align: center;
+    margin: 50px 0px 40px
+}
+.imgs-container {
+    text-align: center;
+    margin: 50px 0px 40px
+}
+.main-buttons {
+    font-size: 50px;
+    background: rgb(64, 169, 255);
+    padding:61px;
+    border-radius: 35px;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    margin: 15px 10% 15px
+}
+img {
+    margin: 20px 0px 20px
+}
