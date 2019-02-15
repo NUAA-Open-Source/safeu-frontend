@@ -5,6 +5,7 @@ import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import App from './App.vue'
 import UploadView from './UploadView.vue'
+import HomeView from './HomeView.vue'
 import UploadedRecodeView from './UploadedRecodeView'
 import DownloadView from './DownloadView.vue'
 import FilelistView from './FilelistView.vue'
@@ -27,7 +28,8 @@ let router = new VueRouter({
     {path: '/download', component: DownloadView},
     {path: '/download/:recode', component: DownloadView},
     {path: '/filelist', component: FilelistView},
-    {path: '/', component: UploadView},
+    {path: '/upload', component: UploadView},
+    {path: '/', component: HomeView},
     {path: '/recode', component: UploadedRecodeView},
   ],
 })
