@@ -81,7 +81,7 @@
                 default: 'jpg,png,jpeg,doc,xls,docx,pdf,ppt,pptx,xlsx'
             },
             maxSize: {
-                default: '500mb'
+                default: '50mb'
             },
             prevent_duplicates: {
                 default: true
@@ -256,9 +256,14 @@
                         FilesAdded: (up, files) => {
                             let fileTotal = files.total
                             let idx = 0
+                            
                             plupload.each(files, (file) => {
                                 idx++
                                 function result_call() {
+                                    if (that.fileList.length == 20) {
+                                        that.$message.error('最多上传 20 个文件')
+                                        return false
+                                    }
                                     that.fileList.push(_file)
                                     if (idx === fileTotal)
                                         that.onFilesAdded(up, files)
