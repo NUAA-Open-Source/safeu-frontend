@@ -96,7 +96,7 @@ export default {
                     var urls = []
                     for (var i in that.selected_files_handled) {
                         xhr[i] = new XMLHttpRequest()
-                        urls[i] = _global.domain_url + "downCount/" + that.recode + "?bucket=" + that.selected_files_handled[i].bucket + "&path=" + that.selected_files_handled.path
+                        urls[i] = _global.domain_url + "downCount/" + that.recode + "?bucket=" + that.selected_files_handled[i].bucket + "&path=" + that.selected_files_handled[i].path
                         xhr[i].open("GET", urls[i], true)
                         xhr[i].send()
                     }
