@@ -24,9 +24,6 @@
                 <button class="zip-downloading-btn" v-else><a-spin />正在打包中...</button>
             </div>
         </div>
-        <div class="zip-loading-container" v-if="is_zip_loading">
-
-        </div>
     </div>
 </template>
 
@@ -45,6 +42,15 @@ export default {
             filelist: this.$route.query.filelist,
             recode: this.$route.query.filelist[0].ReCode,
             selected_files: [],
+        }
+    },
+    watch: {
+        'selected_files': function() {
+            if (this.selected_files.length == this.filelist.length) {
+                this.is_all_selected = true
+            } else {
+                this.is_all_selected = false
+            }
         }
     },
     methods: {
@@ -68,7 +74,6 @@ export default {
         },
 
         downloadfile(url, filename) {
-            console.log(url)
             var xhr = new XMLHttpRequest()
             xhr.open("GET", url)
             xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
