@@ -10,7 +10,7 @@
             <div class="upload-files">
                 <div class="upload-files-item" v-for="item in fileList" v-bind:key="item.id">
                     <div class="upload-files-item-left">
-                        <img v-if="showPreview" :src="item.data_base64" style="width: 36px" />
+                        <img v-if="showPreview" :src="item.data_base64" style="width: 36px; height: 36px;" />
                     </div>
                     <div class="upload-files-item-right">
                         <p>{{item.name}}</p>
