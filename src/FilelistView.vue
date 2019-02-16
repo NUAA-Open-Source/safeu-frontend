@@ -130,6 +130,10 @@ export default {
         },
 
         zippart() {
+            if (this.selected_files.length == 0) {
+                this.$message.error('请选择需要打包的文件')
+                return
+            }
             this.is_zip_loading = true
             var xhr = new XMLHttpRequest()
             var items = []

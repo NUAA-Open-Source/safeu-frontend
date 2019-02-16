@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="out-container">
         <div class="recode-container" v-if="!is_more_setting">
             <p class="recode-top-hint">您的提取码</p>
             <div class="recode-input-row">
@@ -76,7 +76,7 @@
                         if (xhr.readyState == XMLHttpRequest.DONE) {
                             if (xhr.status == 200) {
                                 window.localStorage.removeItem(that.recode)
-                                window.localStorage.setItem(that.new_recode, JSON.stringify({"recode": that.new_recode, "editedAt": Date.parse(new Date())}))
+                                window.localStorage.setItem("recode-" + that.new_recode, JSON.stringify({"recode": that.new_recode, "editedAt": Date.parse(new Date())}))
                                 that.recode = that.new_recode
                                 that.$route.query.code = that.new_recode
                                 that.$message.success('设置成功');
