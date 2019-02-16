@@ -18,7 +18,7 @@ export default {
     },
     data() {
         return {
-            is_user_authored: window.localStorage.getItem(this.$route.query.code) != null ? true : false,
+            is_user_authored: window.localStorage.getItem("recode-" + this.$route.query.code) != null ? true : false,
         }
     },
     mounted() {
@@ -33,6 +33,9 @@ export default {
 #uploadedrecodeview {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

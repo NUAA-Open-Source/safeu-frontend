@@ -6,7 +6,7 @@
             :pagination=false
         >
         <template slot="recode" slot-scope="recode">
-            <a :href="'/recode?code='+recode">recode</a>
+            <a :href="'/recode?code='+recode">{{recode}}</a>
         </template>
         <template slot="download_url" slot-scope="download_url">
             <a :href="download_url">提取</a>
@@ -39,7 +39,7 @@ export default {
         var localStorage = window.localStorage
         for (var i = 0; i < localStorage.length; i++) {
             var key = localStorage.key(i)
-            if (["token", "owner_token"].indexOf(key) == -1) {
+            if (key.indexOf("recode-") == 0) {
                 var value = JSON.parse(localStorage.getItem(key))
                 var recode = value.recode
                 var download_url = "/download/" + value.recode
