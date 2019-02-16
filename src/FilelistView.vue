@@ -16,7 +16,7 @@
                     <p style="margin-bottom: 0">{{item.OriginalName}}</p>
                 </div>
                 <div class="download-files-item-btn">
-                    <a v-on:click="downloadfile(item.Host, item.OriginalName)">下载</a>
+                    <a v-on:click="downloadfile(item.Host, item.OriginalName, false)">下载</a>
                 </div>
             </div>
             <div class="zip-download-row">
@@ -42,6 +42,7 @@ export default {
             filelist: this.$route.query.filelist,
             recode: this.$route.query.filelist[0].ReCode,
             selected_files: [],
+            selected_files_handled: [],
         }
     },
     watch: {
@@ -73,7 +74,7 @@ export default {
             }
         },
 
-        downloadfile(url, filename) {
+        downloadfile(url, filename, iszip) {
             var xhr = new XMLHttpRequest()
             xhr.open("GET", url)
             xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
@@ -90,7 +91,23 @@ export default {
                 }
             }
             xhr.addEventListener("loadend", function(ev) {
-                console.log("下载完成")
+                if (iszip) {
+                    var xhr = []
+                    var urls = []
+                    for (var i in that.selected_files_handled) {
+                        xhr[i] = new XMLHttpRequest()
+                        urls[i] = _global.domain_url + "downCount/" + that.recode + "?bucket=" + that.selected_files_handled[i].bucket + "&path=" + that.selected_files_handled.path
+                        xhr[i].open("GET", urls[i], true)
+                        xhr[i].send()
+                    }
+                } else {
+                    var bucket = url.split("://")[1].split(".")[0]
+                    var path = url.split("://")[1].split(".").splice(1).join(".").split("/").slice(1).join("/")
+                    var downcounturl = _global.domain_url + "downCount/" + that.recode + "?bucket=" + bucket + "&path=" + path
+                    var xhr = new XMLHttpRequest()
+                    xhr.open("GET", downcounturl, true)
+                    xhr.send()
+                }
             });
             xhr.send()
         },
@@ -113,6 +130,7 @@ export default {
                 var original_name = file.name
                 items.push({"protocol": protocol, "bucket": bucket, "endpoint": endpoint, "original_name": original_name, "path": path})
             }
+            this.selected_files_handled = items
             var token = window.localStorage.getItem('token')
             xhr.open("POST", _global.domain_url + "item/" + this.recode)
             xhr.setRequestHeader("Token", token);
@@ -122,7 +140,7 @@ export default {
                     var zip_url = JSON.parse(xhr.response).url
                     var url_pieces = zip_url.split("/")
                     var name = url_pieces[url_pieces.length - 1]
-                    that.downloadfile(zip_url, name)
+                    that.downloadfile(zip_url, name, true)
                 }
             }
             xhr.send(JSON.stringify({"re_code": this.recode, "full": full, "items": items}))
