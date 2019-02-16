@@ -331,6 +331,7 @@
                                     var recode = JSON.parse(xhr.response).recode
                                     var owner_token = JSON.parse(xhr.response).owner
                                     window.localStorage.setItem('owner_token', owner_token)
+                                    window.localStorage.setItem(recode, JSON.stringify({'recode': recode, 'createAt': Date.parse(new Date())}))
                                     that.jumpToRecodeDiplay(recode)
                                 }
                             }

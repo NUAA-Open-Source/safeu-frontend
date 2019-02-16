@@ -143,6 +143,7 @@ export default {
                     that.downloadfile(zip_url, name, true)
                 }
             }
+            console.log(JSON.stringify({"re_code": this.recode, "full": full, "items": items}))
             xhr.send(JSON.stringify({"re_code": this.recode, "full": full, "items": items}))
         },
         

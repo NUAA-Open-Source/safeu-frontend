@@ -36,7 +36,7 @@
         },
         data() {
             return {
-                qrcode_url: "http://192.168.2.186:8080/download/" + this.recode,
+                qrcode_url: "/download/" + this.recode,
                 is_editting_recode: false,
                 is_more_setting: false,
                 is_need_password: false,
@@ -75,6 +75,8 @@
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState == XMLHttpRequest.DONE) {
                             if (xhr.status == 200) {
+                                window.localStorage.removeItem(that.recode)
+                                window.localStorage.setItem(that.new_recode, JSON.stringify({"recode": that.new_recode, "editedAt": Date.parse(new Date())}))
                                 that.recode = that.new_recode
                                 that.$route.query.code = that.new_recode
                                 that.$message.success('设置成功');
@@ -82,7 +84,6 @@
                                 if (JSON.parse(xhr.response).message == "reCode Repeat") {
                                     that.new_recode = that.recode
                                     that.$message.error('该提取码已存在')
-
                                 } else {
                                     that.$message.error('设置失败')
                                 }
