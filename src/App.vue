@@ -9,7 +9,15 @@ export default {
 }
 </script>
 <style>
+body {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
 #app {
+  position: absolute;
+  background: url('./assets/background.png') no-repeat;
   width: 100%;
   height: 100%;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
