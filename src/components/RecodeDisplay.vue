@@ -50,6 +50,12 @@
         created() {
             console.log(this.$refs)
         },
+        watch: {
+            "new_recode": function() {
+                var href = window.location.href
+                window.history.pushState({}, 0, href.split('code=')[0] + "code=" + this.new_recode)
+            }
+        },
         methods: {
             editrecode() {
                 this.is_editting_recode = true
@@ -69,10 +75,14 @@
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState == XMLHttpRequest.DONE) {
                             if (xhr.status == 200) {
+                                that.recode = that.new_recode
+                                that.$route.query.code = that.new_recode
                                 that.$message.success('设置成功');
                             } else if (xhr.status == 400) {
                                 if (JSON.parse(xhr.response).message == "reCode Repeat") {
+                                    that.new_recode = that.recode
                                     that.$message.error('该提取码已存在')
+
                                 } else {
                                     that.$message.error('设置失败')
                                 }
