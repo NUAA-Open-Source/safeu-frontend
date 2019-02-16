@@ -96,7 +96,7 @@
                 var xhr_password = new XMLHttpRequest()
                 var xhr_downloadcount = new XMLHttpRequest()
                 var sha256 = require("js-sha256").sha256
-                var password_sha256 = sha256(this.password)
+                var password_sha256 = this.password == "" ? "" : sha256(this.password)
                 var that = this
                 var user_token = window.localStorage.getItem('owner_token')
                 xhr_password.open("POST", _global.domain_url + "password/" + this.new_recode, true)
@@ -108,11 +108,9 @@
                             if (that.password_setting_status == 1 && that.downcount_setting_status == 1) {
                                 that.$message.success('设置成功')
                                 that.is_more_setting = false    
-                            } else if (that.password_setting_status == 0) {
-                                that.$message.error('密码设置失败')
-                            } else if (that.downcount_setting_status == 0) {
-                                that.$message.error('下载次数设置失败')
                             }
+                        } else {
+                            that.$message.error('密码设置失败')
                         }
                     }
                 }
@@ -123,11 +121,9 @@
                             if (that.password_setting_status == 1 && that.downcount_setting_status == 1) {
                                 that.$message.success('设置成功')
                                 that.is_more_setting = false    
-                            } else if (that.password_setting_status == 0) {
-                                that.$message.error('密码设置失败')
-                            } else if (that.downcount_setting_status == 0) {
-                                that.$message.error('下载次数设置失败')
                             }
+                        } else {
+                            that.$message.error('下载次数设置失败')
                         }
                     }
                 }
