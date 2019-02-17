@@ -1,3 +1,11 @@
+#head-words {
+    text-align: left;
+    margin: 30px 35px 60px
+}
+#intro
+{
+    text-align: center
+}
 .buttons-container {
     text-align: center;
     margin: 50px 0px 40px
@@ -7,15 +15,15 @@
     margin: 50px 0px 40px
 }
 .main-buttons {
-    font-size: 50px;
+    font-size: 20px;
     background: rgb(64, 169, 255);
-    padding:61px;
-    border-radius: 35px;
+    padding: 10px 40px 10px;
+    border-radius: 1px;
     color: white;
     font-weight: bold;
     text-decoration: none;
     display: inline-block;
-    margin: 15px 10% 15px
+    margin: 15px 5% 15px
 }
 img {
     margin: 20px 0px 20px
