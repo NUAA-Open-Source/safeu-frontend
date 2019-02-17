@@ -1,6 +1,5 @@
 <template>
     <div id="filelistview">
-        <Navbar/>
         <div class="filelist-container">
             <p class="filelist-container-title">文件列表</p>
             <div class="filelist-item">
@@ -28,13 +27,9 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
 import _global from './Global.vue'
 export default {
     name: 'filelistview',
-    components: {
-        Navbar,
-    },
     data() {
         return {
             is_all_selected: false,
