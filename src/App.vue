@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Navbar/>
     <router-view></router-view>
     <footer>
       <div style="text-align: left; margin: 10px 4% 2px" class="link-container">
@@ -16,9 +17,13 @@
   </div>
 </template>
 <script>
+import Navbar from './components/Navbar.vue'
 export default {
-  name: "app"
-};
+  name: 'app',
+  components: {
+    Navbar,
+  },
+}
 </script>
 <style>
 body {
@@ -29,10 +34,10 @@ body {
 }
 #app {
   position: absolute;
-  background: url("./assets/background.png") no-repeat;
+  margin-top: 0;
+  background: url('./assets/background.png') no-repeat;
   width: 100%;
-  height: 100%;
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: -apple-system,BlinkMacSystemFont,SF Pro Text,segoe ui,helvetica neue,helvetica,ubuntu,roboto,noto,arial,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
