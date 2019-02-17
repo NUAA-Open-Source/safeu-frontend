@@ -4,11 +4,6 @@ import Vuetify from 'vuetify'
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import App from './App.vue'
-import UploadView from './UploadView.vue'
-import HomeView from './HomeView.vue'
-import UploadedRecodeView from './UploadedRecodeView'
-import DownloadView from './DownloadView.vue'
-import FilelistView from './FilelistView.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -21,6 +16,11 @@ library.add(faCloudUploadAlt)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Vue.config.productionTip = false
+const DownloadView = () => import('./DownloadView.vue')
+const HomeView = () => import('./HomeView.vue')
+const UploadView = () => import('./UploadView.vue')
+const UploadedRecodeView = () => import('./UploadedRecodeView.vue')
+const FilelistView = () => import('./FilelistView.vue')
 
 let router = new VueRouter({
   mode: 'history',
