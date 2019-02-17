@@ -1,17 +1,20 @@
 <template>
   <div>
+    <div id="head-words">
+      <p style="font-size: 45px; display: inline; margin-right: 25px">safeu</p>
+      <p style="font-size: 15px; display: inline">quick &amp; safe for share.</p>
+    </div>
+    <div id="intro">
+      <p style="font-size: 35px; font-weight: bold">南航人自己的云U盘</p>
+      <p style="font-size: 15px;">将你的文件上传至此，而后你可以在任一联网的设备下载该文件。具体文件限制请查看使用须知。</p>
+    </div>
     <div class="buttons-container">
       <a class="main-buttons" href="/upload">上传</a>
       <a class="main-buttons" href="/download">下载</a>
     </div>
     <div class="imgs-container">
       <hr style="margin:5px 8% 5px">
-      <img style="height: auto; width: 350px" src="https://ftp.a2os.club/img/a2os.png">
-      <!-- 在这里放图片，主要是想以后可以在这里加一些宣传语或者广告什么的。但是发现我tcl，多端适配都搞不好。 --vvzero -->
     </div>
-    <footer style="text-align: center; margin: 60px 0px 10px">
-      <p>&copy; a2os.club 2018-2019 All rights reserved</p>
-    </footer>
   </div>
 </template>
 
