@@ -11,7 +11,7 @@
             <p>您可以保存或分享此二维码</p>
             <details>
                 <summary>自定义设置</summary>
-                 <div class="more-setting-container">
+                <div class="more-setting-container">
                     <p class="setting-title">加密<input type="checkbox" v-model="is_need_password" style="margin-left: 8px;"></p>
                     <input class="setting-password-input" type="password" placeholder="请输入加密密码" v-model="password" v-if="is_need_password">
 

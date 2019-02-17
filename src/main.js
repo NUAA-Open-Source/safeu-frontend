@@ -16,11 +16,11 @@ library.add(faCloudUploadAlt)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Vue.config.productionTip = false
-const DownloadView = () => import('./DownloadView.vue')
-const HomeView = () => import('./HomeView.vue')
-const UploadView = () => import('./UploadView.vue')
-const UploadedRecodeView = () => import('./UploadedRecodeView.vue')
-const FilelistView = () => import('./FilelistView.vue')
+const DownloadView = () => import(/* webpackChunkName: "group-foo" */ './DownloadView.vue')
+const HomeView = () => import(/* webpackChunkName: "group-foo" */ './HomeView.vue')
+const UploadView = () => import(/* webpackChunkName: "group-foo" */ './UploadView.vue')
+const UploadedRecodeView = () => import(/* webpackChunkName: "group-foo" */ './UploadedRecodeView.vue')
+const FilelistView = () => import(/* webpackChunkName: "group-foo" */ './FilelistView.vue')
 
 let router = new VueRouter({
   mode: 'history',
