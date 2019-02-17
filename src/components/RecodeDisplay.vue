@@ -1,6 +1,6 @@
 <template>
     <div class="out-container">
-        <div class="recode-container" v-if="!is_more_setting">
+        <div class="recode-container">
             <p class="recode-top-hint">您的提取码</p>
             <div class="recode-input-row">
                 <input id="recode-box" class="recode-box" v-model="new_recode" :disabled="!is_editting_recode" @focus="inputonfocus"/>
@@ -9,16 +9,15 @@
             </div>
             <vue-qr :text="qrcode_url" style="margin-top: 8px"></vue-qr>
             <p>您可以保存或分享此二维码</p>
-            <a v-on:click="moresetting">> 更多设置</a>
+            <a v-on:click="moresetting" v-if="!is_more_setting">更多设置</a>
         </div>
-        <div class="more-setting-container" v-else>
+        <div class="more-setting-container"  v-if="is_more_setting">
             <p class="setting-top-hint">自定义设置</p>
             <p class="setting-title">加密<input type="checkbox" v-model="is_need_password" style="margin-left: 8px;"></p>
             <input class="setting-password-input" type="password" placeholder="请输入加密密码" v-model="password" v-if="is_need_password">
             
             <p class="setting-title" style="margin-top: 12px">下载次数</p>
             <input class="setting-download-count-input" type="text" placeholder="请输入下载次数" v-model="download_count"> 
-            <button class="setting-back-btn" v-on:click="back">返回</button>
             <button class="setting-confirm-btn" v-on:click="submit">确定</button>
         </div>
     </div>
@@ -98,10 +97,6 @@
             moresetting() {
                 this.is_more_setting = true
             },
-            
-            back() {
-                this.is_more_setting = false
-            },
 
             submit() {
                 var xhr_password = new XMLHttpRequest()
@@ -146,5 +141,5 @@
 </script>
 
 <style>
-@import './RecodeDisplay.css'
+@import './RecodeDisplay.css';
 </style>

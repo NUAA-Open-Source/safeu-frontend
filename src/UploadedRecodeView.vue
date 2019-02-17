@@ -1,18 +1,15 @@
 <template>
     <div id="uploadedrecodeview">
-        <Navbar/>
         <RecodeDisplay v-bind:recode="this.$route.query.code" v-if="is_user_authored"/>
         <RecodeUnauthored v-else/>
     </div>
 </template>
 <script>
-import Navbar from './components/Navbar.vue'
 import RecodeDisplay from './components/RecodeDisplay.vue'
 import RecodeUnauthored from './components/RecodeUnauthored.vue'
 export default {
     name: 'uploadedrecodeview',
     components: {
-        Navbar,
         RecodeDisplay,
         RecodeUnauthored,
     },
