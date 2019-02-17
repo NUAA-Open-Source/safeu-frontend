@@ -2,7 +2,11 @@
     <div id="navbar">
         <div class="logo">
             <a class="logo-name" href="/">SafeU</a>
-            <p class="logo-subname">云U盘</p>
+            <div class="logo-sub">
+                <p class="logo-subname">云U盘</p>
+                <p class="logo-des">quick &amp; safe for share.</p>
+            </div>
+            
         </div>
     </div>
 </template>

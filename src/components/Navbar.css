@@ -22,10 +22,26 @@
     color: black;
 }
 
-.logo-subname {
-    font-size: 12px;
-    align-self: flex-end;
-    margin-bottom: 8px;
+.logo-sub {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     margin-left: 4px;
 }
+
+.logo-sub p {
+    margin-bottom: 0;
+}
+
+.logo-subname {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.logo-des {
+    font-size: 12px;
+}
+
+
 

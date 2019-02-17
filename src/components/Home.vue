@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div id="head-words">
-      <p style="font-size: 45px; display: inline; margin-right: 25px">safeu</p>
-      <p style="font-size: 15px; display: inline">quick &amp; safe for share.</p>
-    </div>
     <div id="intro">
       <p style="font-size: 35px; font-weight: bold">南航人自己的云U盘</p>
       <p style="font-size: 15px;">将你的文件上传至此，而后你可以在任一联网的设备下载该文件。具体文件限制请查看使用须知。</p>
