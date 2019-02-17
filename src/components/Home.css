@@ -18,12 +18,12 @@
     font-size: 20px;
     background: rgb(64, 169, 255);
     padding: 10px 40px 10px;
-    border-radius: 1px;
-    color: white;
+    border-radius: 5px;
+    color: white !important;
     font-weight: bold;
     text-decoration: none;
     display: inline-block;
-    margin: 15px 5% 15px
+    margin: 15px 5% 15px;
 }
 img {
     margin: 20px 0px 20px
