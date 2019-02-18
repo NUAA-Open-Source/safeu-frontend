@@ -20,6 +20,7 @@
     "vue": "^2.5.17",
     "vue-loader": "^15.6.2",
     "vue-qr": "^1.5.2",
+    "vue-qriously": "^1.1.1",
     "vue-router": "^3.0.2",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.6",
