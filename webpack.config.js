@@ -1,5 +1,6 @@
 const {join:pathJoin} = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin'); // +++
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
     mode:'production',
     entry:{
@@ -8,6 +9,7 @@ module.exports = {
     externals: {
         'vue': 'Vue',
         'vue-router': 'VueRouter',
+        'antd': 'antd',
     },
     output:{
         filename:'[name].bundle.js',
@@ -34,12 +36,13 @@ module.exports = {
                 ] // +++
             },
             {
-                test: /\.(jpe?g|png|gif|svg)$/i, 
+                test: /\.(jpe?g|png|gif|svg)$/i,
                 loader: "file-loader?name=/public/icons/[name].[ext]"
             }
         ]
     },
     plugins:[
-        new VueLoaderPlugin() // +++
+      new VueLoaderPlugin(),
+      new BundleAnalyzerPlugin()
     ]
 }
