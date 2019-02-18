@@ -6,7 +6,6 @@
     </div>
     <div class="footer">
       <div style="text-align: left; margin: 10px 4% 2px" class="link-container">
-        <a href="https://a2os.club"><img style="height: auto; width: 112px" src="https://ftp.a2os.club/img/a2os.png"></a>
         <a>使用条款</a>
         <a>隐私政策</a>
         <a>关于</a>

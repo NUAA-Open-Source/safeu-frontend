@@ -1,16 +1,14 @@
 // import Vue from 'vue'
-import { message, Table } from "ant-design-vue";
-import "ant-design-vue/dist/antd.css";
+// import { message, Table } from "ant-design-vue";
+// import "ant-design-vue/dist/antd.css";
 import App from './App.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // import VueRouter from 'vue-router'
 
-Vue.use(message)
-Vue.use(Table)
-Vue.prototype.$message = message
 Vue.use(VueRouter)
+Vue.use(antd)
 library.add(faCloudUploadAlt)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
