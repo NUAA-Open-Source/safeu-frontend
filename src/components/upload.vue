@@ -1,4 +1,5 @@
 <template>
+    <div style="display: flex; flex-direction: column">
     <a id="selectfiles" v-bind:class="['upload-container', fileList.length == 0 ? 'justify-content-center' : 'justify-content-space-between']">
         <div class="upload-nofiles-container" v-if="fileList.length == 0">
             <font-awesome-icon icon="cloud-upload-alt" size="4x"/>
@@ -33,6 +34,7 @@
             <button class="start-upload-button" v-on:click.stop="$event.preventDefault();uploader.start()">开始上传</button>
         </div>
     </a>
+    </div>
 </template>
 
 <script>

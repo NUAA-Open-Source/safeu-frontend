@@ -23,7 +23,6 @@ const UploadedRecodeView = () => import(/* webpackChunkName: "group-foo" */ './U
 const FilelistView = () => import(/* webpackChunkName: "group-foo" */ './FilelistView.vue')
 
 let router = new VueRouter({
-  base: '/root/safeu-fronted/',
   mode: 'history',
   routes: [
     {path: '/download', component: DownloadView},
