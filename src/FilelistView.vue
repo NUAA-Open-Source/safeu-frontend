@@ -34,8 +34,8 @@ export default {
         return {
             is_all_selected: false,
             is_zip_loading: false,
-            filelist: this.$route.query.filelist,
-            recode: this.$route.query.filelist[0].ReCode,
+            filelist: JSON.parse(window.sessionStorage.getItem('filelist')),
+            recode: this.$route.query.recode,
             selected_files: [],
             selected_files_handled: [],
         }
