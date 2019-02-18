@@ -7,7 +7,7 @@
                 <a v-on:click="editrecode" v-if="!is_editting_recode">修改</a>
                 <a v-on:click="finisheditrecode" v-else>完成</a>
             </div>
-            <vue-qr :text="qrcode_url" style="margin-top: 8px"></vue-qr>
+            <qriously :text="qrcode_url" :size="160" style="margin-top: 8px"/>
             <p>您可以保存或分享此二维码</p>
             <details>
                 <summary>自定义设置</summary>
@@ -26,10 +26,8 @@
 </template>
 
 <script>
-    import VueQr from 'vue-qr';
     import _global from '../Global.vue'
     export default {
-        components: {VueQr},
         name: 'RecodeDisplay',
         props: {
             recode: String,
