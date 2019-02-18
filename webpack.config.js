@@ -1,10 +1,11 @@
 const {join:pathJoin} = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin'); // +++
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+require('babel-polyfill')
 module.exports = {
     mode:'production',
     entry:{
-        app:'./src/main.js'
+        app:["babel-polyfill", "./src/main.js"]
     },
     externals: {
         'vue': 'Vue',
@@ -17,6 +18,11 @@ module.exports = {
     },
     module: {
         rules: [
+           	{
+								test: /\.js$/,
+    						loader: 'babel-loader',
+                include: [resolve('src'), resolve('/node_modules/vue-qr/src')]
+						},
             {
                 test: /\.vue$/,
                 use: ['vue-loader'] // +++
@@ -44,5 +50,9 @@ module.exports = {
     plugins:[
       new VueLoaderPlugin(),
       new BundleAnalyzerPlugin()
-    ]
+    ],
+		babel: {
+      presets: ['es2015'],
+      plugins: ['transform-runtime']
+    }
 }

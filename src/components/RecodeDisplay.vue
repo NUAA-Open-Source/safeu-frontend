@@ -7,7 +7,7 @@
                 <a v-on:click="editrecode" v-if="!is_editting_recode">修改</a>
                 <a v-on:click="finisheditrecode" v-else>完成</a>
             </div>
-            <qriously :text="qrcode_url" :size="160" style="margin-top: 8px"/>
+            <qriously :value="qrcode_url" :size="160" style="margin-top: 8px"/>
             <p>您可以保存或分享此二维码</p>
             <details>
                 <summary>自定义设置</summary>

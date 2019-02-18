@@ -1,6 +1,7 @@
 // import Vue from 'vue'
 // import { message, Table } from "ant-design-vue";
 // import "ant-design-vue/dist/antd.css";
+import '@babel/polyfill'
 import App from './App.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
@@ -22,6 +23,7 @@ const UploadedRecodeView = () => import(/* webpackChunkName: "group-foo" */ './U
 const FilelistView = () => import(/* webpackChunkName: "group-foo" */ './FilelistView.vue')
 
 let router = new VueRouter({
+  base: '/root/safeu-fronted/',
   mode: 'history',
   routes: [
     {path: '/download', component: DownloadView},
@@ -35,6 +37,6 @@ let router = new VueRouter({
 
 new Vue({
   el: '#app',
-  router,
+  router: router,
   render: h => h(App),
 }).$mount('#app')
