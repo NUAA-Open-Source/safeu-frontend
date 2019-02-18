@@ -41,7 +41,8 @@ export default {
                         var token = JSON.parse(xmlhttp.response).token
                         var filelist = JSON.parse(xmlhttp.response).items
                         window.localStorage.setItem('token', token)
-                        that.$router.push({path: '/filelist', query: {filelist: filelist}})
+                        window.sessionStorage.setItem('filelist', JSON.stringify(filelist))
+                        that.$router.push({path: '/filelist', query: {recode: that.recode}})
                     } else if (xmlhttp.status === 401) {
                         that.needpassword = true
                         console.log(xmlhttp.response)
