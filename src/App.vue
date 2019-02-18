@@ -35,19 +35,19 @@ body {
 }
 #app {
   position: absolute;
+  min-height: calc(100vh-0px);
   display: flex;
   flex-direction: column;
   margin-top: 0;
   background: url('./assets/background.png') no-repeat;
   width: 100%;
-  min-height: 100%;
   font-family: -apple-system,BlinkMacSystemFont,SF Pro Text,segoe ui,helvetica neue,helvetica,ubuntu,roboto,noto,arial,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
 .app-container {
-  flex: 1;
+  flex-grow: 1;
 }
 .link-container a{
   margin:0px 1% 0px;
