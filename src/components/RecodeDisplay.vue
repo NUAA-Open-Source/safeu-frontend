@@ -14,7 +14,6 @@
                 <div class="more-setting-container">
                     <p class="setting-title">加密<input type="checkbox" v-model="is_need_password" style="margin-left: 8px;"></p>
                     <input class="setting-password-input" type="password" placeholder="请输入加密密码" v-model="password" v-if="is_need_password">
-
                     <p class="setting-title" style="margin-top: 12px">下载次数</p>
                     <input class="setting-download-count-input" type="text" placeholder="请输入下载次数" v-model="download_count"> 
                     <button class="setting-confirm-btn" v-on:click="submit">确定</button>
@@ -76,7 +75,7 @@
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState == XMLHttpRequest.DONE) {
                             if (xhr.status == 200) {
-                                window.localStorage.removeItem(that.recode)
+                                window.localStorage.removeItem("recode-" + that.recode)
                                 window.localStorage.setItem("recode-" + that.new_recode, JSON.stringify({"recode": that.new_recode, "editedAt": Date.parse(new Date())}))
                                 that.recode = that.new_recode
                                 that.$route.query.code = that.new_recode
