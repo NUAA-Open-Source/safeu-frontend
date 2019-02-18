@@ -8,7 +8,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueRouter from 'vue-router'
+import VueQriously from 'vue-qriously'
 
+Vue.use(VueQriously)
 Vue.use(message)
 Vue.use(Table)
 Vue.prototype.$message = message
