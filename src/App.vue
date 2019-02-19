@@ -39,7 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-top: 0;
-  background: url('./assets/background.png') no-repeat;
+  background: url('./assets/background.svg') no-repeat;
   width: 100%;
   font-family: -apple-system,BlinkMacSystemFont,SF Pro Text,segoe ui,helvetica neue,helvetica,ubuntu,roboto,noto,arial,sans-serif;
   -webkit-font-smoothing: antialiased;
