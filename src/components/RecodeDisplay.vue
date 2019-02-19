@@ -13,7 +13,13 @@
                 <summary>自定义设置</summary>
                 <div class="more-setting-container">
                     <p class="setting-title">加密<input type="checkbox" v-model="is_need_password" style="margin-left: 8px;"></p>
-                    <input class="setting-password-input" type="password" placeholder="请输入加密密码" v-model="password" v-if="is_need_password">
+                    <div class="setting-password-input-row" v-if="is_need_password">
+                        <input class="setting-password-input" :type="is_show_password ? 'text' : 'password'" placeholder="请输入加密密码" v-model="password">
+                        <a v-on:click="showpassword">
+                            <font-awesome-icon :icon="is_show_password ? 'eye-slash' : 'eye'"/>
+                        </a>
+                    </div>
+                    
                     <p class="setting-title" style="margin-top: 12px">下载次数</p>
                     <div class="download-count-btn-group">
                          <a-radio-group buttonStyle="solid" v-model="download_count">
@@ -43,11 +49,12 @@
             return {
                 qrcode_url: "/download/" + this.recode,
                 is_editting_recode: false,
+                is_show_password: false,
                 is_more_setting: false,
-                is_need_password: false,
-                password: '',
+                is_need_password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != null,
+                password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password,
                 new_recode: this.recode,
-                download_count: "10",
+                download_count: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).downcount == null ? "10" : JSON.parse(window.localStorage.getItem("recode-" + this.recode)).downcount,
                 downcount_setting_status: 0,
                 password_setting_status: 0,
             }
@@ -62,6 +69,10 @@
             }
         },
         methods: {
+            showpassword() {
+                this.is_show_password = !this.is_show_password
+            },
+
             handle() {
                 console.log(this.download_count)
             },
@@ -84,8 +95,9 @@
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState == XMLHttpRequest.DONE) {
                             if (xhr.status == 200) {
+                                var createdAt = JSON.parse(window.localStorage.getItem("recode-" + that.recode)).createAt
                                 window.localStorage.removeItem("recode-" + that.recode)
-                                window.localStorage.setItem("recode-" + that.new_recode, JSON.stringify({"recode": that.new_recode, "editedAt": Date.parse(new Date())}))
+                                window.localStorage.setItem("recode-" + that.new_recode, JSON.stringify({"recode": that.new_recode, "createdAt": createdAt, "editedAt": Date.parse(new Date())}))
                                 that.recode = that.new_recode
                                 that.$route.query.code = that.new_recode
                                 that.$message.success('设置成功');
@@ -121,9 +133,12 @@
                     if (xhr_password.readyState == XMLHttpRequest.DONE) {
                         if (xhr_password.status == 200) {
                             that.password_setting_status = 1
+                            var uploadedinfo = JSON.parse(window.localStorage.getItem("recode-" + that.recode))
+                            uploadedinfo.password = that.password
+                            window.localStorage.setItem("recode-" + that.recode, JSON.stringify(uploadedinfo))
                             if (that.password_setting_status == 1 && that.downcount_setting_status == 1) {
                                 that.$message.success('设置成功')
-                                that.is_more_setting = false    
+                                that.is_more_setting = false
                             }
                         } else {
                             that.$message.error('密码设置失败')
@@ -134,6 +149,9 @@
                     if (xhr_downloadcount.readyState == XMLHttpRequest.DONE) {
                         if (xhr_downloadcount.status == 200) {
                             that.downcount_setting_status = 1
+                            var uploadedinfo = JSON.parse(window.localStorage.getItem("recode-" + that.recode))
+                            uploadedinfo.downcount = that.download_count
+                            window.localStorage.setItem("recode-" + that.recode, JSON.stringify(uploadedinfo))
                             if (that.password_setting_status == 1 && that.downcount_setting_status == 1) {
                                 that.$message.success('设置成功')
                                 that.is_more_setting = false    

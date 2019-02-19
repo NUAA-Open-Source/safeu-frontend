@@ -190,6 +190,7 @@ a:hover {
 
 .start-upload-button {
     border: 1px solid #3596ff;
+    background: white;
     color: #3596ff;
     font-weight: bold;
     border-radius: 6px;
