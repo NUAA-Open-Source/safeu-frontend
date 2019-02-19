@@ -86,6 +86,7 @@ a:hover {
 }
 
 .upload-files {
+    margin-top: 8px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
