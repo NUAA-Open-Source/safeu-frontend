@@ -1,8 +1,8 @@
 <template>
     <div class="download-container">
         <p class="download-top-hint">输入提取码</p>
-        <input class="download-recode-input" v-model="recode">
-        <input type="password" class="download-password-input" v-if="needpassword" v-model="password" placeholder="输入密码">
+        <input class="download-recode-input" v-model="recode" @keyup.enter="display">
+        <input type="password" class="download-password-input" v-if="needpassword" v-model="password" placeholder="输入密码" @keyup.enter="display">
         <button class="download-button" v-on:click="display()">提取</button>
     </div>
 </template>
