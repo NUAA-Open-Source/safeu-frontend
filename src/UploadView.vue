@@ -1,18 +1,15 @@
 <template>
     <div id="uploadview">
         <upload/>
-        <UploadedFiles/>
     </div>
 </template>
 <script>
 import upload from './components/upload.vue'
-import UploadedFiles from './components/UploadedFiles.vue'
 
 export default {
     name: 'uploadview',
     components: {
         upload,
-        UploadedFiles,
     }
 }
 </script>
@@ -23,9 +20,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
 </style>
