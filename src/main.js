@@ -3,7 +3,7 @@ import { message, Table, Radio } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import App from './App.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCloudUploadAlt, faCommentDots } from '@fortawesome/free-solid-svg-icons'
+import { faCloudUploadAlt, faCommentDots, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueRouter from 'vue-router'
 import VueQriously from 'vue-qriously'
@@ -16,6 +16,8 @@ Vue.prototype.$message = message
 Vue.use(VueRouter)
 library.add(faCloudUploadAlt)
 library.add(faCommentDots)
+library.add(faEye)
+library.add(faEyeSlash)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Vue.config.productionTip = false

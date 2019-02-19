@@ -152,3 +152,20 @@
     margin-right: 8px;
     border-radius: 4px!important;
 }
+
+.setting-password-input-row {
+    display: flex;
+    width: 80%;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.setting-password-input-row input {
+    width: 95%;
+}
+
+.setting-password-input-row a {
+    color: black;
+    width: 5%;
+}
