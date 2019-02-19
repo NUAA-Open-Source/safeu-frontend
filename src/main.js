@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import './plugins/vuetify'
 import Vuetify from 'vuetify'
-import { message, Table } from "ant-design-vue";
+import { message, Table, Radio } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import App from './App.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -12,6 +12,7 @@ import VueQriously from 'vue-qriously'
 
 Vue.use(VueQriously)
 Vue.use(message)
+Vue.use(Radio)
 Vue.use(Table)
 Vue.prototype.$message = message
 Vue.use(Vuetify)

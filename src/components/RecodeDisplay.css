@@ -111,7 +111,7 @@
 }
 
 .setting-confirm-btn {
-    margin-top: 8px;
+    margin-top: 16px;
     height: 40px;
     width: 80%;
     border: 0;
@@ -141,4 +141,14 @@
 .selected {
     color: white;
     background: #1ab20a;    
+}
+
+.download-count-btn-group {
+    align-self: flex-start;
+    margin-left: 10%;
+}
+
+.download-count {
+    margin-right: 8px;
+    border-radius: 4px!important;
 }
