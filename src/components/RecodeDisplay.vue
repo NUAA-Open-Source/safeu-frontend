@@ -15,7 +15,14 @@
                     <p class="setting-title">加密<input type="checkbox" v-model="is_need_password" style="margin-left: 8px;"></p>
                     <input class="setting-password-input" type="password" placeholder="请输入加密密码" v-model="password" v-if="is_need_password">
                     <p class="setting-title" style="margin-top: 12px">下载次数</p>
-                    <input class="setting-download-count-input" type="text" placeholder="请输入下载次数" v-model="download_count"> 
+                    <div class="download-count-btn-group">
+                         <a-radio-group buttonStyle="solid" v-model="download_count">
+                            <a-radio-button class="download-count" value="1">1 次</a-radio-button>
+                            <a-radio-button class="download-count" value="10">10 次</a-radio-button>
+                            <a-radio-button class="download-count" value="20">20 次</a-radio-button>
+                            <a-radio-button class="download-count" value="50">50 次</a-radio-button>
+                        </a-radio-group>
+                    </div>
                     <button class="setting-confirm-btn" v-on:click="submit">确定</button>
                 </div>
             </details>
@@ -40,7 +47,7 @@
                 is_need_password: false,
                 password: '',
                 new_recode: this.recode,
-                download_count: 10,
+                download_count: "10",
                 downcount_setting_status: 0,
                 password_setting_status: 0,
             }
@@ -55,6 +62,10 @@
             }
         },
         methods: {
+            handle() {
+                console.log(this.download_count)
+            },
+
             editrecode() {
                 this.is_editting_recode = true
             },
@@ -133,7 +144,7 @@
                     }
                 }
                 xhr_password.send(JSON.stringify({"user_token":user_token, "Auth": password_sha256}))
-                xhr_downloadcount.send(JSON.stringify({"new_down_count": that.download_count, "user_token": user_token}))
+                xhr_downloadcount.send(JSON.stringify({"new_down_count": parseInt(that.download_count), "user_token": user_token}))
             }
         }
     }
