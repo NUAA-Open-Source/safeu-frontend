@@ -6,7 +6,9 @@
                 <p class="logo-subname">云U盘</p>
                 <p class="logo-des">quick &amp; safe for share.</p>
             </div>
-            
+        </div>
+        <div class="feedback">
+            <a href=""><font-awesome-icon icon="comment-dots"/> 反馈</a>
         </div>
     </div>
 </template>

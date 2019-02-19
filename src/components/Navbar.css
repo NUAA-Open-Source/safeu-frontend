@@ -4,7 +4,7 @@
     margin-top: 0;
     display:  flex;
     flex-direction: row;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -43,5 +43,15 @@
     font-size: 12px;
 }
 
+.feedback {
+    margin-right: 40px;
+    background: #40a9ff;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.feedback a {
+    color: white;
+}
 
 
