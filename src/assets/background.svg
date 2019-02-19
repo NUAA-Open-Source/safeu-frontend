@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="1080px" viewBox="0 0 1920 1080" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#FFFFFF" x="0" y="0" width="1920" height="1080"></rect>
+        <g id="xls" opacity="0.82" transform="translate(46.549500, 253.940546) rotate(-49.000000) translate(-46.549500, -253.940546) translate(-35.450500, 150.440546)">
+            <text id=".XLS" font-family="PingFangSC-Medium, PingFang SC" font-size="36" font-weight="400" fill="#D5D5D5">
+                <tspan x="37" y="189">.XLS</tspan>
+            </text>
+            <polygon id="Path" stroke="#D5D5D5" stroke-width="8" fill-rule="nonzero" points="0.799299631 0.575398805 0.799299631 206.043097 160.816698 206.043097 163.342688 74.8345612 103.561129 0.575398805"></polygon>
+            <polyline id="Path-3" stroke="#D5D5D5" stroke-width="8" fill-rule="nonzero" points="103.375123 0.443553569 103.375123 74.4928391 163.005008 74.4928391"></polyline>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="29" y="130" width="46" height="17"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="85" y="130" width="46" height="17"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="29" y="103" width="46" height="17"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="85" y="103" width="46" height="17"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="29" y="76" width="46" height="17"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="85" y="76" width="46" height="17"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="29" y="130" width="46" height="17"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="85" y="130" width="46" height="17"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="29" y="49" width="46" height="17"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="85" y="49" width="19" height="17"></rect>
+        </g>
+        <g id="doc" opacity="0.82" transform="translate(307.255051, 45.601302) rotate(-6.000000) translate(-307.255051, -45.601302) translate(249.755051, -27.398698)">
+            <text id=".DOC" font-family="PingFangSC-Medium, PingFang SC" font-size="24" font-weight="400" fill="#D5D5D5">
+                <tspan x="25" y="138">.DOC</tspan>
+            </text>
+            <polygon id="Path" stroke="#D5D5D5" stroke-width="7" fill-rule="nonzero" points="0 1 0 146 113.212854 146 115 53.4052133 72.7043439 1"></polygon>
+            <polyline id="Path-3" stroke="#D5D5D5" stroke-width="7" fill-rule="nonzero" points="73 0 73 52 115 52"></polyline>
+            <path d="M97.6441441,101.25 L19,101.25" id="Line" stroke="#D5D5D5" stroke-width="7" stroke-linecap="square" fill-rule="nonzero"></path>
+            <path d="M97.6441441,75.25 L19,75.25" id="Line" stroke="#D5D5D5" stroke-width="7" stroke-linecap="square" fill-rule="nonzero"></path>
+            <path d="M72.6447368,48.8333333 L19,48.8333333" id="Line" stroke="#D5D5D5" stroke-width="7" stroke-linecap="square" fill-rule="nonzero"></path>
+            <path d="M72.6447368,23.2083333 L19,23.2083333" id="Line" stroke="#D5D5D5" stroke-width="7" stroke-linecap="square" fill-rule="nonzero"></path>
+        </g>
+        <g id="ppt" opacity="0.82" transform="translate(97.058229, 99.457553) rotate(-25.000000) translate(-97.058229, -99.457553) translate(15.058229, -4.042447)">
+            <polygon id="Path" stroke="#D5D5D5" stroke-width="7" fill="#FFFFFF" fill-rule="nonzero" points="0.799299631 0.575398805 0.799299631 206.043097 160.816698 206.043097 163.342688 74.8345612 103.561129 0.575398805"></polygon>
+            <text id=".PPT" font-family="PingFangSC-Medium, PingFang SC" font-size="36" font-weight="400" fill="#D5D5D5">
+                <tspan x="37" y="189">.PPT</tspan>
+            </text>
+            <path d="M121.000002,73.9859382 C122.932978,78.7786529 123.99705,84.0150628 123.99705,89.5 C123.99705,112.419817 105.416867,131 82.4970498,131 C59.7441313,131 41.2678761,112.689428 41,90 L81.9970498,90 L81.9970498,48.0029502 C82.1634827,48.0009852 82.3301512,48 82.4970498,48 C90.3701597,48 97.7312065,50.1924026 104.002982,54 L103,54 L103,74 L121,74 L121,73.9859339 Z" id="Combined-Shape" fill="#D5D5D5" fill-rule="nonzero"></path>
+            <polyline id="Path-3" stroke="#D5D5D5" stroke-width="7" fill-rule="nonzero" points="103.375123 0.443553569 103.375123 74.4928391 163.005008 74.4928391"></polyline>
+        </g>
+        <g id="xls" opacity="0.82" transform="translate(511.500000, -0.500000) rotate(17.000000) translate(-511.500000, 0.500000) translate(450.000000, -78.000000)">
+            <text id=".XLS" font-family="PingFangSC-Medium, PingFang SC" font-size="20" font-weight="400" fill="#D5D5D5">
+                <tspan x="35.32" y="143">.XLS</tspan>
+            </text>
+            <polygon id="Path" stroke="#D5D5D5" stroke-width="6" fill-rule="nonzero" points="0 0 0 155 121.088531 155 123 56.019366 77.7620373 0"></polygon>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="21" y="98" width="35" height="13"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="63" y="98" width="35" height="13"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="21" y="78" width="35" height="13"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="63" y="78" width="35" height="13"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="63" y="57" width="35" height="13"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="21" y="98" width="35" height="13"></rect>
+            <rect id="Rectangle-3" fill="#D5D5D5" fill-rule="nonzero" x="63" y="98" width="35" height="13"></rect>
+        </g>
+        <g id="pdf" opacity="0.82" transform="translate(1873.038879, 227.860629) rotate(-51.000000) translate(-1873.038879, -227.860629) translate(1791.038879, 124.360629)">
+            <text id=".PDF" font-family="PingFangSC-Medium, PingFang SC" font-size="36" font-weight="400" fill="#D5D5D5">
+                <tspan x="37" y="189">.PDF</tspan>
+            </text>
+            <polygon id="Path" stroke="#D5D5D5" stroke-width="9" fill-rule="nonzero" points="0.799299631 0.575398805 0.799299631 206.043097 160.816698 206.043097 163.342688 74.8345612 103.561129 0.575398805"></polygon>
+            <path d="" id="Path-2" stroke="#D5D5D5" stroke-width="9" fill-rule="nonzero"></path>
+            <polyline id="Path-3" stroke="#D5D5D5" stroke-width="9" fill-rule="nonzero" points="103.375123 0.443553569 103.375123 74.4928391 163.005008 74.4928391"></polyline>
+            <path d="M32.095108,121.121913 C55.6596504,98.0111952 103.708515,98.1231185 121.323297,95.4536111 C138.93808,92.7841038 156.305651,129.924428 132.648258,117.4484 C108.990866,104.972373 67.154918,65.7828815 61.0326944,58.0356014 C57.1180473,53.0818674 47.3931877,22.5871179 54.9352972,21.4493894 C59.188499,20.8077931 77.8770574,37.7812909 78.4286736,50.5439024 C79.9584587,85.9381726 50.675274,123.579803 46.1821324,131.688059 C43.3913851,136.7242 32.8473571,150.519272 27.3546108,144.512586 C24.0039602,140.848425 23.1668025,129.87827 32.095108,121.121913 Z" id="Path-4" stroke="#D5D5D5" stroke-width="9" fill-rule="nonzero"></path>
+        </g>
+        <g id="doc" opacity="0.82" transform="translate(1410.000000, 36.000000) rotate(7.000000) translate(-1410.000000, -36.000000) translate(1338.000000, -55.000000)">
+            <text id=".DOC" font-family="PingFangSC-Medium, PingFang SC" font-size="24" font-weight="400" fill="#D5D5D5">
+                <tspan x="42.084" y="168">.DOC</tspan>
+            </text>
+            <polygon id="Path" stroke="#D5D5D5" stroke-width="6" fill-rule="nonzero" points="0 1 0 182 141.762182 182 144 66.4161628 91.0384828 1"></polygon>
+            <polyline id="Path-3" stroke="#D5D5D5" stroke-width="6" fill-rule="nonzero" points="90 0 90 65 143 65"></polyline>
+            <path d="M120.558559,126.25 L23,126.25" id="Line" stroke="#D5D5D5" stroke-width="6" stroke-linecap="square" fill-rule="nonzero"></path>
+            <path d="M120.558559,94.25 L23,94.25" id="Line" stroke="#D5D5D5" stroke-width="6" stroke-linecap="square" fill-rule="nonzero"></path>
+            <path d="M89.5592105,61.25 L23,61.25" id="Line" stroke="#D5D5D5" stroke-width="6" stroke-linecap="square" fill-rule="nonzero"></path>
+        </g>
+        <g id="pdf" opacity="0.82" transform="translate(1265.183013, 36.316987) rotate(-30.000000) translate(-1265.183013, -36.316987) translate(1199.683013, -46.183013)">
+            <polygon id="Path" stroke="#D5D5D5" stroke-width="6" fill="#FFFFFF" fill-rule="nonzero" points="5.68434189e-13 0 5.68434189e-13 165 128.964207 165 131 59.6335186 82.8197308 0"></polygon>
+            <text id=".PDF" font-family="PingFangSC-Semibold, PingFang SC" font-size="18" font-weight="500" fill="#D5D5D5">
+                <tspan x="45.912" y="154">.PDF</tspan>
+            </text>
+            <polyline id="Path-3" stroke="#D5D5D5" stroke-width="6" fill-rule="nonzero" points="82 0 82 59 130 59"></polyline>
+            <path d="M24.7160842,97.0285521 C43.7005603,78.4759005 82.4105215,78.5657495 96.6016488,76.422742 C110.792776,74.2797345 124.78474,104.094971 105.725461,94.0795571 C86.666181,84.0641435 52.9615777,52.6038921 48.0292854,46.3845876 C44.8754994,42.4078655 37.0407891,17.927515 43.1169943,17.0141776 C46.5435327,16.4991217 61.5997339,30.1249813 62.0441365,40.3704566 C63.2765886,68.7840083 39.6849604,99.0016797 36.0651176,105.510766 C33.8167872,109.553642 25.3221242,120.627948 20.8969625,115.805945 C18.1975531,112.864456 17.5231076,104.057916 24.7160842,97.0285521 Z" id="Path-4" stroke="#D5D5D5" stroke-width="6" fill-rule="nonzero"></path>
+        </g>
+        <g id="ppt" opacity="0.82" transform="translate(1667.518605, 53.127628) rotate(-13.000000) translate(-1667.518605, -53.127628) translate(1568.018605, -72.872372)">
+            <text id=".PPT" font-family="PingFangSC-Semibold, PingFang SC" font-size="44" font-weight="500" fill="#D5D5D5">
+                <tspan x="54.1" y="229">.PPT</tspan>
+            </text>
+            <path d="M147.31675,89.9345265 C149.692299,95.8243686 151,102.259475 151,109 C151,137.166522 128.165711,160 99.9981872,160 C72.0357754,160 49.3292088,137.497851 49,109.614458 L99.3837075,109.614458 L99.3837075,58.0036255 C99.5882468,58.0012108 99.7930756,58 99.9981872,58 C109.673919,58 118.720346,60.6942779 126.428104,65.373494 L125.195479,65.373494 L125.195479,89.9518072 L147.316748,89.9518072 L147.316748,89.9345212 Z" id="Combined-Shape" fill="#D5D5D5" fill-rule="nonzero"></path>
+            <polygon id="Path" stroke="#D5D5D5" stroke-width="10" fill-rule="nonzero" points="0 -1.13686838e-13 0 252 195.90746 252 199 91.0766466 125.810125 -1.13686838e-13"></polygon>
+            <polyline id="Path-3" stroke="#D5D5D5" stroke-width="10" fill-rule="nonzero" points="126 -1.13686838e-13 126 91 199 91"></polyline>
+        </g>
+    </g>
+</svg>
