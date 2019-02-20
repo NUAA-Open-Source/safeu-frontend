@@ -8,14 +8,24 @@
             </div>
         </div>
         <div class="feedback">
-            <a href=""><font-awesome-icon icon="comment-dots"/> 反馈</a>
+            <a v-on:click="showfeedback"><font-awesome-icon icon="comment-dots"/> 反馈</a>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  methods: {
+      showfeedback() {
+          var that = this
+          this.$notification.open({
+            message: '欢迎加入用户群',
+            description: '欢迎加入 safeu 用户群，您可以在群中讨论关于 safeu 的一切，群号: 879651618',
+            icon: <a-icon type="smile" style="color: #108ee9" />,
+        });
+      },
+  }
 }
 </script>
 
