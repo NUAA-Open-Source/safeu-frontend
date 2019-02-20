@@ -59,9 +59,6 @@
                 password_setting_status: 0,
             }
         },
-        created() {
-            console.log(this.$refs)
-        },
         watch: {
             "new_recode": function() {
                 var href = window.location.href
