@@ -63,7 +63,6 @@ export default {
                 file.image = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/default.png'
             }
         }
-        console.log(this.filelist)
     },
     watch: {
         'selected_files': function() {
@@ -167,7 +166,6 @@ export default {
                     that.downloadfile(zip_url, name, true)
                 }
             }
-            console.log(JSON.stringify({"re_code": this.recode, "full": full, "items": items}))
             xhr.send(JSON.stringify({"re_code": this.recode, "full": full, "items": items}))
         },
         
