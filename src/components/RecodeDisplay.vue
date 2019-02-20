@@ -70,12 +70,6 @@
                 password_setting_status: 0,
             }
         },
-        watch: {
-            "new_recode": function() {
-                var href = window.location.href
-                window.history.pushState({}, 0, href.split('code=')[0] + "code=" + this.new_recode)
-            }
-        },
         methods: {
             showpassword() {
                 this.is_show_password = !this.is_show_password
@@ -102,6 +96,8 @@
                                 var uploadedinfo = JSON.parse(window.localStorage.getItem("recode-" + that.recode))
                                 var createdAt = uploadedinfo.createdAt
                                 var owner_token = uploadedinfo.owner_token
+                                var href = window.location.href
+                                window.history.pushState({}, 0, href.split('code=')[0] + "code=" + that.new_recode)
                                 window.localStorage.removeItem("recode-" + that.recode)
                                 window.localStorage.setItem("recode-" + that.new_recode, JSON.stringify({"recode": that.new_recode, "owner_token": owner_token, "createdAt": createdAt, "editedAt": Date.parse(new Date())}))
                                 that.recode = that.new_recode
