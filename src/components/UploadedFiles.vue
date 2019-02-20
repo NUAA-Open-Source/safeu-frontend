@@ -11,7 +11,18 @@
         <template slot="download_url" slot-scope="download_url">
             <a :href="download_url">提取</a>
         </template>
+        <template slot="delete" slot-scope="code">
+            <a v-on:click="showmodal(code)"><font-awesome-icon icon="trash"/></a>
+        </template>
         </a-table>
+        <a-modal
+            title="确定删除"
+            :visible="modal_visible"
+            @ok="deletefile(to_delete_recode)"
+            @cancel="modalcancel"
+            >
+            <p>您确定要删除该文件嘛，这不仅会删除历史记录，也将无法提取该文件</p>
+        </a-modal>
     </div>
 </template>
 
@@ -26,12 +37,20 @@ const columns = [{
     dataIndex: 'download_url',
     width: '20%',
     scopedSlots: { customRender: 'download_url' },
+}, {
+    title: '',
+    dataIndex: 'code',
+    width: '10%',
+    scopedSlots: { customRender: 'delete'},
 }]
+import _global from '../Global.vue'
 export default {
     name: "UploadedFiles",
     data() {
         return {
             uploaded_files: [],
+            modal_visible: false,
+            to_delete_recode: '',
             columns,
         }
     },
@@ -43,10 +62,60 @@ export default {
                 var value = JSON.parse(localStorage.getItem(key))
                 var recode = value.recode
                 var download_url = "/download/" + value.recode
-                this.uploaded_files.push({'recode': recode, 'download_url': download_url})
+                var createdAt = value.createdAt
+                this.uploaded_files.push({'recode': recode, 'download_url': download_url, 'code': recode, 'createdAt': createdAt})
             }
         }
+        this.uploaded_files.sort(this.compare("createdAt"))
     },
+    methods: {
+        showmodal(recode) {
+            this.modal_visible = true
+            this.to_delete_recode = recode
+        },
+
+        modalcancel() {
+            this.modal_visible = false
+        },
+
+        deletefile(recode) {
+            var user_token = JSON.parse(window.localStorage.getItem("recode-" + recode)).owner_token
+            var xhr = new XMLHttpRequest()
+            var that = this
+            xhr.open("POST", _global.domain_url + "delete/" + recode)
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    if (xhr.status == 200) {
+                        that.modal_visible = false
+                        window.localStorage.removeItem("recode-" + recode)
+                        for (var i = 0; i < that.uploaded_files.length; i++) {
+                            if (that.uploaded_files[i].code == recode) {
+                                that.uploaded_files.splice(i, 1)
+                                break
+                            }
+                        }
+                        that.to_delete_recode = ''
+                        that.$message.success('删除成功')
+                    }
+                }
+            }
+            xhr.send(JSON.stringify({"user_token": user_token}))
+        },
+
+        compare(pro) { 
+            return function (obj1, obj2) { 
+                var val1 = obj1[pro]; 
+                var val2 = obj2[pro]; 
+                if (val1 < val2 ) { //正序
+                    return 1; 
+                } else if (val1 > val2 ) { 
+                    return -1; 
+                } else { 
+                    return 0; 
+                } 
+            } 
+        }
+    }
 }
 </script>
 

@@ -169,3 +169,13 @@
     color: black;
     width: 5%;
 }
+
+.expire-time-btn-group {
+    align-self: flex-start;
+    margin-left: 10%;
+}
+
+.expire-time {
+    margin-right: 8px;
+    border-radius: 4px!important; 
+}
