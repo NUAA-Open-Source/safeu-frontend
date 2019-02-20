@@ -81,10 +81,6 @@
                 this.is_show_password = !this.is_show_password
             },
 
-            handle() {
-                console.log(this.download_count)
-            },
-
             editrecode() {
                 this.is_editting_recode = true
             },
@@ -98,14 +94,16 @@
                 var that = this
                 if (this.recode != this.new_recode) {
                     var xhr = new XMLHttpRequest()
-                    var user_token = window.localStorage.getItem('owner_token')
+                    var user_token = JSON.parse(window.localStorage.getItem('recode-'+ this.recode)).owner_token
                     xhr.open("POST", _global.domain_url + "recode/" + this.recode, true)
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState == XMLHttpRequest.DONE) {
                             if (xhr.status == 200) {
-                                var createdAt = JSON.parse(window.localStorage.getItem("recode-" + that.recode)).createAt
+                                var uploadedinfo = JSON.parse(window.localStorage.getItem("recode-" + that.recode))
+                                var createdAt = uploadedinfo.createdAt
+                                var owner_token = uploadedinfo.owner_token
                                 window.localStorage.removeItem("recode-" + that.recode)
-                                window.localStorage.setItem("recode-" + that.new_recode, JSON.stringify({"recode": that.new_recode, "createdAt": createdAt, "editedAt": Date.parse(new Date())}))
+                                window.localStorage.setItem("recode-" + that.new_recode, JSON.stringify({"recode": that.new_recode, "owner_token": owner_token, "createdAt": createdAt, "editedAt": Date.parse(new Date())}))
                                 that.recode = that.new_recode
                                 that.$route.query.code = that.new_recode
                                 that.$message.success('设置成功');
@@ -114,11 +112,11 @@
                                     that.new_recode = that.recode
                                     that.$message.error('该提取码已存在')
                                 } else {
+                                    that.new_recode = that.recode
                                     that.$message.error('设置失败')
                                 }
                             }
                         }
-                        console.log(xhr.response)
                     }
                     xhr.send(JSON.stringify({"new_re_code": this.new_recode, "user_token": user_token}))
                 }
@@ -135,10 +133,10 @@
                 var sha256 = require("js-sha256").sha256
                 var password_sha256 = this.password == "" ? "" : sha256(this.password)
                 var that = this
-                var user_token = window.localStorage.getItem('owner_token')
-                xhr_password.open("POST", _global.domain_url + "password/" + this.new_recode, true)
-                xhr_downloadcount.open("POST", _global.domain_url + "downCount/" + this.new_recode, true)
-                xhr_expiretime.open("POST", _global.domain_url + "expireTime/" + this.new_recode, true)
+                var user_token = JSON.parse(window.localStorage.getItem('recode-' + this.recode)).owner_token
+                xhr_password.open("POST", _global.domain_url + "password/" + this.recode, true)
+                xhr_downloadcount.open("POST", _global.domain_url + "downCount/" + this.recode, true)
+                xhr_expiretime.open("POST", _global.domain_url + "expireTime/" + this.recode, true)
                 xhr_password.onreadystatechange = function() {
                     if (xhr_password.readyState == XMLHttpRequest.DONE) {
                         if (xhr_password.status == 200) {
