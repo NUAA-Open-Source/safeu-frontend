@@ -5,8 +5,8 @@
       <router-view></router-view>
     </div>
     <div class="footer">
-      <div style="text-align: left; margin: 10px 4% 2px" class="link-container">
-        <a href="https://a2os.club"><img style="height: auto; width: 112px" src="https://ftp.a2os.club/img/a2os.png"></a>
+      <div style="display: flex; flex-direction: row; align-items: center; margin: 10px 4% 2px" class="link-container">
+        <span style="font-size: 30px; font-weight: bold; margin-right: 12px;">A²OS</span>
         <a>使用条款</a>
         <a>隐私政策</a>
         <a>关于</a>
