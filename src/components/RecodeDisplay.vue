@@ -29,6 +29,15 @@
                             <a-radio-button class="download-count" value="50">50 次</a-radio-button>
                         </a-radio-group>
                     </div>
+                    <p class="setting-title" style="margin-top: 12px">有效期</p>
+                    <div class="expire-time-btn-group">
+                         <a-radio-group buttonStyle="solid" v-model="expire_time">
+                            <a-radio-button class="expire-time" value="4">4 小时</a-radio-button>
+                            <a-radio-button class="expire-time" value="8">8 小时</a-radio-button>
+                            <a-radio-button class="expire-time" value="12">12 小时</a-radio-button>
+                            <a-radio-button class="expire-time" value="24">24 小时</a-radio-button>
+                        </a-radio-group>
+                    </div>
                     <button class="setting-confirm-btn" v-on:click="submit">确定</button>
                 </div>
             </details>
@@ -51,11 +60,13 @@
                 is_editting_recode: false,
                 is_show_password: false,
                 is_more_setting: false,
-                is_need_password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != null,
-                password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password,
+                is_need_password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != null && JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != "",
+                password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password == null  ? "" : JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password,
                 new_recode: this.recode,
                 download_count: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).downcount == null ? "10" : JSON.parse(window.localStorage.getItem("recode-" + this.recode)).downcount,
+                expire_time: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).expiretime == null ? "8" : JSON.parse(window.localStorage.getItem("recode-" + this.recode)).expiretime,
                 downcount_setting_status: 0,
+                expiretime_setting_status: 0,
                 password_setting_status: 0,
             }
         },
@@ -120,12 +131,14 @@
             submit() {
                 var xhr_password = new XMLHttpRequest()
                 var xhr_downloadcount = new XMLHttpRequest()
+                var xhr_expiretime = new XMLHttpRequest()
                 var sha256 = require("js-sha256").sha256
                 var password_sha256 = this.password == "" ? "" : sha256(this.password)
                 var that = this
                 var user_token = window.localStorage.getItem('owner_token')
                 xhr_password.open("POST", _global.domain_url + "password/" + this.new_recode, true)
                 xhr_downloadcount.open("POST", _global.domain_url + "downCount/" + this.new_recode, true)
+                xhr_expiretime.open("POST", _global.domain_url + "expireTime/" + this.new_recode, true)
                 xhr_password.onreadystatechange = function() {
                     if (xhr_password.readyState == XMLHttpRequest.DONE) {
                         if (xhr_password.status == 200) {
@@ -133,7 +146,7 @@
                             var uploadedinfo = JSON.parse(window.localStorage.getItem("recode-" + that.recode))
                             uploadedinfo.password = that.password
                             window.localStorage.setItem("recode-" + that.recode, JSON.stringify(uploadedinfo))
-                            if (that.password_setting_status == 1 && that.downcount_setting_status == 1) {
+                            if (that.password_setting_status == 1 && that.downcount_setting_status == 1 && that.expiretime_setting_status == 1) {
                                 that.$message.success('设置成功')
                                 that.is_more_setting = false
                             }
@@ -149,7 +162,7 @@
                             var uploadedinfo = JSON.parse(window.localStorage.getItem("recode-" + that.recode))
                             uploadedinfo.downcount = that.download_count
                             window.localStorage.setItem("recode-" + that.recode, JSON.stringify(uploadedinfo))
-                            if (that.password_setting_status == 1 && that.downcount_setting_status == 1) {
+                            if (that.password_setting_status == 1 && that.downcount_setting_status == 1 && that.expiretime_setting_status == 1) {
                                 that.$message.success('设置成功')
                                 that.is_more_setting = false    
                             }
@@ -158,8 +171,25 @@
                         }
                     }
                 }
+                xhr_expiretime.onreadystatechange = function() {
+                    if (xhr_expiretime.readyState == XMLHttpRequest.DONE) {
+                        if (xhr_expiretime.status == 200) {
+                            that.expiretime_setting_status = 1
+                            var uploadedinfo = JSON.parse(window.localStorage.getItem("recode-" + that.recode))
+                            uploadedinfo.expiretime = that.expire_time
+                            window.localStorage.setItem("recode-" + that.recode, JSON.stringify(uploadedinfo))
+                            if (that.password_setting_status == 1 && that.downcount_setting_status == 1 && that.expiretime_setting_status == 1) {
+                                that.$message.success('设置成功')
+                                that.is_more_setting = false    
+                            }
+                        } else {
+                            that.$message.error('有效期设置失败')
+                        }
+                    }
+                }
                 xhr_password.send(JSON.stringify({"user_token":user_token, "Auth": password_sha256}))
                 xhr_downloadcount.send(JSON.stringify({"new_down_count": parseInt(that.download_count), "user_token": user_token}))
+                xhr_expiretime.send(JSON.stringify({"user_token": user_token, "new_expire_time": parseInt(that.expire_time)}))
             }
         }
     }
