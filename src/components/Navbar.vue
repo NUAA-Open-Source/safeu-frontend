@@ -21,7 +21,7 @@ export default {
           var that = this
           this.$notification.open({
             message: '欢迎加入用户群',
-            description: '欢迎加入 safeu 用户群，您可以在群中讨论关于 safeu 的一切，群号: 879651618',
+            description: '欢迎加入 SafeU 用户群，您可以在群中讨论关于 SafeU 的一切，群号: 879651618',
             icon: <a-icon type="smile" style="color: #108ee9" />,
         });
       },
