@@ -234,6 +234,11 @@
                 up.start();
             },
             jumpToRecodeDiplay(recode) {
+                this.$notification.open({
+                    message: '上传成功',
+                    description: '您上传的该文件默认有效期为 8 小时，可下载 10 次。若需更改，可点击"自定义设置"进行更改',
+                    icon: <a-icon type="smile" style="color: #108ee9" />,
+                });
                 this.$router.push({path: '/recode', query: {code: recode}})
             },
             upload() {
@@ -342,8 +347,7 @@
                                 if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
                                     var recode = JSON.parse(xhr.response).recode
                                     var owner_token = JSON.parse(xhr.response).owner
-                                    window.localStorage.setItem('owner_token', owner_token)
-                                    window.localStorage.setItem("recode-" + recode, JSON.stringify({'recode': recode, 'createdAt': Date.parse(new Date())}))
+                                    window.localStorage.setItem("recode-" + recode, JSON.stringify({'recode': recode, 'owner_token': owner_token, 'createdAt': Date.parse(new Date())}))
                                     that.jumpToRecodeDiplay(recode)
                                 }
                             }

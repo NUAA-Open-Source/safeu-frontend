@@ -21,9 +21,6 @@ export default {
     mounted() {
         
     },
-    created() {
-        console.log(this.$route.query)
-    }
 }
 </script>
 <style>
