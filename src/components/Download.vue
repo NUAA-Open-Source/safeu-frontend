@@ -37,7 +37,6 @@ export default {
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                     if  (xmlhttp.status == 200) {
-                        console.log(xmlhttp.response)
                         var token = JSON.parse(xmlhttp.response).token
                         var filelist = JSON.parse(xmlhttp.response).items
                         window.localStorage.setItem('token', token)
@@ -45,7 +44,6 @@ export default {
                         that.$router.push({path: '/filelist', query: {recode: that.recode}})
                     } else if (xmlhttp.status === 401) {
                         that.needpassword = true
-                        console.log(xmlhttp.response)
                         var error = JSON.parse(xmlhttp.response).error
                         
                         if (error == "Cannot get the password") {
@@ -54,16 +52,12 @@ export default {
                             that.$message.error("密码输入错误")
                         }
                         
-                        console.log(xmlhttp.response)
-                        console.log(that.needpassword)
                     } else if (xmlhttp.status === 404) {
                         that.$message.error("提取码错误")
-                        console.log(xmlhttp.response)
                     }
                 }
             }
             if (that.needpassword) {
-                console.log(password)
                 xmlhttp.send(JSON.stringify({"password": password}))
             } else {
                 xmlhttp.send(null)
