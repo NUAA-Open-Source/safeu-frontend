@@ -102,11 +102,22 @@ export default {
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     that.is_zip_loading = false
-                    var link = document.createElement('a');
-                    var file = new Blob([xhr.response], { type: '' });
-                    link.href = window.URL.createObjectURL(file);
-                    link.download = filename;
-                    link.click(); 
+                    var b = that.getBrowser();
+                    if(b =="Chrome"){
+                        var link = document.createElement('a');
+                        var file = new Blob([xhr.response], { type: '' });
+                        link.href = window.URL.createObjectURL(file);
+                        link.download = filename;
+                        link.click(); 
+                    } else if(b =="Firefox"){
+                        var file = new File([xhr.response], filename, { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                        var url = URL.createObjectURL(file);
+                        //window.location.href = url;
+                        parent.location.href = url;
+                    } else if(b=="IE"){
+                        var file = new Blob([xhr.response], { type: 'application/force-download' });
+                        window.navigator.msSaveBlob(file, filename);
+                    }
                 }
             }
             xhr.addEventListener("loadend", function(ev) {
@@ -169,9 +180,28 @@ export default {
             xhr.send(JSON.stringify({"re_code": this.recode, "full": full, "items": items}))
         },
         
-        zipall() {
-
-        }
+        getBrowser() {  
+            var ua = window.navigator.userAgent;  
+            //var isIE = window.ActiveXObject != undefined && ua.indexOf("MSIE") != -1;  
+            var isIE = !!window.ActiveXObject || "ActiveXObject" in window;
+            var isFirefox = ua.indexOf("Firefox") != -1;  
+            var isOpera = window.opr != undefined;  
+            var isChrome = ua.indexOf("Chrome") && window.chrome;  
+            var isSafari = ua.indexOf("Safari") != -1 && ua.indexOf("Version") != -1;  
+            if (isIE) {  
+                return "IE";  
+            } else if (isFirefox) {  
+                return "Firefox";  
+            } else if (isOpera) {  
+                return "Opera";  
+            } else if (isChrome) {  
+                return "Chrome";  
+            } else if (isSafari) {  
+                return "Safari";  
+            } else {  
+                return "Unkown";  
+            }  
+        }  
     }
 }
 </script>
