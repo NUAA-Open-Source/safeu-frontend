@@ -3,6 +3,7 @@
 // import "ant-design-vue/dist/antd.css";
 import '@babel/polyfill'
 import App from './App.vue'
+import VueClipboard from 'vue-clipboard2'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCloudUploadAlt, faCommentDots, faEye, faEyeSlash, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -18,6 +19,7 @@ Vue.use(VueQriously)
 // Vue.use(Table)
 // Vue.prototype.$message = message
 // Vue.prototype.$notification = notification
+Vue.use(VueClipboard)
 Vue.use(VueRouter)
 Vue.use(antd)
 library.add(faCloudUploadAlt)
