@@ -21,6 +21,7 @@
     "style-loader": "^0.23.1",
     "vue": "^2.5.17",
     "vue-loader": "^15.6.2",
+    "vue-clipboard2": "^0.3.0",
     "vue-qr": "^1.5.2",
     "vue-qriously": "^1.1.1",
     "vue-router": "^3.0.2",
