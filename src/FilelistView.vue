@@ -110,12 +110,12 @@ export default {
                         link.download = filename;
                         link.click(); 
                     } else if(b =="Firefox"){
-                        var file = new File([xhr.response], filename, { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                        var file = new File([xhr.response], filename, { type: '' });
                         var url = URL.createObjectURL(file);
                         //window.location.href = url;
                         parent.location.href = url;
                     } else if(b=="IE"){
-                        var file = new Blob([xhr.response], { type: 'application/force-download' });
+                        var file = new Blob([xhr.response], { type: '' });
                         window.navigator.msSaveBlob(file, filename);
                     }
                 }
