@@ -93,3 +93,9 @@
     color: #3596ff;
     font-size: 16px;
 }
+
+.download-files-item-name p {
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
