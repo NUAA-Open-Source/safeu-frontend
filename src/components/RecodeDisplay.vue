@@ -3,10 +3,12 @@
         <div class="recode-container">
             <p class="recode-top-hint">您的提取码</p>
             <div class="recode-input-row">
-                <input id="recode-box" class="recode-box" v-model="new_recode" :disabled="!is_editting_recode" @focus="inputonfocus"/>
+                <span class="recode-box" v-clipboard:copy="new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror" v-if="!is_editting_recode" v-on:click="log">{{new_recode}}</span>    
+                <input id="recode-box" class="recode-box" v-model="new_recode" @focus="inputonfocus" v-else/>
                 <a v-on:click="editrecode" v-if="!is_editting_recode">修改</a>
                 <a v-on:click="finisheditrecode" v-else>完成</a>
             </div>
+            <p style="font-size: 12px; color: grey; margin: 8px 0">点击提取码一键复制</p>
             <qriously :text="qrcode_url" :size="160" style="margin-top: 8px"/>
             <p>您可以保存或分享此二维码</p>
             <details>
@@ -72,6 +74,14 @@
             }
         },
         methods: {
+            copysuccess() {
+                this.$message.success("复制成功")
+            },
+
+            copyerror() {
+                this.$message.error("复制失败，请手动复制")
+            },
+
             showpassword() {
                 this.is_show_password = !this.is_show_password
             },

@@ -17,6 +17,7 @@
     "js-sha256": "^0.9.0",
     "plupload": "^2.3.6",
     "vue": "^2.5.17",
+    "vue-clipboard2": "^0.3.0",
     "vue-qr": "^1.5.2",
     "vue-qriously": "^1.1.1",
     "vue-router": "^3.0.2",
