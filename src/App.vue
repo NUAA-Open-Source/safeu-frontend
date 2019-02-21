@@ -13,7 +13,7 @@
         <a>Cookie</a>
       </div>
       <div style="text-align: center; margin: 2px 0px 10px">
-        <p>&copy; a2os.club 2018-2019 All rights reserved</p>
+        <p>&copy; <a href="https://a2os.club" style="color: #2c3e50;">a2os.club</a> 2018-2019 All rights reserved</p>
       </div>
     </div>
   </div>
