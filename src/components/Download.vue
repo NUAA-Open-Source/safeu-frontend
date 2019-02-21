@@ -1,8 +1,8 @@
 <template>
     <div class="download-container">
         <p class="download-top-hint">输入提取码</p>
-        <input class="download-recode-input" v-model="recode">
-        <input type="password" class="download-password-input" v-if="needpassword" v-model="password" placeholder="输入密码">
+        <input class="download-recode-input" v-model="recode" @keyup.enter="display">
+        <input type="password" class="download-password-input" v-if="needpassword" v-model="password" placeholder="输入密码" @keyup.enter="display">
         <button class="download-button" v-on:click="display()">提取</button>
     </div>
 </template>
@@ -37,14 +37,13 @@ export default {
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                     if  (xmlhttp.status == 200) {
-                        console.log(xmlhttp.response)
                         var token = JSON.parse(xmlhttp.response).token
                         var filelist = JSON.parse(xmlhttp.response).items
                         window.localStorage.setItem('token', token)
-                        that.$router.push({path: '/filelist', query: {filelist: filelist}})
+                        window.sessionStorage.setItem('filelist', JSON.stringify(filelist))
+                        that.$router.push({path: '/filelist', query: {recode: that.recode}})
                     } else if (xmlhttp.status === 401) {
                         that.needpassword = true
-                        console.log(xmlhttp.response)
                         var error = JSON.parse(xmlhttp.response).error
                         
                         if (error == "Cannot get the password") {
@@ -53,16 +52,12 @@ export default {
                             that.$message.error("密码输入错误")
                         }
                         
-                        console.log(xmlhttp.response)
-                        console.log(that.needpassword)
                     } else if (xmlhttp.status === 404) {
                         that.$message.error("提取码错误")
-                        console.log(xmlhttp.response)
                     }
                 }
             }
             if (that.needpassword) {
-                console.log(password)
                 xmlhttp.send(JSON.stringify({"password": password}))
             } else {
                 xmlhttp.send(null)

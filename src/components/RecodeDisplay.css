@@ -111,7 +111,7 @@
 }
 
 .setting-confirm-btn {
-    margin-top: 8px;
+    margin-top: 16px;
     height: 40px;
     width: 80%;
     border: 0;
@@ -141,4 +141,47 @@
 .selected {
     color: white;
     background: #1ab20a;    
+}
+
+.download-count-btn-group {
+    align-self: flex-start;
+    margin-left: 10%;
+}
+
+.download-count {
+    margin-right: 8px;
+    border-radius: 4px!important;
+}
+
+.setting-password-input-row {
+    display: flex;
+    width: 80%;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.setting-password-input-row input {
+    width: 95%;
+}
+
+.setting-password-input-row a {
+    color: black;
+    width: 5%;
+}
+
+.expire-time-btn-group {
+    align-self: flex-start;
+    margin-left: 10%;
+}
+
+.expire-time {
+    margin-right: 8px;
+    border-radius: 4px!important; 
+}
+
+.back-btn {
+    margin-top: 8px;
+    text-decoration: underline;
+    text-align: center;
 }
