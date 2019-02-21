@@ -15,7 +15,7 @@
                     <p style="margin-bottom: 0">{{item.OriginalName}}</p>
                 </div>
                 <div class="download-files-item-btn">
-                    <a v-on:click="downloadfile(item.Host, item.OriginalName, false)">下载</a>
+                    <a v-on:click="downloadfile(item.Host, item.OriginalName, item.Type, false)">下载</a>
                 </div>
             </div>
             <div class="zip-download-row">
@@ -93,7 +93,7 @@ export default {
             }
         },
 
-        downloadfile(url, filename, iszip) {
+        downloadfile(url, filename, filetype, iszip) {
             var xhr = new XMLHttpRequest()
             xhr.open("GET", url)
             xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
@@ -103,20 +103,16 @@ export default {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     that.is_zip_loading = false
                     var b = that.getBrowser();
-                    if(b =="Chrome"){
+                    if (b=="IE"){
+                        var file = new Blob([xhr.response], { type: filetype });
+                        window.navigator.msSaveBlob(file, filename);
+                    } else {
                         var link = document.createElement('a');
-                        var file = new Blob([xhr.response], { type: '' });
+                        var file = new Blob([xhr.response], { type: filetype });
                         link.href = window.URL.createObjectURL(file);
                         link.download = filename;
+                        document.body.appendChild(link)
                         link.click(); 
-                    } else if(b =="Firefox"){
-                        var file = new File([xhr.response], filename, { type: '' });
-                        var url = URL.createObjectURL(file);
-                        //window.location.href = url;
-                        parent.location.href = url;
-                    } else if(b=="IE"){
-                        var file = new Blob([xhr.response], { type: '' });
-                        window.navigator.msSaveBlob(file, filename);
                     }
                 }
             }
@@ -174,7 +170,7 @@ export default {
                     var zip_url = JSON.parse(xhr.response).url
                     var url_pieces = zip_url.split("/")
                     var name = url_pieces[url_pieces.length - 1]
-                    that.downloadfile(zip_url, name, true)
+                    that.downloadfile(zip_url, name, '', true)
                 }
             }
             xhr.send(JSON.stringify({"re_code": this.recode, "full": full, "items": items}))
