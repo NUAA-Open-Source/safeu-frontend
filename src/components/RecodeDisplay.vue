@@ -41,6 +41,7 @@
                     <button class="setting-confirm-btn" v-on:click="submit">确定</button>
                 </div>
             </details>
+            <a href="/" class="back-btn">返回</a>
         </div>
        
     </div>
