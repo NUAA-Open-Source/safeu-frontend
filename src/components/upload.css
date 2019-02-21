@@ -86,6 +86,7 @@ a:hover {
 }
 
 .upload-files {
+    margin-top: 8px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -189,6 +190,7 @@ a:hover {
 
 .start-upload-button {
     border: 1px solid #3596ff;
+    background: white;
     color: #3596ff;
     font-weight: bold;
     border-radius: 6px;

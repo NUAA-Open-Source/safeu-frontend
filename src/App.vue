@@ -5,15 +5,15 @@
       <router-view></router-view>
     </div>
     <div class="footer">
-      <div style="text-align: left; margin: 10px 4% 2px" class="link-container">
-        <a href="https://a2os.club"><img style="height: auto; width: 112px" src="https://ftp.a2os.club/img/a2os.png"></a>
+      <div style="display: flex; flex-direction: row; align-items: center; margin: 10px 4% 2px" class="link-container">
+        <span style="font-size: 30px; font-weight: bold; margin-right: 12px;">A²OS</span>
         <a>使用条款</a>
         <a>隐私政策</a>
         <a>关于</a>
         <a>Cookie</a>
       </div>
       <div style="text-align: center; margin: 2px 0px 10px">
-        <p>&copy; a2os.club 2018-2019 All rights reserved</p>
+        <p>&copy; <a href="https://a2os.club" style="color: #2c3e50;">a2os.club</a> 2018-2019 All rights reserved</p>
       </div>
     </div>
   </div>
@@ -39,7 +39,7 @@ body {
   display: flex;
   flex-direction: column;
   margin-top: 0;
-  background: url('./assets/background.png') no-repeat;
+  background: url('./assets/background.svg') no-repeat;
   width: 100%;
   min-height: 100%;
   font-family: -apple-system,BlinkMacSystemFont,SF Pro Text,segoe ui,helvetica neue,helvetica,ubuntu,roboto,noto,arial,sans-serif;

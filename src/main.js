@@ -1,20 +1,28 @@
 import Vue from 'vue'
-import './plugins/vuetify'
-import Vuetify from 'vuetify'
-import { message, Table } from "ant-design-vue";
+import { message, Table, Radio, notification, Modal, Icon } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import App from './App.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons'
+import { faCloudUploadAlt, faCommentDots, faEye, faEyeSlash, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueRouter from 'vue-router'
+import VueQriously from 'vue-qriously'
 
+Vue.use(VueQriously)
+Vue.use(notification)
+Vue.use(Modal)
+Vue.use(Icon)
 Vue.use(message)
+Vue.use(Radio)
 Vue.use(Table)
 Vue.prototype.$message = message
-Vue.use(Vuetify)
+Vue.prototype.$notification = notification
 Vue.use(VueRouter)
 library.add(faCloudUploadAlt)
+library.add(faCommentDots)
+library.add(faEye)
+library.add(faEyeSlash)
+library.add(faTrash)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Vue.config.productionTip = false
