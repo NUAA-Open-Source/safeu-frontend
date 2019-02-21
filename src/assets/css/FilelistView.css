@@ -35,7 +35,7 @@
 
 .filelist-item {
     width: 100%;
-    margin-top: 12px;
+    margin-top: 4px;
     display: flex;
     flex-direction: row;
     justify-content: start;
