@@ -9,7 +9,7 @@
             <div class="filelist-item" v-for="item in filelist" :key="item.ID">
                 <input type="checkbox" :value="{'host': item.Host, 'name': item.OriginalName}" v-model="selected_files">
                 <div class="download-files-item-left">
-                    <img :src="item.image" style="width: 36px; height: 36px;" />
+                    <img :src="item.image" />
                 </div>
                 <div class="download-files-item-name">
                     <p style="margin-bottom: 0">{{item.OriginalName}}</p>
