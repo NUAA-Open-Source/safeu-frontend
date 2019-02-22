@@ -84,9 +84,6 @@
             authServerUrl: {
                 default: _global.domain_url + 'upload/policy'
             },
-            extensions: {
-                default: 'zip,rar,jpg,png,jpeg,doc,xls,docx,pdf,ppt,pptx,xlsx'
-            },
             maxSize: {
                 default: '50mb'
             },
@@ -252,10 +249,6 @@
                     container: that.$refs.container,
                     url: 'https://oss.aliyuncs.com',
                     filters: {
-                        mime_types: [{
-                            title: '允许上传文件类型',
-                            extensions: that.extensions,
-                        }],
                         // 最大只能上传200mb的文件
                         max_file_size: that.maxSize,
                         // 不允许队列中存在重复文件
