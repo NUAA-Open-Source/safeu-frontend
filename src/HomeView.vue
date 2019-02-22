@@ -1,5 +1,5 @@
 <template>
-    <div id="homeview">
+    <div :id="isuploaded ? 'homeview1' : 'homeview2'">
         <Home :code="this.$route.params.recode"/>
         <UploadedFiles/>
     </div>
@@ -14,15 +14,66 @@ export default {
         Home,
         UploadedFiles,
     },
+    data() {
+        return {
+            isuploaded: false,
+        }
+    },
+    mounted() {
+        var localStorage = window.localStorage
+        for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i)
+            if (key.indexOf("recode-") == 0) {
+                this.isuploaded = true
+                break
+            }
+        }
+    }
 }
 </script>
 <style>
-#homeview {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+@media (max-width: 700px) {
+    #homeview1 {
+        width: 100%;
+        height: 100%;
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }    
+
+    #homeview2 {
+        width: 100%;
+        height: 100%;
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }    
+}
+
+@media (min-width: 700px) {
+    #homeview1 {
+        width: 100%;
+        height: 100%;
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #homeview2 {
+        width: 100%;
+        height: 100%;
+        margin-top: 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 }
 </style>
 

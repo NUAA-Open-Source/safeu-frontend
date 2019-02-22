@@ -1,11 +1,13 @@
 @media (max-width: 700px) {
     .uploadedfiles-container {
         width: 90%;
+        margin-top: 20px;
     }
 }
 
 @media (min-width: 700px) {
     .uploadedfiles-container {
         width: 600px;
+        margin-top: 20px;
     }
 }
