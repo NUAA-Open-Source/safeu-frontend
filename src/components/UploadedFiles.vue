@@ -1,5 +1,6 @@
 <template>
     <div class="uploadedfiles-container" v-if="uploaded_files.length > 0">
+        <p style="font-size: 20px; font-weight: 700">历史上传文件</p>
         <a-table :columns="columns"
             :rowKey="file => file.recode"
             :dataSource="uploaded_files"
