@@ -5,7 +5,7 @@ import '@babel/polyfill'
 import App from './App.vue'
 import VueClipboard from 'vue-clipboard2'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCloudUploadAlt, faCommentDots, faEye, faEyeSlash, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCloudUploadAlt, faCommentDots, faEye, faEyeSlash, faTrash, faArrowAltCircleDown, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // import VueRouter from 'vue-router'
 import VueQriously from 'vue-qriously'
@@ -27,6 +27,8 @@ library.add(faCommentDots)
 library.add(faEye)
 library.add(faEyeSlash)
 library.add(faTrash)
+library.add(faArrowAltCircleDown)
+library.add(faArrowAltCircleUp)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Vue.config.productionTip = false

@@ -34,18 +34,33 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        align-items: flex-start;
+        align-items: center;
         margin-top: 12px;
     }
 
-    .main-buttons {
+    .main-upload-buttons {
         font-size: 20px;
-        width: 180px;
+        width: 100%;
         text-align: center;
         background: rgb(64, 169, 255);
         padding: 10px 40px 10px;
         border-radius: 30px;
         color: white !important;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 8px;
+    }
+
+    .main-download-buttons {
+        font-size: 20px;
+        width: 100%;
+        text-align: center;
+        color: rgb(64, 169, 255) !important;
+        padding: 10px 40px 10px;
+        border-radius: 30px;
+        background-color: white !important;
+        border: 1px solid rgb(64, 169, 255);
         font-weight: bold;
         text-decoration: none;
         display: inline-block;
@@ -62,15 +77,14 @@
         width: 600px;
         height: 300px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
     }
 
     .intro {
         display: flex;
-        width: 60%;
-        height: 100%;
+        width: 100%;
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-end;
@@ -81,25 +95,36 @@
         font-size: 35px;
         font-weight: bold;
         max-width: 90%;
+        height: 50%;
+    }
+
+    .intro-sub {
+        width: 100%;
+        height: 50%;
+        margin-top: 36px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
     }
     
     .intro-subtitle {
-        margin-top: 36px;
+        width: 50%;
         margin-bottom: 0;
         font-size: 20px;
         max-width: 90%;
     }
 
     .buttons-container {
-        width: 40%;
+        width: 50%;
         height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
+        justify-content: flex-start;
         align-items: flex-end;
     }
 
-    .main-buttons {
+    .main-upload-buttons {
         font-size: 20px;
         width: 70%;
         text-align: center;
@@ -110,6 +135,29 @@
         font-weight: bold;
         text-decoration: none;
         display: inline-block;
-        margin-top: 8px;
+        margin-bottom: 8px;
+        outline: 2px;
     }
+
+    .main-download-buttons {
+        font-size: 20px;
+        width: 70%;
+        text-align: center;
+        color: rgb(64, 169, 255) !important;
+        padding: 10px 40px 10px;
+        border-radius: 30px;
+        background-color: white;
+        border: 1px solid rgb(64, 169, 255);
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 8px;
+        outline: 2px;
+    }
+}
+
+.main-download-buttons:hover {
+    background-color: rgb(64, 169, 255);
+    border: none;
+    color: white !important;
 }
