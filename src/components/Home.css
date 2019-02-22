@@ -12,6 +12,8 @@
 }
 .imgs-container {
     text-align: center;
+    display: flex;
+    justify-content: center;
     margin: 50px 0px 40px
 }
 .main-buttons {
