@@ -3,12 +3,13 @@
         <div class="recode-container">
             <p class="recode-top-hint">您的提取码</p>
             <div class="recode-input-row">
-                <span class="recode-box" v-clipboard:copy="new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror" v-if="!is_editting_recode" v-on:click="log">{{new_recode}}</span>    
+                <span class="recode-box" v-clipboard:copy="new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror" v-if="!is_editting_recode">{{new_recode}}</span>    
                 <input id="recode-box" class="recode-box" v-model="new_recode" @focus="inputonfocus" v-else/>
                 <a v-on:click="editrecode" v-if="!is_editting_recode">修改</a>
                 <a v-on:click="finisheditrecode" v-else>完成</a>
             </div>
-            <p style="font-size: 12px; color: grey; margin: 8px 0">点击提取码一键复制</p>
+            <p style="font-size: 12px; color: grey; margin: 8px 0" v-if="!is_editting_recode">点击提取码一键复制</p>
+            <p style="font-size: 12px; color: grey; margin: 8px 0" v-else>*仅允许 a-z, A-Z, 0-9, 下划线和短横线</p>
             <qriously :text="qrcode_url" :size="160" style="margin-top: 8px"/>
             <p>您可以保存或分享此二维码</p>
             <details>
@@ -51,6 +52,7 @@
 </template>
 
 <script>
+    const legalChar = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_'
     import _global from '../Global.vue'
     export default {
         name: 'RecodeDisplay',
@@ -62,7 +64,6 @@
                 qrcode_url: "/download/" + this.recode,
                 is_editting_recode: false,
                 is_show_password: false,
-                is_more_setting: false,
                 is_need_password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != null && JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != "",
                 password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password == null  ? "" : JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password,
                 new_recode: this.recode,
@@ -95,6 +96,18 @@
             },
 
             finisheditrecode() {
+                if (this.new_recode == '') {
+                    this.$message.error('提取码不能为空')
+                    this.new_recode = this.recode
+                    return
+                }
+                for (var i = 0; i < this.new_recode.length; i++) {
+                    if (legalChar.indexOf(this.new_recode.charAt(i)) == -1) {
+                        this.$message.error('提取码不规范，仅允许 a-z, A-Z, 0-9, 下划线和短横线')
+                        this.new_recode = this.recode
+                        return
+                    }
+                }
                 this.is_editting_recode = false
                 var that = this
                 if (this.recode != this.new_recode) {
@@ -129,10 +142,6 @@
                 }
             },
 
-            moresetting() {
-                this.is_more_setting = true
-            },
-
             submit() {
                 var xhr_password = new XMLHttpRequest()
                 var xhr_downloadcount = new XMLHttpRequest()
@@ -153,7 +162,9 @@
                             window.localStorage.setItem("recode-" + that.recode, JSON.stringify(uploadedinfo))
                             if (that.password_setting_status == 1 && that.downcount_setting_status == 1 && that.expiretime_setting_status == 1) {
                                 that.$message.success('设置成功')
-                                that.is_more_setting = false
+                                that.password_setting_status = 0
+                                that.downcount_setting_status = 0
+                                that.expiretime_setting_status = 0
                             }
                         } else {
                             that.$message.error('密码设置失败')
@@ -169,7 +180,9 @@
                             window.localStorage.setItem("recode-" + that.recode, JSON.stringify(uploadedinfo))
                             if (that.password_setting_status == 1 && that.downcount_setting_status == 1 && that.expiretime_setting_status == 1) {
                                 that.$message.success('设置成功')
-                                that.is_more_setting = false    
+                                that.password_setting_status = 0
+                                that.downcount_setting_status = 0
+                                that.expiretime_setting_status = 0
                             }
                         } else {
                             that.$message.error('下载次数设置失败')
@@ -185,7 +198,9 @@
                             window.localStorage.setItem("recode-" + that.recode, JSON.stringify(uploadedinfo))
                             if (that.password_setting_status == 1 && that.downcount_setting_status == 1 && that.expiretime_setting_status == 1) {
                                 that.$message.success('设置成功')
-                                that.is_more_setting = false    
+                                that.password_setting_status = 0
+                                that.downcount_setting_status = 0
+                                that.expiretime_setting_status = 0
                             }
                         } else {
                             that.$message.error('有效期设置失败')
