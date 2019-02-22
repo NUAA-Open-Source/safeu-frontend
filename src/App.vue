@@ -7,10 +7,9 @@
     <div class="footer">
       <div style="display: flex; flex-direction: row; align-items: center; margin: 10px 4% 2px" class="link-container">
         <span style="font-size: 30px; font-weight: bold; margin-right: 12px;">A²OS</span>
-        <a>使用条款</a>
-        <a>隐私政策</a>
-        <a>关于</a>
-        <a>Cookie</a>
+        <a href="/terms">使用条款</a>
+        <a href="/privacy">隐私政策</a>
+        <a href="/about">关于</a>
       </div>
       <div style="text-align: center; margin: 2px 0px 10px">
         <p>&copy; <a href="https://a2os.club" style="color: #2c3e50;">a2os.club</a> 2018-2019 All rights reserved</p>
@@ -41,7 +40,7 @@ body {
   flex-direction: column;
   margin-top: 0;
   background: url('./assets/background.svg') no-repeat;
-  background-size: cover;
+  background-size: 100%;
   width: 100%;
   font-family: -apple-system,BlinkMacSystemFont,SF Pro Text,segoe ui,helvetica neue,helvetica,ubuntu,roboto,noto,arial,sans-serif;
   -webkit-font-smoothing: antialiased;

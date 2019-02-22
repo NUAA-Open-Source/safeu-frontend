@@ -35,6 +35,9 @@ const HomeView = () => import(/* webpackChunkName: "group-foo" */ './HomeView.vu
 const UploadView = () => import(/* webpackChunkName: "group-foo" */ './UploadView.vue')
 const UploadedRecodeView = () => import(/* webpackChunkName: "group-foo" */ './UploadedRecodeView.vue')
 const FilelistView = () => import(/* webpackChunkName: "group-foo" */ './FilelistView.vue')
+const Terms = () => import(/* webpackChunkName: "group-foo" */ './Terms.vue')
+const Privacy = () => import(/* webpackChunkName: "group-foo" */ './Privacy.vue')
+const About = () => import(/* webpackChunkName: "group-foo" */ './About.vue')
 
 let router = new VueRouter({
   mode: 'history',
@@ -45,6 +48,9 @@ let router = new VueRouter({
     {path: '/upload', component: UploadView},
     {path: '/', component: HomeView},
     {path: '/recode', component: UploadedRecodeView},
+    {path: '/terms', component: Terms},
+    {path: '/privacy', component: Privacy},
+    {path: '/about', component: About},
   ],
 })
 
