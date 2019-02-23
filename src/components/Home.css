@@ -157,7 +157,7 @@
 }
 
 .main-download-buttons:hover {
-    background-color: rgb(64, 169, 255);
+    background-color: rgb(64, 169, 255)!important;
     border: none;
     color: white !important;
 }
