@@ -114,12 +114,12 @@
                         if (xhr.readyState == XMLHttpRequest.DONE) {
                             if (xhr.status == 200) {
                                 var uploadedinfo = JSON.parse(window.localStorage.getItem("recode-" + that.recode))
-                                var createdAt = uploadedinfo.createdAt
-                                var owner_token = uploadedinfo.owner_token
                                 var href = window.location.href
                                 window.history.pushState({}, 0, href.split('code=')[0] + "code=" + that.new_recode)
+                                uploadedinfo.editedAt = Date.parse(new Date())
+                                uploadedinfo.recode = that.new_recode
                                 window.localStorage.removeItem("recode-" + that.recode)
-                                window.localStorage.setItem("recode-" + that.new_recode, JSON.stringify({"recode": that.new_recode, "owner_token": owner_token, "createdAt": createdAt, "editedAt": Date.parse(new Date())}))
+                                window.localStorage.setItem("recode-" + that.new_recode, JSON.stringify(uploadedinfo))
                                 that.recode = that.new_recode
                                 that.$route.query.code = that.new_recode
                                 that.$message.success('设置成功');
