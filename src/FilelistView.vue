@@ -167,10 +167,15 @@ export default {
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
-                    var zip_url = JSON.parse(xhr.response).url
-                    var url_pieces = zip_url.split("/")
-                    var name = url_pieces[url_pieces.length - 1]
-                    that.downloadfile(zip_url, name, '', true)
+                    if (xhr.status == 200) {
+                        var zip_url = JSON.parse(xhr.response).url
+                        var url_pieces = zip_url.split("/")
+                        var name = url_pieces[url_pieces.length - 1]
+                        that.downloadfile(zip_url, name, '', true)
+                    } else {
+                        that.is_zip_loading = false
+                        that.$message.error('打包失败')
+                    }
                 }
             }
             xhr.send(JSON.stringify({"re_code": this.recode, "full": full, "items": items}))
