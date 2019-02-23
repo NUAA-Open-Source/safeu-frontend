@@ -51,7 +51,6 @@
 </template>
 
 <script>
-    const legalChar = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_'
     import _global from '../Global.vue'
     export default {
         name: 'RecodeDisplay',
@@ -106,13 +105,6 @@
                     this.$message.error('提取码不能为空')
                     this.new_recode = this.recode
                     return
-                }
-                for (var i = 0; i < this.new_recode.length; i++) {
-                    if (legalChar.indexOf(this.new_recode.charAt(i)) == -1) {
-                        this.$message.error('提取码不规范，仅允许 a-z, A-Z, 0-9, 下划线和短横线')
-                        this.new_recode = this.recode
-                        return
-                    }
                 }
                 this.is_editting_recode = false
                 var that = this
