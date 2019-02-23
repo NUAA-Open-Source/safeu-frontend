@@ -157,6 +157,7 @@
                             that.password_setting_status = 1
                             var uploadedinfo = JSON.parse(window.localStorage.getItem("recode-" + that.recode))
                             uploadedinfo.password = that.password
+                            uploadedinfo.editedAt = Date.parse(new Date())
                             window.localStorage.setItem("recode-" + that.recode, JSON.stringify(uploadedinfo))
                             if (that.password_setting_status == 1 && that.downcount_setting_status == 1 && that.expiretime_setting_status == 1) {
                                 that.$message.success('设置成功')
@@ -175,6 +176,7 @@
                             that.downcount_setting_status = 1
                             var uploadedinfo = JSON.parse(window.localStorage.getItem("recode-" + that.recode))
                             uploadedinfo.downcount = that.download_count
+                            uploadedinfo.editedAt = Date.parse(new Date())
                             window.localStorage.setItem("recode-" + that.recode, JSON.stringify(uploadedinfo))
                             if (that.password_setting_status == 1 && that.downcount_setting_status == 1 && that.expiretime_setting_status == 1) {
                                 that.$message.success('设置成功')
@@ -193,6 +195,7 @@
                             that.expiretime_setting_status = 1
                             var uploadedinfo = JSON.parse(window.localStorage.getItem("recode-" + that.recode))
                             uploadedinfo.expiretime = that.expire_time
+                            uploadedinfo.editedAt = Date.parse(new Date())
                             window.localStorage.setItem("recode-" + that.recode, JSON.stringify(uploadedinfo))
                             if (that.password_setting_status == 1 && that.downcount_setting_status == 1 && that.expiretime_setting_status == 1) {
                                 that.$message.success('设置成功')
