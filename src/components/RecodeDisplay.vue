@@ -22,7 +22,6 @@
                             <font-awesome-icon :icon="is_show_password ? 'eye-slash' : 'eye'"/>
                         </a>
                     </div>
-                    
                     <p class="setting-title" style="margin-top: 12px">下载次数</p>
                     <div class="download-count-btn-group">
                          <a-radio-group buttonStyle="solid" v-model="download_count">
@@ -72,6 +71,13 @@
                 downcount_setting_status: 0,
                 expiretime_setting_status: 0,
                 password_setting_status: 0,
+            }
+        },
+        watch: {
+            'is_need_password': function() {
+                if (!this.is_need_password) {
+                    this.password = ""
+                }
             }
         },
         methods: {
