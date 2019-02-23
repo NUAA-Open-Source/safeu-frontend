@@ -137,6 +137,7 @@
         display: inline-block;
         margin-bottom: 8px;
         outline: 2px;
+        border: 1px solid rgb(64, 169, 255);
     }
 
     .main-download-buttons {
@@ -160,4 +161,10 @@
     background-color: rgb(64, 169, 255);
     border: none;
     color: white !important;
+}
+.main-upload-buttons:hover {
+    background-color: white;
+    border: none;
+    color: rgb(64, 169, 255) !important;
+    border: 1px solid rgb(64, 169, 255);
 }

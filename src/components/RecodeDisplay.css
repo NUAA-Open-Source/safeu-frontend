@@ -20,6 +20,28 @@
     }
 }
 
+#custom-settings {
+    font-size: 20px;
+    margin: 30px 0px 30px;
+    text-align: center;
+    border: 2px solid rgb(64, 169, 255);
+    border-radius: 10px;
+
+    font-weight: bold;
+}
+
+#custom-settings:hover {
+    font-size: 20px;
+    background-color: rgb(64, 169, 255);
+    color: white;
+    margin: 30px 0px 30px;
+    text-align: center;
+    border: 2px solid rgb(64, 169, 255);
+    border-radius: 10px;
+
+    font-weight: bold;
+}
+
 .container p {
     margin-bottom: 0.5em;
 }
