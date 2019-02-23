@@ -13,7 +13,7 @@
             <qriously :text="qrcode_url" :size="160" style="margin-top: 8px"/>
             <p>您可以保存或分享此二维码</p>
             <details>
-                <summary>自定义设置</summary>
+                <summary id="custom-settings">点此进行自定义设置</summary>
                 <div class="more-setting-container">
                     <p class="setting-title">加密<input type="checkbox" v-model="is_need_password" style="margin-left: 8px;"></p>
                     <div class="setting-password-input-row" v-if="is_need_password">
