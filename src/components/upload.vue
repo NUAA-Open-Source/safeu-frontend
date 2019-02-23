@@ -340,7 +340,9 @@
                                 if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
                                     var recode = JSON.parse(xhr.response).recode
                                     var owner_token = JSON.parse(xhr.response).owner
-                                    window.localStorage.setItem("recode-" + recode, JSON.stringify({'recode': recode, 'owner_token': owner_token, 'createdAt': Date.parse(new Date())}))
+                                    var expire_time = "8"
+                                    var download_count = "10"
+                                    window.localStorage.setItem("recode-" + recode, JSON.stringify({'recode': recode, 'owner_token': owner_token, 'downcount': download_count, 'expiretime': expire_time, 'createdAt': Date.parse(new Date())}))
                                     that.jumpToRecodeDiplay(recode)
                                 }
                             }

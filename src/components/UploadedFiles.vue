@@ -9,6 +9,9 @@
         <template slot="recode" slot-scope="recode">
             <a :href="'/recode?code='+recode">{{recode}}</a>
         </template>
+        <template slot="remain_time" slot-scope="remain_time">
+            <span>{{remain_time}}</span>
+        </template>
         <template slot="download_url" slot-scope="download_url">
             <a :href="download_url">提取</a>
         </template>
@@ -39,6 +42,11 @@ const columns = [{
     width: '20%',
     scopedSlots: { customRender: 'download_url' },
 }, {
+    title: '有效时间剩余',
+    dataIndex: 'remain_time',
+    width: '20%',
+    scopedSlots: { customRender: 'remain_time' },
+},{
     title: '',
     dataIndex: 'code',
     width: '10%',
@@ -64,7 +72,17 @@ export default {
                 var recode = value.recode
                 var download_url = "/download/" + value.recode
                 var createdAt = value.createdAt
-                this.uploaded_files.push({'recode': recode, 'download_url': download_url, 'code': recode, 'createdAt': createdAt})
+                // var download_count = value.downcount
+                var expire_time = value.expiretime
+                var remain_time = createdAt + expire_time * 60 * 60 * 1000 - Date.parse(new Date())
+                if (remain_time < 0) {
+                    window.localStorage.removeItem("recode-" + recode)
+                }
+                else {
+                    var remain_hour = parseInt(remain_time / 1000 / 60 / 60).toString()
+                    var remain_min = Math.round(remain_time / 1000 / 60 % 60).toString()
+                    this.uploaded_files.push({'recode': recode, 'download_url': download_url, 'remain_time': remain_hour + '小时' + remain_min + '分钟', 'code': recode, 'createdAt': createdAt})
+                } 
             }
         }
         this.uploaded_files.sort(this.compare("createdAt"))
