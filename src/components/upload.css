@@ -198,6 +198,26 @@ a:hover {
     margin: 1em 0 1em 1em    
 }
 
+.start-upload-button:hover {
+    border: 1px solid #3596ff;
+    background: #3596ff;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 6px 12px 6px 12px;
+    margin: 1em 0 1em 1em    
+}
+
+.browse-button:hover {
+    border: 1px solid #3596ff;
+    background: #3596ff;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 6px 12px 6px 12px;
+    margin-top: 1em; 
+}
+
 .upload-files-remove-btn {
     width: 10%;
 }
