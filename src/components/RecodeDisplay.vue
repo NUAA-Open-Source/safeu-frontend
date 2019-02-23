@@ -4,7 +4,7 @@
             <p class="recode-top-hint">您的提取码</p>
             <div class="recode-input-row">
                 <span class="recode-box" v-clipboard:copy="new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror" v-if="!is_editting_recode">{{new_recode}}</span>    
-                <input id="recode-box" class="recode-box" v-model="new_recode" @focus="inputonfocus" v-else/>
+                <input id="recode-box" class="recode-box" v-model="new_recode" @focus="inputonfocus" @keyup.enter="finisheditrecode" v-else/>
                 <a v-on:click="editrecode" v-if="!is_editting_recode">修改</a>
                 <a v-on:click="finisheditrecode" v-else>完成</a>
             </div>
@@ -45,9 +45,7 @@
             </details>
             <a href="/" class="back-btn">返回</a>
         </div>
-       
     </div>
-    
 </template>
 
 <script>
