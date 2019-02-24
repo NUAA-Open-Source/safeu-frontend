@@ -3,7 +3,7 @@
         <div class="filelist-container">
             <p class="filelist-container-title">文件列表</p>
             <div class="filelist-item">
-                <input type="checkbox" v-model="is_all_selected" @change="selectall" style="margin-right: 8px">
+                <input type="checkbox" v-model="is_all_selected" @change="selectall" style="margin-right: 17px">
                 全选
             </div>
             <div class="filelist-item" v-for="item in filelist" :key="item.ID">
