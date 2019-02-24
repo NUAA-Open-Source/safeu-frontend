@@ -1,6 +1,6 @@
 // import Vue from 'vue'
 import Vue from 'vue'
-import { message, Table, Radio, notification, Modal, Icon } from "ant-design-vue";
+import { message, Table, Radio, notification, Modal, Icon, Tooltip } from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import App from './App.vue'
 import VueClipboard from 'vue-clipboard2'
@@ -17,6 +17,7 @@ Vue.use(Icon)
 Vue.use(message)
 Vue.use(Radio)
 Vue.use(Table)
+Vue.use(Tooltip)
 Vue.prototype.$message = message
 Vue.prototype.$notification = notification
 Vue.use(VueClipboard)
