@@ -9,9 +9,15 @@
                 <a v-on:click="finisheditrecode" v-else>完成</a>
             </div>
             <p style="font-size: 12px; color: grey; margin: 8px 0" v-if="!is_editting_recode">点击提取码一键复制</p>
-            <p style="font-size: 12px; color: grey; margin: 8px 0" v-else>*仅允许 a-z, A-Z, 0-9, 下划线和短横线</p>
-            <qriously :text="qrcode_url" :size="160" style="margin-top: 8px"/>
-            <p>您可以保存或分享此二维码</p>
+            <p style="font-size: 12px; color: grey; margin: 8px 0" v-else>&nbsp;</p>
+            <button class="copy-downloadurl-btn" v-clipboard:copy="'https://safeu.a2os.club/download/' + new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror">拷贝链接</button>
+            <a-tooltip trigger="hover" overlayClassName="overlay" placement="bottom" style="margin-top: 12px">
+                <a href="#">分享二维码</a>
+                <div slot="title" style="background: white; width: 100%; height: 100%;">
+                    <qriously slot="title" :value="qrcode_url" :size="160" style="margin-top: 8px"/>
+                    <p style="color: gray; text-align: center; font-size: 12px;">保存分享二维码</p>
+                </div>
+            </a-tooltip>
             <details>
                 <summary id="custom-settings">点此进行自定义设置</summary>
                 <div class="more-setting-container">

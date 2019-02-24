@@ -208,3 +208,25 @@
     text-decoration: underline;
     text-align: center;
 }
+
+.overlay {
+    color: gray;
+}
+
+.overlay .ant-tooltip-inner{
+    background-color: white;
+}
+
+.overlay .ant-tooltip-arrow {
+    border-bottom-color: white;
+}
+
+.copy-downloadurl-btn {
+    width: 40%;
+    border: none;
+    border-radius: 30px;
+    background: #3596ff;
+    color: white;
+    font-weight: bold;
+    padding: 10px 40px 10px;
+}
