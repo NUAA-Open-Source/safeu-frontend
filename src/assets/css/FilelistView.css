@@ -8,6 +8,7 @@
 
 @media (max-width: 700px) {
     .filelist-container {
+        width: 90%;
         display: flex;
         flex-direction: column;
         align-items: center;
