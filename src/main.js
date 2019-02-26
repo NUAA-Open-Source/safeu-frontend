@@ -1,33 +1,20 @@
 import Vue from 'vue'
-import { message, Table, Radio, notification, Modal, Icon, Tooltip } from "ant-design-vue";
+import { message, Table, Radio, notification, Modal, Icon, Tooltip} from "ant-design-vue";
 import "ant-design-vue/dist/antd.css";
 import App from './App.vue'
 import VueClipboard from 'vue-clipboard2'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCloudUploadAlt, faCommentDots, faEye, faEyeSlash, faTrash, faArrowAltCircleDown, faArrowAltCircleUp } from '@fortawesome/free-solid-svg-icons'
+import { library, icon } from '@fortawesome/fontawesome-svg-core'
+import { faCloudUploadAlt, faCommentDots, faEye, faEyeSlash, faTrash, faArrowAltCircleDown, faArrowAltCircleUp, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueRouter from 'vue-router'
 import VueQriously from 'vue-qriously'
 
-Vue.use(VueQriously)
-Vue.use(notification)
-Vue.use(Modal)
-Vue.use(Icon)
-Vue.use(message)
-Vue.use(Radio)
-Vue.use(Table)
-Vue.use(Tooltip)
+Vue.use(VueQriously, notification, Modal, Icon, message, Radio, Table, Tooltip)
 Vue.prototype.$message = message
 Vue.prototype.$notification = notification
 Vue.use(VueClipboard)
 Vue.use(VueRouter)
-library.add(faCloudUploadAlt)
-library.add(faCommentDots)
-library.add(faEye)
-library.add(faEyeSlash)
-library.add(faTrash)
-library.add(faArrowAltCircleDown)
-library.add(faArrowAltCircleUp)
+library.add(faCloudUploadAlt, faCommentDots, faEye, faEyeSlash, faTrash, faArrowAltCircleDown, faArrowAltCircleUp, faMinusCircle)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // Vue.config.productionTip = false
