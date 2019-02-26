@@ -1,7 +1,7 @@
 <template>
   <div id="app">
+    <Navbar/>
     <div class="app-container">
-      <Navbar/>
       <router-view></router-view>
     </div>
     <div class="footer">
@@ -48,6 +48,11 @@ body {
   color: #2c3e50;
 }
 .app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80px;
   flex: 1;
 }
 .link-container a{

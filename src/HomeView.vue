@@ -46,7 +46,6 @@ export default {
     #homeview2 {
         width: 100%;
         height: 100%;
-        margin-top: 50px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -68,7 +67,6 @@ export default {
     #homeview2 {
         width: 100%;
         height: 100%;
-        margin-top: 5%;
         display: flex;
         flex-direction: column;
         align-items: center;
