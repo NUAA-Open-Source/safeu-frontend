@@ -9,7 +9,14 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueRouter from 'vue-router'
 import VueQriously from 'vue-qriously'
 
-Vue.use(VueQriously, notification, Modal, Icon, message, Radio, Table, Tooltip)
+Vue.use(VueQriously)
+Vue.use(notification)
+Vue.use(Modal)
+Vue.use(Icon)
+Vue.use(message)
+Vue.use(Radio)
+Vue.use(Table)
+Vue.use(Tooltip)
 Vue.prototype.$message = message
 Vue.prototype.$notification = notification
 Vue.use(VueClipboard)
