@@ -7,9 +7,9 @@
     <div class="footer">
       <div style="display: flex; flex-direction: row; align-items: center; margin: 10px 4% 2px" class="link-container">
         <span style="font-size: 30px; font-weight: bold; margin-right: 12px;">A²OS</span>
-        <a href="/terms">使用条款</a>
-        <a href="/privacy">隐私政策</a>
-        <a href="/about">关于</a>
+        <a v-on:click="gototerms">使用条款</a>
+        <a v-on:click="gotoprivacy">隐私政策</a>
+        <a v-on:click="gotoabout">关于</a>
       </div>
       <div style="text-align: center; margin: 2px 0px 10px">
         <p>&copy; <a href="https://a2os.club" style="color: #2c3e50;">A²OS</a> 2018-2019 All rights reserved</p>
@@ -24,6 +24,19 @@ export default {
   components: {
     Navbar,
   },
+  methods: {
+    gototerms() {
+      this.$router.push({path: '/terms'})
+    },
+
+    gotoprivacy() {
+      this.$router.push({path: '/privacy'})
+    },
+
+    gotoabout() {
+      this.$router.push({path: '/about'})
+    },
+  }
 }
 </script>
 <style>

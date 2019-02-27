@@ -7,11 +7,11 @@
             :pagination=false
         >
         <template slot="recode" slot-scope="recode">
-            <a :href="'/recode?code='+recode" v-if="remain_time != '0'">{{recode}}</a>
+            <a v-on:click="gotoedit(recode)" v-if="remain_time != '0'">{{recode}}</a>
             <span v-else>{{recode}}</span>
         </template>
         <template slot="download_url" slot-scope="download_url">
-            <a :href="download_url" v-if="remain_time != '0'">提取</a>
+            <a v-on:click="gotodownload(download_url)" v-if="remain_time != '0'">提取</a>
             <span v-else>提取</span>
         </template>
         <template slot="remain_time" slot-scope="remain_time">
@@ -80,18 +80,26 @@ export default {
                 var expire_time = value.expiretime
                 var remain_time = createdAt + expire_time * 60 * 60 * 1000 - Date.parse(new Date())
                 if (remain_time < 0) {
-                    this.uploaded_files.push({'recode': recode, 'download_url': download_url, 'remain_time': '0', 'code': recode, 'createdAt': createdAt}) 
+                    this.uploaded_files.push({'recode': recode, 'download_url': recode, 'remain_time': '0', 'code': recode, 'createdAt': createdAt}) 
                 }
                 else {
                     var remain_hour = parseInt(remain_time / 1000 / 60 / 60).toString()
                     var remain_min = Math.round(remain_time / 1000 / 60 % 60).toString()
-                    this.uploaded_files.push({'recode': recode, 'download_url': download_url, 'remain_time': remain_hour + '小时' + remain_min + '分钟', 'code': recode, 'createdAt': createdAt})
+                    this.uploaded_files.push({'recode': recode, 'download_url': recode, 'remain_time': remain_hour + '小时' + remain_min + '分钟', 'code': recode, 'createdAt': createdAt})
                 } 
             }
         }
         this.uploaded_files.sort(this.compare("createdAt"))
     },
     methods: {
+        gotoedit(recode) {
+            this.$router.push({path: '/recode', query: {code: recode}})
+        },
+
+        gotodownload(recode) {
+            this.$router.push({path: '/download', query: {params: { recode: recode }}})
+        },
+
         showmodal(recode) {
             this.modal_visible = true
             this.to_delete_recode = recode
