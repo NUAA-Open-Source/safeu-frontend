@@ -8,13 +8,26 @@
     <div class="intro-sub">
       <p class="intro-subtitle">我们提供了非常高效及安全的文件传输服务，完胜并取代 90% 的 U 盘应用场景</p>
       <div class="buttons-container">
-        <a class="main-upload-buttons" href="/upload"><font-awesome-icon icon="arrow-alt-circle-up" size="1x"/> 上传</a>
-        <a class="main-download-buttons" href="/download"><font-awesome-icon icon="arrow-alt-circle-down" size="1x"/> 下载</a>
+        <a class="main-upload-buttons" v-on:click="gotoupload"><font-awesome-icon icon="arrow-alt-circle-up" size="1x"/> 上传</a>
+        <a class="main-download-buttons" v-on:click="gotodownload"><font-awesome-icon icon="arrow-alt-circle-down" size="1x"/> 下载</a>
       </div>
     </div>
   </div>
 </template>
+<script>
+export default {
+  name: 'home',
+  methods: {
+    gotoupload() {
+      this.$router.push({path: '/upload'})
+    },
 
+    gotodownload() {
+      this.$router.push({path: '/download'})
+    }
+  }
+}
+</script>
 <style>
 @import "./Home.css";
 </style>
