@@ -1,5 +1,6 @@
 #navbar {
     width: 90%;
+    position: absolute;
     margin-left: 5%;
     height: 80px;
     margin-top: 0;

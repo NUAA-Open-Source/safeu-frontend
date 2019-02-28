@@ -8,10 +8,10 @@
 
 @media (max-width: 700px) {
     .filelist-container {
+        width: 90%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 40px;
         min-height: 50%;
     }
 }
@@ -22,7 +22,6 @@
         flex-direction: column;
         align-items: center;
         width: 600px;
-        margin-top: 40px;
         min-height: 50%;
     }
 }
@@ -65,7 +64,7 @@
     
     .download-files-item-btn {
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         width: 25%;
     }
 }
@@ -92,7 +91,7 @@
     
     .download-files-item-btn {
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         width: 20%;
     }
 }
@@ -109,25 +108,27 @@
     margin-top: 40px;
     display:  flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
 }
 
 .zip-download-btn {
-    padding: 4px 8px;
+    padding: 8px 16px;
     border-radius: 4px;
     background: #3596ff;
     color: white;
     font-size: 16px;
+    border: 0px;
 }
 
 .zip-downloading-btn {
     text-align: center;
-    padding: 4px 8px;
+    padding: 8px 16px;
     border-radius: 4px;
     border: 1px solid #3596ff;
     color: #3596ff;
     font-size: 16px;
+    border: 0px;
 }
 
 .download-files-item-name p {

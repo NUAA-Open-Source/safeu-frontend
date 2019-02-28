@@ -7,16 +7,25 @@
         justify-content: center;
         align-items: center;
     }
+    .vertical-divider {
+        border-left:1px solid rgb(193,193,193);
+        height:0px;
+        margin-top: 40px;
+    }
 }
 
 @media (min-width: 700px) {
     .out-container {
-        width: 600px;
+        width: 1000px;
         margin-top: 5%;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
         align-items: flex-start;
+    }
+    .vertical-divider {
+        border-left:1px solid rgb(193,193,193);
+        height:500px;
     }
 }
 
@@ -26,7 +35,6 @@
     text-align: center;
     border: 2px solid rgb(64, 169, 255);
     border-radius: 10px;
-
     font-weight: bold;
 }
 
@@ -48,7 +56,7 @@
 
 .recode-container {
     width: 100%;
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
@@ -204,7 +212,35 @@
 }
 
 .back-btn {
-    margin-top: 8px;
-    text-decoration: underline;
+    margin-top: 16px;
+    height: 40px;
+    line-height: 40px;
+    width: 80%;
+    border: 1px solid #3596ff;
+    border-radius: 8px;
     text-align: center;
+    background: white;
+    color: #3596ff;
+}
+
+.overlay {
+    color: gray;
+}
+
+.overlay .ant-tooltip-inner{
+    background-color: white;
+}
+
+.overlay .ant-tooltip-arrow {
+    border-bottom-color: white;
+}
+
+.copy-downloadurl-btn {
+    width: 40%;
+    border: none;
+    border-radius: 30px;
+    background: #3596ff;
+    color: white;
+    font-weight: bold;
+    padding: 10px 40px 10px;
 }
