@@ -1,7 +1,7 @@
 <template>
     <div class="out-container">
         <div class="recode-container">
-            <p class="recode-top-hint">您的提取码</p>
+            <h1 class="recode-top-hint">您的提取码</h1>
             <div class="recode-input-row">
                 <span class="recode-box" v-clipboard:copy="new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror" v-if="!is_editting_recode">{{new_recode}}</span>    
                 <input id="recode-box" class="recode-box" v-model="new_recode" @focus="inputonfocus" @keyup.enter="finisheditrecode" v-else/>
@@ -9,43 +9,50 @@
                 <a v-on:click="finisheditrecode" v-else>完成</a>
             </div>
             <p style="font-size: 12px; color: grey; margin: 8px 0" v-if="!is_editting_recode">点击提取码一键复制</p>
-            <p style="font-size: 12px; color: grey; margin: 8px 0" v-else>*仅允许 a-z, A-Z, 0-9, 下划线和短横线</p>
-            <qriously :text="qrcode_url" :size="160" style="margin-top: 8px"/>
-            <p>您可以保存或分享此二维码</p>
-            <details>
-                <summary id="custom-settings">点此进行自定义设置</summary>
-                <div class="more-setting-container">
-                    <p class="setting-title">加密<input type="checkbox" v-model="is_need_password" style="margin-left: 8px;"></p>
-                    <div class="setting-password-input-row" v-if="is_need_password">
-                        <input class="setting-password-input" :type="is_show_password ? 'text' : 'password'" placeholder="请输入加密密码" v-model="password">
-                        <a v-on:click="showpassword">
-                            <font-awesome-icon :icon="is_show_password ? 'eye-slash' : 'eye'"/>
-                        </a>
-                    </div>
-                    <p class="setting-title" style="margin-top: 12px">下载次数</p>
-                    <div class="download-count-btn-group">
-                         <a-radio-group buttonStyle="solid" v-model="download_count">
-                            <a-radio-button class="download-count" value="1">1 次</a-radio-button>
-                            <a-radio-button class="download-count" value="10">10 次</a-radio-button>
-                            <a-radio-button class="download-count" value="20">20 次</a-radio-button>
-                            <a-radio-button class="download-count" value="50">50 次</a-radio-button>
-                        </a-radio-group>
-                    </div>
-                    <p class="setting-title" style="margin-top: 12px">有效期</p>
-                    <div class="expire-time-btn-group">
-                         <a-radio-group buttonStyle="solid" v-model="expire_time">
-                            <a-radio-button class="expire-time" value="4">4 小时</a-radio-button>
-                            <a-radio-button class="expire-time" value="8">8 小时</a-radio-button>
-                            <a-radio-button class="expire-time" value="12">12 小时</a-radio-button>
-                            <a-radio-button class="expire-time" value="24">24 小时</a-radio-button>
-                        </a-radio-group>
-                    </div>
-                    <button class="setting-confirm-btn" v-on:click="submit">确定</button>
+            <p style="font-size: 12px; color: grey; margin: 8px 0" v-else>&nbsp;</p>
+            <button class="copy-downloadurl-btn" v-clipboard:copy="'https://safeu.a2os.club/download/' + new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror">拷贝链接</button>
+            <a-tooltip trigger="hover" overlayClassName="overlay" placement="bottom" style="margin-top: 12px">
+                <a href="#">分享二维码</a>
+                <div slot="title" style="background: white; width: 100%; height: 100%;">
+                    <qriously slot="title" :value="qrcode_url" :size="160" style="margin-top: 8px"/>
+                    <p style="color: gray; text-align: center; font-size: 12px;">保存分享二维码</p>
                 </div>
-            </details>
-            <a href="/" class="back-btn">返回</a>
+            </a-tooltip>
         </div>
-    </div>
+        <div class="vertical-divider"></div>
+        <div class="recode-container">
+            <h1 class="recode-top-hint">自定义设置</h1>
+            <div class="more-setting-container">
+                <p class="setting-title">加密<input type="checkbox" v-model="is_need_password" style="margin-left: 8px;"></p>
+                <div class="setting-password-input-row" v-if="is_need_password">
+                    <input class="setting-password-input" :type="is_show_password ? 'text' : 'password'" placeholder="请输入加密密码" v-model="password">
+                    <a v-on:click="showpassword">
+                        <font-awesome-icon :icon="is_show_password ? 'eye-slash' : 'eye'"/>
+                    </a>
+                </div>
+                <p class="setting-title" style="margin-top: 12px">下载次数</p>
+                <div class="download-count-btn-group">
+                        <a-radio-group buttonStyle="solid" v-model="download_count">
+                        <a-radio-button class="download-count" value="1">1 次</a-radio-button>
+                        <a-radio-button class="download-count" value="10">10 次</a-radio-button>
+                        <a-radio-button class="download-count" value="20">20 次</a-radio-button>
+                        <a-radio-button class="download-count" value="50">50 次</a-radio-button>
+                    </a-radio-group>
+                </div>
+                <p class="setting-title" style="margin-top: 12px">有效期</p>
+                <div class="expire-time-btn-group">
+                        <a-radio-group buttonStyle="solid" v-model="expire_time">
+                        <a-radio-button class="expire-time" value="4">4 小时</a-radio-button>
+                        <a-radio-button class="expire-time" value="8">8 小时</a-radio-button>
+                        <a-radio-button class="expire-time" value="12">12 小时</a-radio-button>
+                        <a-radio-button class="expire-time" value="24">24 小时</a-radio-button>
+                    </a-radio-group>
+                </div>
+                <button class="setting-confirm-btn" v-on:click="submit">确定</button>
+                <a href="/" class="back-btn">返回</a>
+            </div>
+        </div>
+        </div>
 </template>
 
 <script>
