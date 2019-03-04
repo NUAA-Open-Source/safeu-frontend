@@ -10,7 +10,7 @@
 - plupload 文件上传组件
 - ant-design-vue 大部分组件使用该组件库
 - vue-router 路由管理
-- VueQriously 二维码生茶
+- VueQriously 二维码生成
 - FontAwesome 图标库
 - vue-clipboard2 自动复制
 
