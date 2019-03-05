@@ -2,24 +2,24 @@
     <div class="uploadedfiles-container" v-if="uploaded_files.length > 0">
         <p style="font-size: 20px; font-weight: 700">历史上传文件</p>
         <a-table :columns="columns"
-            :rowKey="file => file.recode"
+            :rowKey="file => file.recode.recode"
             :dataSource="uploaded_files"
             :pagination=false
         >
         <template slot="recode" slot-scope="recode">
-            <a v-on:click="gotoedit(recode)" v-if="remain_time != '0'">{{recode}}</a>
-            <span v-else>{{recode}}</span>
+            <a v-on:click="gotoedit(recode)" v-if="!recode.isExpired">{{recode.recode}}</a>
+            <span v-else>{{recode.recode}}</span>
         </template>
         <template slot="download_url" slot-scope="download_url">
-            <a v-on:click="gotodownload(download_url)" v-if="remain_time != '0'">提取</a>
+            <a v-on:click="gotodownload(download_url)" v-if="download_url != null">提取</a>
             <span v-else>提取</span>
         </template>
         <template slot="remain_time" slot-scope="remain_time">
-            <span v-if="remain_time != '0'">{{remain_time}}</span>
+            <span v-if="remain_time != null">{{remain_time}}</span>
             <span v-else>已过期</span>
         </template>
         <template slot="delete" slot-scope="code">
-            <a v-on:click="showmodal(code)" v-if="remain_time != '0'"><font-awesome-icon icon="trash"/></a>
+            <a v-on:click="showmodal(code)" v-if="code != null"><font-awesome-icon icon="trash"/></a>
             <a v-on:click="removels(code)" style="color: red" v-else><font-awesome-icon icon="minus-circle"/></a>
         </template>
         </a-table>
@@ -80,12 +80,12 @@ export default {
                 var expire_time = value.expiretime
                 var remain_time = createdAt + expire_time * 60 * 60 * 1000 - Date.parse(new Date())
                 if (remain_time < 0) {
-                    this.uploaded_files.push({'recode': recode, 'download_url': recode, 'remain_time': '0', 'code': recode, 'createdAt': createdAt}) 
+                    this.uploaded_files.push({'recode': {'recode': recode, 'isExpired': true}, 'download_url': null, 'remain_time': null, 'code': null, 'createdAt': null}) 
                 }
                 else {
                     var remain_hour = parseInt(remain_time / 1000 / 60 / 60).toString()
                     var remain_min = Math.round(remain_time / 1000 / 60 % 60).toString()
-                    this.uploaded_files.push({'recode': recode, 'download_url': recode, 'remain_time': remain_hour + '小时' + remain_min + '分钟', 'code': recode, 'createdAt': createdAt})
+                    this.uploaded_files.push({'recode': {'recode': recode, 'isExpired': false}, 'download_url': recode, 'remain_time': remain_hour + '小时' + remain_min + '分钟', 'code': recode, 'createdAt': createdAt})
                 } 
             }
         }
