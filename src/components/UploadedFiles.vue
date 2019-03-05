@@ -97,7 +97,7 @@ export default {
         },
 
         gotodownload(recode) {
-            this.$router.push({path: '/download', query: {params: { recode: recode }}})
+            this.$router.push('/download/' + recode)
         },
 
         showmodal(recode) {
