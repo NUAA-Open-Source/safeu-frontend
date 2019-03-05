@@ -19,8 +19,8 @@
             <span v-else>已过期</span>
         </template>
         <template slot="delete" slot-scope="code">
-            <a v-on:click="showmodal(code)" v-if="code != null"><font-awesome-icon icon="trash"/></a>
-            <a v-on:click="removels(code)" style="color: red" v-else><font-awesome-icon icon="minus-circle"/></a>
+            <a v-on:click="showmodal(code.recode)" v-if="!code.isExpired"><font-awesome-icon icon="trash"/></a>
+            <a v-on:click="removels(code.recode)" style="color: red" v-else><font-awesome-icon icon="minus-circle"/></a>
         </template>
         </a-table>
         <a-modal
@@ -80,12 +80,12 @@ export default {
                 var expire_time = value.expiretime
                 var remain_time = createdAt + expire_time * 60 * 60 * 1000 - Date.parse(new Date())
                 if (remain_time < 0) {
-                    this.uploaded_files.push({'recode': {'recode': recode, 'isExpired': true}, 'download_url': null, 'remain_time': null, 'code': null, 'createdAt': null}) 
+                    this.uploaded_files.push({'recode': {'recode': recode, 'isExpired': true}, 'download_url': null, 'remain_time': null, 'code': {'recode': recode, 'isExpired': true}, 'createdAt': null}) 
                 }
                 else {
                     var remain_hour = parseInt(remain_time / 1000 / 60 / 60).toString()
                     var remain_min = Math.round(remain_time / 1000 / 60 % 60).toString()
-                    this.uploaded_files.push({'recode': {'recode': recode, 'isExpired': false}, 'download_url': recode, 'remain_time': remain_hour + '小时' + remain_min + '分钟', 'code': recode, 'createdAt': createdAt})
+                    this.uploaded_files.push({'recode': {'recode': recode, 'isExpired': false}, 'download_url': recode, 'remain_time': remain_hour + '小时' + remain_min + '分钟', 'code': {'recode': recode, 'isExpired': false}, 'createdAt': createdAt})
                 } 
             }
         }
@@ -101,6 +101,7 @@ export default {
         },
 
         showmodal(recode) {
+            console.log(recode)
             this.modal_visible = true
             this.to_delete_recode = recode
         },
@@ -110,6 +111,7 @@ export default {
         },
 
         removels(recode) {
+            console.log(recode)
             window.localStorage.removeItem("recode-" + recode)
             for (var i = 0; i < this.uploaded_files.length; i++) {
                 if (this.uploaded_files[i].code == recode) {
