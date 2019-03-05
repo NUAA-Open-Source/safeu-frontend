@@ -60,6 +60,7 @@
                 uploadMethod: '',
                 g_object_name: '',
                 uploader: null,
+                sizeTotal: 0,
             };
         },
         props: {
@@ -261,14 +262,28 @@
                         },
                         FilesAdded: (up, files) => {
                             let fileTotal = files.total
-                            let idx = 0
-                            
+                            var idx = 0
+                            var countStatus = false
+                            var sizeStatus = false
+                            console.log("233")
                             plupload.each(files, (file) => {
                                 idx++
+                                that.sizeTotal += file.size/1024/1024
                                 function result_call() {
-                                    if (that.fileList.length == 20) {
-                                        that.$message.error('最多上传 20 个文件')
-                                        return false
+                                    if (that.fileList.length >= 20) {
+                                        that.uploader.removeFile(file)
+                                        countStatus = true
+                                        return
+                                    } else {
+                                        countStatus = false
+                                    }
+                                    if (that.sizeTotal >= 50) {
+                                        that.uploader.removeFile(file)
+                                        sizeStatus = true
+                                        that.sizeTotal -= file.size/1024/1024
+                                       return
+                                    } else {
+                                        sizeStatus = false
                                     }
                                     that.fileList.push(_file)
                                     if (idx === fileTotal)
@@ -317,6 +332,12 @@
                                     result_call()
                                 }
                             })
+                            if (countStatus == true) {
+                                that.$message.error("您上传的文件数量太多")
+                            }
+                            if (sizeStatus == true) {
+                                that.$message.error('您上传的文件太大，无法上传')
+                            }
                         },
                         BeforeUpload: (up, file) => {
                             that.setUploadParam(myPlupload, file, false)
@@ -352,6 +373,10 @@
                             that.onUploadComplete(up, files)
                         },
                         Error: (up, err) => {
+                            console.log(err)
+                            if (err.code == -600) {
+                                that.$message.error('您上传的文件太大，无法上传')
+                            }
                             that.onError(up, err)
                         },
                     },

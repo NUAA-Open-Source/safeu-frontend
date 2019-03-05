@@ -7,7 +7,7 @@
             :pagination=false
         >
         <template slot="recode" slot-scope="recode">
-            <a v-on:click="gotoedit(recode)" v-if="!recode.isExpired">{{recode.recode}}</a>
+            <a v-on:click="gotoedit(recode.recode)" v-if="!recode.isExpired">{{recode.recode}}</a>
             <span v-else>{{recode.recode}}</span>
         </template>
         <template slot="download_url" slot-scope="download_url">
