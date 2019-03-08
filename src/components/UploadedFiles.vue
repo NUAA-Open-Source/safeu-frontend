@@ -101,7 +101,6 @@ export default {
         },
 
         showmodal(recode) {
-            console.log(recode)
             this.modal_visible = true
             this.to_delete_recode = recode
         },
@@ -111,10 +110,9 @@ export default {
         },
 
         removels(recode) {
-            console.log(recode)
             window.localStorage.removeItem("recode-" + recode)
             for (var i = 0; i < this.uploaded_files.length; i++) {
-                if (this.uploaded_files[i].code == recode) {
+                if (this.uploaded_files[i].code.recode == recode) {
                     this.uploaded_files.splice(i, 1)
                     break
                 }
@@ -132,7 +130,7 @@ export default {
                         that.modal_visible = false
                         window.localStorage.removeItem("recode-" + recode)
                         for (var i = 0; i < that.uploaded_files.length; i++) {
-                            if (that.uploaded_files[i].code == recode) {
+                            if (that.uploaded_files[i].code.recode == recode) {
                                 that.uploaded_files.splice(i, 1)
                                 break
                             }
