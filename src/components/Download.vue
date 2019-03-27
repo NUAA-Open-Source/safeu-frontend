@@ -32,8 +32,10 @@ export default {
 
         sendValidationRequest(password) {
             const xmlhttp = new XMLHttpRequest();
+            var csrf_token = sessionStorage.getItem("csrf_token")
             var that = this
-            xmlhttp.open("POST", _global.domain_url + "validation/" + this.recode, true)
+            
+            xmlhttp.open("POST", _global.api_url + "validation/" + this.recode, true)
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                     if  (xmlhttp.status == 200) {
@@ -51,15 +53,16 @@ export default {
                         } else if (error == "The password is not correct") {
                             that.$message.error("密码输入错误")
                         }
-                        
                     } else if (xmlhttp.status === 404) {
                         that.$message.error("提取码错误")
                     }
                 }
             }
             if (that.needpassword) {
+                xmlhttp.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                 xmlhttp.send(JSON.stringify({"password": password}))
             } else {
+                xmlhttp.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                 xmlhttp.send(null)
             }
         },
