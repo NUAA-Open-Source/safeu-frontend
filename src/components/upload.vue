@@ -81,7 +81,7 @@
                 default: true
             },
             authServerUrl: {
-                default: _global.domain_url + 'upload/policy'
+                default: _global.domain_url + _global.version + 'upload/policy'
             },
             maxSize: {
                 default: '50mb'
@@ -176,6 +176,7 @@
                     this.accessid = obj.accessid;
                     this.signature = obj.signature;
                     this.expire = parseInt(obj.expire, 10);
+                    console.log("callback:" + obj.callback)
                     this.callbackbody = obj.callback;
                     this.key = this.g_object_name;
                     return true;
@@ -351,12 +352,30 @@
                             that.onProgress(file.id, file.percent)
                         },
                         FileUploaded: (up, file, info) => {
+                            console.log(info)
                             that.fileUUIDList.push(JSON.parse(info.response).uuid)
+                            console.log(that.fileUUIDList)
                             that.onFileUploaded(up, file, info)
                         },
                         UploadComplete: (up, files) => {
+                            var csrf_token = sessionStorage.getItem('csrf_token')
+                            
+                            // that.$axios.post(
+                            //     _global.api_url + "upload/finish", 
+                            //     JSON.stringify({"files": that.fileUUIDList}),
+                            //     {headers: {"X-CSRF-TOKEN": csrf_token}}
+                            // ).then(function(response) {
+                            //     var recode = JSON.parse(response).recode
+                            //     var owner_token = JSON.parse(response).owner
+                            //     var expire_time = "8"
+                            //     var download_count = "10"
+                            //     window.localStorage.setItem("recode-" + recode, JSON.stringify({'recode': recode, 'owner_token': owner_token, 'downcount': download_count, 'expiretime': expire_time, 'createdAt': Date.parse(new Date())}))
+                            //     that.jumpToRecodeDiplay(recode)
+                            // }).catch(function(error) {
+                            //     console.log(error)
+                            // })
                             var xhr = new XMLHttpRequest()
-                            xhr.open("POST", _global.domain_url + "upload/finish", true)
+                            xhr.open("POST", _global.api_url + "upload/finish", true)
                             xhr.onreadystatechange = function() {
                                 if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
                                     var recode = JSON.parse(xhr.response).recode
@@ -364,9 +383,10 @@
                                     var expire_time = "8"
                                     var download_count = "10"
                                     window.localStorage.setItem("recode-" + recode, JSON.stringify({'recode': recode, 'owner_token': owner_token, 'downcount': download_count, 'expiretime': expire_time, 'createdAt': Date.parse(new Date())}))
-                                    that.jumpToRecodeDiplay(recode)
+                                    that.jumpToRecodeDiplay(recode) 
                                 }
                             }
+                            xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                             xhr.send(JSON.stringify({"files": that.fileUUIDList}))
                             that.onUploadComplete(up, files)
                         },

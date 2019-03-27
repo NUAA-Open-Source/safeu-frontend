@@ -8,6 +8,7 @@ import { faCloudUploadAlt, faCommentDots, faEye, faEyeSlash, faTrash, faArrowAlt
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueRouter from 'vue-router'
 import VueQriously from 'vue-qriously'
+import axios from 'axios'
 
 Vue.use(VueQriously)
 Vue.use(notification)
@@ -19,6 +20,7 @@ Vue.use(Table)
 Vue.use(Tooltip)
 Vue.prototype.$message = message
 Vue.prototype.$notification = notification
+Vue.prototype.$axios = axios
 Vue.use(VueClipboard)
 Vue.use(VueRouter)
 library.add(faCloudUploadAlt, faCommentDots, faEye, faEyeSlash, faTrash, faArrowAltCircleDown, faArrowAltCircleUp, faMinusCircle)

@@ -19,10 +19,21 @@
 </template>
 <script>
 import Navbar from './components/Navbar.vue'
+import _global from './Global.vue'
 export default {
   name: 'app',
   components: {
     Navbar,
+  },
+  mounted() {
+    this.$axios.get(_global.domain_url + "csrf")
+    .then(function(response) {
+      var csrf_token = response.headers["x-csrf-token"]
+      sessionStorage.setItem("csrf_token", csrf_token)
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
   },
   methods: {
     gototerms() {
