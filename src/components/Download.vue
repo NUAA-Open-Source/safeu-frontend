@@ -35,7 +35,7 @@ export default {
             var csrf_token = sessionStorage.getItem("csrf_token")
             var that = this
             
-            xmlhttp.open("POST", _global.api_url + "validation/" + this.recode, true)
+            
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                     if  (xmlhttp.status == 200) {
@@ -58,6 +58,8 @@ export default {
                     }
                 }
             }
+            xmlhttp.open("POST", _global.api_url + "validation/" + this.recode, true)
+            xmlhttp.withCredentials = true
             if (that.needpassword) {
                 xmlhttp.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                 xmlhttp.send(JSON.stringify({"password": password}))
