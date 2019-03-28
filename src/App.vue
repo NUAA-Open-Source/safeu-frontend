@@ -26,6 +26,7 @@ export default {
     Navbar,
   },
   mounted() {
+    this.$axios.defaults.withCredentials = true
     this.$axios.get(_global.domain_url + "csrf")
     .then(function(response) {
       var csrf_token = response.headers["x-csrf-token"]

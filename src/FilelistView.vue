@@ -7,15 +7,15 @@
                 全选
             </div>
             <div class="filelist-item" v-for="item in filelist" :key="item.ID">
-                <input type="checkbox" :value="{'host': item.Host, 'name': item.OriginalName}" v-model="selected_files">
+                <input type="checkbox" :value="{'host': item.host, 'name': item.original_name}" v-model="selected_files">
                 <div class="download-files-item-left">
                     <img :src="item.image" />
                 </div>
                 <div class="download-files-item-name">
-                    <p style="margin-bottom: 0">{{item.OriginalName}}</p>
+                    <p style="margin-bottom: 0">{{item.original_name}}</p>
                 </div>
                 <div class="download-files-item-btn">
-                    <a v-on:click="downloadfile(item.Host, item.OriginalName, item.Type, false)">下载</a>
+                    <a v-on:click="singleFileDownload(item.host, item.original_name)" class="download-files-btn-download">下载</a>
                 </div>
             </div>
             <div class="zip-download-row">
@@ -42,7 +42,8 @@ export default {
     },
     created() {
         for (var file of this.filelist) {
-            let file_ext = file.OriginalName.split('.').splice(-1)[0]
+            let file_ext = file.original_name.split('.').splice(-1)[0]
+            file.host = file.protocol + "://" + file.bucket + "." + file.endpoint + "/" + file.path
             if (file_ext == 'pdf'){
                 file.image = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/pdf.png'
             } else if (['doc', 'docx'].indexOf(file_ext) != -1) {
@@ -78,7 +79,8 @@ export default {
             if (this.is_all_selected) {
                 var selected_files = []
                 for (var item of this.filelist) {
-                    selected_files.push({'host': item.Host, 'name': item.OriginalName})
+                    console.log(item)
+                    selected_files.push({'host': item.host, 'name': item.original_name})
                 }
                 this.selected_files = selected_files
             } else {
@@ -88,7 +90,7 @@ export default {
 
         handlefilelist(filelist) {
             for (file in filelist) {
-                var name = file.OriginalName
+                var name = file.original_name
                 var ext = name.split('.').splice(-1)[0]
             }
         },
@@ -98,6 +100,7 @@ export default {
             xhr.open("GET", url)
             xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             xhr.responseType = "blob";
+            var csrf_token = sessionStorage.getItem("csrf_token")
             var that = this
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -122,20 +125,50 @@ export default {
                     var urls = []
                     for (var i in that.selected_files_handled) {
                         xhr[i] = new XMLHttpRequest()
-                        urls[i] = _global.domain_url + "downCount/" + that.recode + "?bucket=" + that.selected_files_handled[i].bucket + "&path=" + that.selected_files_handled[i].path
-                        xhr[i].open("GET", urls[i], true)
-                        xhr[i].send()
+                        xhr[i].withCredentials = true
+                        xhr[i].setRequestHeader("X-CSRF-TOKEN", csrf_token)
+                        urls[i] = _global.api_url + "minusDownCount/" + that.recode
+                        xhr[i].open("POST", urls[i], true)
+                        xhr[i].send(JSON.stringify({"bucket": that.selected_files_handled[i].bucket, "path": that.selected_files_handled[i].path}))
                     }
                 } else {
                     var bucket = url.split("://")[1].split(".")[0]
                     var path = url.split("://")[1].split(".").splice(1).join(".").split("/").slice(1).join("/")
-                    var downcounturl = _global.domain_url + "downCount/" + that.recode + "?bucket=" + bucket + "&path=" + path
+                    var downcounturl = _global.api_url + "minusDownCount/" + that.recode
                     var xhr = new XMLHttpRequest()
-                    xhr.open("GET", downcounturl, true)
-                    xhr.send()
+                    xhr.withCredentials = true
+                    xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
+                    xhr.open("POST", downcounturl, true)
+                    xhr.send(JSON.stringify({"bucket": bucket, "path": path}))
                 }
             });
             xhr.send()
+        },
+
+        singleFileDownload(host, original_name) {
+            let items = [{'host': host, 'name': original_name}]
+            var token = window.localStorage.getItem('token')
+            var csrf_token = sessionStorage.getItem("csrf_token")
+            var xhr = new XMLHttpRequest()
+            xhr.withCredentials = true
+            var that = this
+            xhr.open("POST", _global.api_url + "item/" + this.recode)
+            xhr.setRequestHeader("Token", token);
+            xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
+            xhr.setRequestHeader("Content-Type", "application/json")
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status == 200) {
+                        var zip_url = JSON.parse(xhr.response).url
+                        var url_pieces = zip_url.split("/")
+                        var name = url_pieces[url_pieces.length - 1]
+                        that.downloadfile(zip_url, name, '', true)
+                    } else {
+                        that.$message.error('下载失败')
+                    }
+                }
+            }
+            xhr.send(JSON.stringify({"re_code": this.recode, "full": false, "items": items})) 
         },
 
         zippart() {

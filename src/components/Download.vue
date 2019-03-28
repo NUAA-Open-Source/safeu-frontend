@@ -31,41 +31,37 @@ export default {
         },
 
         sendValidationRequest(password) {
-            const xmlhttp = new XMLHttpRequest();
+            const xhr = new XMLHttpRequest();
             var csrf_token = sessionStorage.getItem("csrf_token")
             var that = this
-            
-            
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-                    if  (xmlhttp.status == 200) {
-                        var token = JSON.parse(xmlhttp.response).token
-                        var filelist = JSON.parse(xmlhttp.response).items
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    if  (xhr.status == 200) {
+                        var token = JSON.parse(xhr.response).token
+                        var filelist = JSON.parse(xhr.response).items
                         window.localStorage.setItem('token', token)
                         window.sessionStorage.setItem('filelist', JSON.stringify(filelist))
                         that.$router.push({path: '/filelist', query: {recode: that.recode}})
-                    } else if (xmlhttp.status === 401) {
+                    } else if (xhr.status === 401) {
                         that.needpassword = true
-                        var error = JSON.parse(xmlhttp.response).error
-                        
+                        var error = JSON.parse(xhr.response).error
                         if (error == "Cannot get the password") {
                             that.$message.info("该文件加密，请输入密码")
                         } else if (error == "The password is not correct") {
                             that.$message.error("密码输入错误")
                         }
-                    } else if (xmlhttp.status === 404) {
+                    } else if (xhr.status === 404) {
                         that.$message.error("提取码错误")
                     }
                 }
             }
-            xmlhttp.open("POST", _global.api_url + "validation/" + this.recode, true)
-            xmlhttp.withCredentials = true
+            xhr.withCredentials = true
+            xhr.open("POST", _global.api_url + "validation/" + this.recode, true)
+            xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
             if (that.needpassword) {
-                xmlhttp.setRequestHeader("X-CSRF-TOKEN", csrf_token)
-                xmlhttp.send(JSON.stringify({"password": password}))
+                xhr.send(JSON.stringify({"password": password}))
             } else {
-                xmlhttp.setRequestHeader("X-CSRF-TOKEN", csrf_token)
-                xmlhttp.send(null)
+                xhr.send(null)
             }
         },
 
