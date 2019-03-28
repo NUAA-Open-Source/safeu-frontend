@@ -121,9 +121,11 @@ export default {
 
         deletefile(recode) {
             var user_token = JSON.parse(window.localStorage.getItem("recode-" + recode)).owner_token
+            var csrf_token = sessionStorage.getItem("csrf_token")
             var xhr = new XMLHttpRequest()
+            xhr.withCredentials = true
             var that = this
-            xhr.open("POST", _global.domain_url + "delete/" + recode)
+            xhr.open("POST", _global.api_url + "delete/" + recode)
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
                     if (xhr.status == 200) {
@@ -140,6 +142,7 @@ export default {
                     }
                 }
             }
+            xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
             xhr.send(JSON.stringify({"user_token": user_token}))
         },
 

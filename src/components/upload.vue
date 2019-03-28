@@ -81,7 +81,7 @@
                 default: true
             },
             authServerUrl: {
-                default: _global.domain_url + _global.version + 'upload/policy'
+                default: _global.api_url + 'upload/policy'
             },
             maxSize: {
                 default: '50mb'
@@ -158,10 +158,10 @@
                 }
             },
             sendRequest() {
-                const xmlhttp = new XMLHttpRequest();
-                xmlhttp.open('GET', this.authServerUrl, false);
-                xmlhttp.send(null);
-                return xmlhttp.responseText;
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', this.authServerUrl, false);
+                xhr.send(null);
+                return xhr.responseText;
             },
             getSignature() {
                 // 可以判断当前expire是否超过了当前时间,如果超过了当前时间,就重新取一下.3s 做为缓冲
@@ -375,6 +375,7 @@
                             //     console.log(error)
                             // })
                             var xhr = new XMLHttpRequest()
+                            xhr.withCredentials = true
                             xhr.open("POST", _global.api_url + "upload/finish", true)
                             xhr.onreadystatechange = function() {
                                 if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {

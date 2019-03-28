@@ -113,10 +113,12 @@
                 }
                 this.is_editting_recode = false
                 var that = this
+                var csrf_token = sessionStorage.getItem("csrf_token")
                 if (this.recode != this.new_recode) {
                     var xhr = new XMLHttpRequest()
+                    xhr.withCredentials = true
                     var user_token = JSON.parse(window.localStorage.getItem('recode-'+ this.recode)).owner_token
-                    xhr.open("POST", _global.domain_url + "recode/" + this.recode, true)
+                    xhr.open("POST", _global.api_url + "recode/" + this.recode, true)
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState == XMLHttpRequest.DONE) {
                             if (xhr.status == 200) {
@@ -141,21 +143,26 @@
                             }
                         }
                     }
+                    xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                     xhr.send(JSON.stringify({"new_re_code": this.new_recode, "user_token": user_token}))
                 }
             },
 
             submit() {
+                var csrf_token = sessionStorage.getItem("csrf_token")
                 var xhr_password = new XMLHttpRequest()
+                xhr_password.withCredentials = true
                 var xhr_downloadcount = new XMLHttpRequest()
+                xhr_downloadcount.withCredentials = true
                 var xhr_expiretime = new XMLHttpRequest()
+                xhr_expiretime.withCredentials = true
                 var sha256 = require("js-sha256").sha256
                 var password_sha256 = this.password == "" ? "" : sha256(this.password)
                 var that = this
                 var user_token = JSON.parse(window.localStorage.getItem('recode-' + this.recode)).owner_token
-                xhr_password.open("POST", _global.domain_url + "password/" + this.recode, true)
-                xhr_downloadcount.open("POST", _global.domain_url + "downCount/" + this.recode, true)
-                xhr_expiretime.open("POST", _global.domain_url + "expireTime/" + this.recode, true)
+                xhr_password.open("POST", _global.api_url + "password/" + this.recode, true)
+                xhr_downloadcount.open("POST", _global.api_url + "downCount/" + this.recode, true)
+                xhr_expiretime.open("POST", _global.api_url + "expireTime/" + this.recode, true)
                 xhr_password.onreadystatechange = function() {
                     if (xhr_password.readyState == XMLHttpRequest.DONE) {
                         if (xhr_password.status == 200) {
@@ -213,8 +220,11 @@
                         }
                     }
                 }
+                xhr_password.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                 xhr_password.send(JSON.stringify({"user_token":user_token, "Auth": password_sha256}))
+                xhr_downloadcount.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                 xhr_downloadcount.send(JSON.stringify({"new_down_count": parseInt(that.download_count), "user_token": user_token}))
+                xhr_expiretime.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                 xhr_expiretime.send(JSON.stringify({"user_token": user_token, "new_expire_time": parseInt(that.expire_time)}))
             }
         }
