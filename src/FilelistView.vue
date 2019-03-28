@@ -172,6 +172,7 @@ export default {
         },
 
         zippart() {
+            var csrf_token = sessionStorage.getItem("csrf_token")
             if (this.selected_files.length == 0) {
                 this.$message.error('请选择需要打包的文件')
                 return
@@ -194,8 +195,9 @@ export default {
                 items.push({"protocol": protocol, "bucket": bucket, "endpoint": endpoint, "original_name": original_name, "path": path})
             }
             this.selected_files_handled = items
+            xhr.withCredentials = true
             var token = window.localStorage.getItem('token')
-            xhr.open("POST", _global.domain_url + "item/" + this.recode)
+            xhr.open("POST", _global.api_url + "item/" + this.recode)
             xhr.setRequestHeader("Token", token);
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onreadystatechange = function() {
@@ -211,6 +213,7 @@ export default {
                     }
                 }
             }
+            xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
             xhr.send(JSON.stringify({"re_code": this.recode, "full": full, "items": items}))
         },
         
