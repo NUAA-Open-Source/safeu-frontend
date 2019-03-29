@@ -98,7 +98,6 @@ export default {
         downloadfile(url, filename, filetype, iszip) {
             var xhr = new XMLHttpRequest()
             xhr.open("GET", url)
-            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
             xhr.responseType = "blob"
             var csrf_token = sessionStorage.getItem("csrf_token")
             var that = this
