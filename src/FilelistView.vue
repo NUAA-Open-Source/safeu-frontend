@@ -98,8 +98,8 @@ export default {
         downloadfile(url, filename, filetype, iszip) {
             var xhr = new XMLHttpRequest()
             xhr.open("GET", url)
-            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            xhr.responseType = "blob";
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+            xhr.responseType = "blob"
             var csrf_token = sessionStorage.getItem("csrf_token")
             var that = this
             xhr.onreadystatechange = function() {
@@ -152,7 +152,7 @@ export default {
             var endpoint = url.split(".").splice(1).join(".").split("/")[0]
             var path = url.split(".").splice(1).join(".").split("/").slice(1).join("/")
             let items = [{"protocol": protocol, "bucket": bucket, "endpoint": endpoint, "original_name": original_name, "path": path}]
-            var token = window.localStorage.getItem('token')
+            var token = window.localStorage.getItem("token")
             var csrf_token = sessionStorage.getItem("csrf_token")
             var xhr = new XMLHttpRequest()
             xhr.withCredentials = true
@@ -164,10 +164,8 @@ export default {
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status == 200) {
-                        var zip_url = JSON.parse(xhr.response).url
-                        var url_pieces = zip_url.split("/")
-                        var name = url_pieces[url_pieces.length - 1]
-                        that.downloadfile(zip_url, name, '', true)
+                        var download_url = JSON.parse(xhr.response).url
+                        that.downloadfile(download_url, original_name, '', true)
                     } else {
                         that.$message.error('下载失败')
                     }
@@ -210,9 +208,11 @@ export default {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status == 200) {
                         var zip_url = JSON.parse(xhr.response).url
-                        var url_pieces = zip_url.split("/")
-                        var name = url_pieces[url_pieces.length - 1]
-                        that.downloadfile(zip_url, name, '', true)
+                        if (that.selected_files.length == 1) {
+                            that.downloadfile(zip_url, that.selected_files[0].name, '', true)
+                        } else {
+                            that.downloadfile(zip_url, that.recode + ".zip", '', true)
+                        }
                     } else {
                         that.is_zip_loading = false
                         that.$message.error('打包失败')
