@@ -146,7 +146,12 @@ export default {
         },
 
         singleFileDownload(host, original_name) {
-            let items = [{'host': host, 'name': original_name}]
+            var protocol = host.split("://")[0]
+            var url = host.split("://")[1]
+            var bucket = url.split(".")[0]
+            var endpoint = url.split(".").splice(1).join(".").split("/")[0]
+            var path = url.split(".").splice(1).join(".").split("/").slice(1).join("/")
+            let items = [{"protocol": protocol, "bucket": bucket, "endpoint": endpoint, "original_name": original_name, "path": path}]
             var token = window.localStorage.getItem('token')
             var csrf_token = sessionStorage.getItem("csrf_token")
             var xhr = new XMLHttpRequest()
@@ -168,7 +173,7 @@ export default {
                     }
                 }
             }
-            xhr.send(JSON.stringify({"re_code": this.recode, "full": false, "items": items})) 
+            xhr.send(JSON.stringify({"full": false, "items": items})) 
         },
 
         zippart() {
@@ -199,6 +204,7 @@ export default {
             var token = window.localStorage.getItem('token')
             xhr.open("POST", _global.api_url + "item/" + this.recode)
             xhr.setRequestHeader("Token", token);
+            xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
             xhr.setRequestHeader("Content-Type", "application/json")
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -213,8 +219,7 @@ export default {
                     }
                 }
             }
-            xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
-            xhr.send(JSON.stringify({"re_code": this.recode, "full": full, "items": items}))
+            xhr.send(JSON.stringify({"full": full, "items": items}))
         },
         
         getBrowser() {  
