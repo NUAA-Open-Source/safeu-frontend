@@ -125,9 +125,9 @@ export default {
                     for (var i in that.selected_files_handled) {
                         xhr[i] = new XMLHttpRequest()
                         xhr[i].withCredentials = true
-                        xhr[i].setRequestHeader("X-CSRF-TOKEN", csrf_token)
                         urls[i] = _global.api_url + "minusDownCount/" + that.recode
                         xhr[i].open("POST", urls[i], true)
+                        xhr[i].setRequestHeader("X-CSRF-TOKEN", csrf_token)
                         xhr[i].send(JSON.stringify({"bucket": that.selected_files_handled[i].bucket, "path": that.selected_files_handled[i].path}))
                     }
                 } else {
@@ -136,8 +136,8 @@ export default {
                     var downcounturl = _global.api_url + "minusDownCount/" + that.recode
                     var xhr = new XMLHttpRequest()
                     xhr.withCredentials = true
-                    xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                     xhr.open("POST", downcounturl, true)
+                    xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                     xhr.send(JSON.stringify({"bucket": bucket, "path": path}))
                 }
             });
@@ -164,7 +164,7 @@ export default {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status == 200) {
                         var download_url = JSON.parse(xhr.response).url
-                        that.downloadfile(download_url, original_name, '', true)
+                        that.downloadfile(download_url, original_name, '', false)
                     } else {
                         that.$message.error('下载失败')
                     }
