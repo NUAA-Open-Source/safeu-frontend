@@ -65,3 +65,7 @@ $ ./docker.sh help
 ```
 
 > 使用时请进入 `scripts/` 目录！
+
+## Events 数据埋点
+
+[READ MORE](./docs/events.md)
