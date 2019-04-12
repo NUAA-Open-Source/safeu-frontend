@@ -14,6 +14,9 @@ export default {
         Home,
         UploadedFiles,
     },
+    mounted() {
+        this.$event("home")
+    },
     data() {
         return {
             isuploaded: false,

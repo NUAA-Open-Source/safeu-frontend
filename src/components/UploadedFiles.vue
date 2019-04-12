@@ -93,11 +93,11 @@ export default {
     },
     methods: {
         gotoedit(recode) {
-            this.$router.push({path: '/recode', query: {code: recode}})
+            this.$router.push({path: '/recode', query: {code: recode, from: "history"}})
         },
 
         gotodownload(recode) {
-            this.$router.push('/download/' + recode)
+            this.$router.push({path: '/download/' + recode, query: {from: "history"}})
         },
 
         showmodal(recode) {
@@ -117,6 +117,7 @@ export default {
                     break
                 }
             }
+            this.$event("delete_expired_file")
         },
 
         deletefile(recode) {
@@ -139,6 +140,7 @@ export default {
                         }
                         that.to_delete_recode = ''
                         that.$message.success('删除成功')
+                        that.$event("delete_file")
                     }
                 }
             }
