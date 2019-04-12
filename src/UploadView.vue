@@ -10,6 +10,9 @@ export default {
     name: 'uploadview',
     components: {
         upload,
+    },
+    mounted() {
+        this.$event("upload", this.$route.query.from)
     }
 }
 </script>

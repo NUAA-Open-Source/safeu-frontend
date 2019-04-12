@@ -11,6 +11,9 @@ export default {
     components: {
         Download,
     },
+    mounted() {
+        this.$event("download", this.$route.query.from)
+    }
 }
 </script>
 <style>

@@ -65,6 +65,9 @@ export default {
             }
         }
     },
+    mounted() {
+        this.$event("file_list")
+    },
     watch: {
         'selected_files': function() {
             if (this.selected_files.length == this.filelist.length) {
@@ -212,6 +215,7 @@ export default {
                         } else {
                             that.downloadfile(zip_url, that.recode + ".zip", '', true)
                         }
+                        that.$event("zip_download")
                     } else {
                         that.is_zip_loading = false
                         that.$message.error('打包失败')

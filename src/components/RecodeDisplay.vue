@@ -10,7 +10,7 @@
             </div>
             <p style="font-size: 12px; color: grey; margin: 8px 0" v-if="!is_editting_recode">点击提取码一键复制</p>
             <p style="font-size: 12px; color: grey; margin: 8px 0" v-else>&nbsp;</p>
-            <button class="copy-downloadurl-btn" v-clipboard:copy="'https://safeu.a2os.club/download/' + new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror">拷贝链接</button>
+            <button class="copy-downloadurl-btn" v-clipboard:copy="'https://safeu.a2os.club/download/' + new_recode + '?from=copyurl'" v-clipboard:success="copysuccess" v-clipboard:error="copyerror">拷贝链接</button>
             <a-tooltip trigger="hover" overlayClassName="overlay" placement="bottom" style="margin-top: 12px">
                 <a href="#">分享二维码</a>
                 <div slot="title" style="background: white; width: 100%; height: 100%;">
@@ -49,7 +49,7 @@
                     </a-radio-group>
                 </div>
                 <button class="setting-confirm-btn" v-on:click="submit">确定</button>
-                <a href="/" class="back-btn">返回</a>
+                <a class="back-btn" v-on:click="back">返回</a>
             </div>
         </div>
         </div>
@@ -64,7 +64,7 @@
         },
         data() {
             return {
-                qrcode_url: "/download/" + this.recode,
+                qrcode_url: "/download/" + this.recode + "?from=qrcode",
                 is_editting_recode: false,
                 is_show_password: false,
                 is_need_password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != null && JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != "",
@@ -103,6 +103,11 @@
 
             inputonfocus() {
                 this.alert_style = 0;
+            },
+
+            back() {
+                this.$event("recode_display_backbtn")
+                this.$router.push({path: '/'})
             },
 
             finisheditrecode() {

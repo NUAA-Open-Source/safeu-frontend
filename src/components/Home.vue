@@ -19,11 +19,11 @@ export default {
   name: 'home',
   methods: {
     gotoupload() {
-      this.$router.push({path: '/upload'})
+      this.$router.push({path: '/upload', query: {from: 'homebutton'}})
     },
 
     gotodownload() {
-      this.$router.push({path: '/download'})
+      this.$router.push({path: '/download', query: {from: 'homebutton'}})
     }
   }
 }
