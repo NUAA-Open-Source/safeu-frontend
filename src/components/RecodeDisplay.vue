@@ -3,8 +3,8 @@
         <div class="recode-container">
             <h1 class="recode-top-hint">您的提取码</h1>
             <div class="recode-input-row">
-                <span class="recode-box" v-clipboard:copy="new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror" v-if="!is_editting_recode">{{new_recode}}</span>    
-                <input id="recode-box" class="recode-box" v-model="new_recode" @focus="inputonfocus" @keyup.enter="finisheditrecode" v-else/>
+                <span class="recode-box" v-clipboard:copy="new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror" v-if="!is_editting_recode">{{new_recode}}</span>
+                <input id="recode-box" class="recode-box" v-model="new_recode" @focus="inputonfocus" @keyup="adaptinput" @keyup.enter="finisheditrecode" v-else/>
                 <a v-on:click="editrecode" v-if="!is_editting_recode">修改</a>
                 <a v-on:click="finisheditrecode" v-else>完成</a>
             </div>
@@ -82,7 +82,7 @@
                 if (!this.is_need_password) {
                     this.password = ""
                 }
-            }
+            },
         },
         methods: {
             copysuccess() {
@@ -99,6 +99,7 @@
 
             editrecode() {
                 this.is_editting_recode = true
+                adaptinput()
             },
 
             inputonfocus() {
@@ -108,6 +109,21 @@
             back() {
                 this.$event("recode_display_backbtn")
                 this.$router.push({path: '/'})
+            },
+
+            adaptinput() {
+                var input = document.getElementsByClassName("recode-box")[0]
+                var text = input.value
+                var textLength = 40
+                for (var i = 0; i < text.length; i++) {
+                    console.log(text.charCodeAt(i))
+                    if (text.charCodeAt(i) < 256) {
+                        textLength += 20
+                    } else {
+                        textLength += 40
+                    }
+                }
+                input.style.width = textLength.toString() + "px"
             },
 
             finisheditrecode() {
