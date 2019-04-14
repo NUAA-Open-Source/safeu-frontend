@@ -35,6 +35,14 @@ export default {
     .catch(function(error) {
       console.log(error)
     })
+    this.$axios.get(_global.behavior_domain_url + "csrf")
+    .then(function(response) {
+      var csrf_token = response.headers["x-csrf-token"]
+      sessionStorage.setItem("behavior_csrf_token", csrf_token)
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
   },
   methods: {
     gototerms() {

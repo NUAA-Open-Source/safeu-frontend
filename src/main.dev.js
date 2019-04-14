@@ -31,13 +31,14 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.prototype.$event = function(event_name, from) {
   from = typeof from !== "undefined" ? from : null
   const xhr = new XMLHttpRequest()
-  xhr.open("POST", _global.behavior_api_url + "event/", true)
+  xhr.withCredentials = true
+  xhr.open("POST", _global.behavior_api_url + "event", true)
+  xhr.setRequestHeader("X-CSRF-TOKEN", sessionStorage.getItem("behavior_csrf_token"))
   if (from == null) {
     xhr.send(JSON.stringify({"name": event_name}))
   } else {
-    xhr.send(JSON.stringify({"name": event_name, "src": from}))
+    xhr.send(JSON.stringify({"event": {"name": event_name, "src": from}}))
   }
-  
 }
 
 // Vue.config.productionTip = false
