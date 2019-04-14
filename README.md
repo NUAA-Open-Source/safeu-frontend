@@ -16,17 +16,15 @@
 
 ## Install & Run
 ### For development
+
 ```
 yarn install
 yarn run serve
 ```
 ### For production
-使用 `webpack` 进行打包。
-
-建议切换分支到 `deploy-test`，在 `deploy-test` 分支上，编写了 `webpack.config.js` 文件并对项目中部分文件进行了修改，如直接通过外部链接引入一些库来减小打包体积，以增加网页的浏览速度。
+通过 `vue.config.js` 配置 `dev & prod` 不同环境的代码
 
 ```
-yarn run serve
 yarn run build
 serve -s dist
 ```
