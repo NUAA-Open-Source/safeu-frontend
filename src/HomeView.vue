@@ -14,15 +14,13 @@ export default {
         Home,
         UploadedFiles,
     },
-    mounted() {
-        this.$event("home")
-    },
     data() {
         return {
             isuploaded: false,
         }
     },
     mounted() {
+        this.$event("home")
         var localStorage = window.localStorage
         for (var i = 0; i < localStorage.length; i++) {
             var key = localStorage.key(i)
