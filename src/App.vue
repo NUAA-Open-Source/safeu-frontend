@@ -24,6 +24,13 @@ export default {
   components: {
     Navbar,
   },
+  created() {
+    this.$notification.open({
+            message: '最新通知',
+            description: '今天(2019年4月16日)20:00-24:00 将进行 alpha 到 beta 的升级维护，期间会出现功能异常的状况，尽情谅解',
+            icon: <a-icon type="smile" style="color: #108ee9" />,
+    })
+  },
   methods: {
     gototerms() {
       this.$router.push({path: '/terms'})
@@ -36,7 +43,7 @@ export default {
     gotoabout() {
       this.$router.push({path: '/about'})
     },
-  }
+  },
 }
 </script>
 <style>
