@@ -61,13 +61,13 @@ body {
 }
 #app {
   position: absolute;
+  min-height: calc(100vh-0px);
   display: flex;
   flex-direction: column;
   margin-top: 0;
   background: url('./assets/background.svg') no-repeat;
   background-size: 100%;
   width: 100%;
-  min-height: 100%;
   font-family: -apple-system,BlinkMacSystemFont,SF Pro Text,segoe ui,helvetica neue,helvetica,ubuntu,roboto,noto,arial,sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

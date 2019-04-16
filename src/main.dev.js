@@ -68,7 +68,7 @@ let router = new VueRouter({
 
 new Vue({
   el: '#app',
-  router,
+  router: router,
   render: h => h(App),
 }).$mount('#app')
 
