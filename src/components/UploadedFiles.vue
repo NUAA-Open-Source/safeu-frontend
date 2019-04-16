@@ -14,9 +14,15 @@
             <a v-on:click="gotodownload(download_url)" v-if="download_url != null">提取</a>
             <span v-else>提取</span>
         </template>
+        <template slot="remain_downcount" slot-scope="remain_downcount">
+            <span v-if="remain_downcount == null">-</span>
+            <span v-else-if="remain_downcount == 0">加载中...</span>
+            <span v-else>{{remain_downcount}}</span>
+        </template>
         <template slot="remain_time" slot-scope="remain_time">
-            <span v-if="remain_time != null">{{remain_time}}</span>
-            <span v-else>已过期</span>
+            <span v-if="remain_time == null">已过期</span>
+            <span v-else-if="remain_time == -1">-</span>
+            <span v-else>{{remain_time}}</span>
         </template>
         <template slot="delete" slot-scope="code">
             <a v-on:click="showmodal(code.recode)" v-if="!code.isExpired"><font-awesome-icon icon="trash"/></a>
@@ -46,6 +52,11 @@ const columns = [{
     width: '20%',
     scopedSlots: { customRender: 'download_url' },
 }, {
+    title: '下载次数剩余',
+    dataIndex: 'remain_downcount',
+    width: '20%',
+    scopedSlots: { customRender: 'remain_downcount' },
+}, {
     title: '有效时间剩余',
     dataIndex: 'remain_time',
     width: '20%',
@@ -69,23 +80,54 @@ export default {
     },
     mounted() {
         var localStorage = window.localStorage
+        var csrf_token = sessionStorage.getItem("csrf_token")
+        const max_history_count = 5
+        var history_count = 0
         for (var i = 0; i < localStorage.length; i++) {
             var key = localStorage.key(i)
             if (key.indexOf("recode-") == 0) {
                 var value = JSON.parse(localStorage.getItem(key))
                 var recode = value.recode
+                var user_token = JSON.parse(window.localStorage.getItem("recode-" + recode)).owner_token
                 var download_url = "/download/" + value.recode
                 var createdAt = value.createdAt
-                // var download_count = value.downcount
+                var download_count = 0
                 var expire_time = value.expiretime
                 var remain_time = createdAt + expire_time * 60 * 60 * 1000 - Date.parse(new Date())
                 if (remain_time < 0) {
-                    this.uploaded_files.push({'recode': {'recode': recode, 'isExpired': true}, 'download_url': null, 'remain_time': null, 'code': {'recode': recode, 'isExpired': true}, 'createdAt': null}) 
-                }
-                else {
+                    if (history_count < max_history_count) {
+                        this.uploaded_files.push({'recode': {'recode': recode, 'isExpired': true}, 'download_url': null, 'remain_downcount': null, 'remain_time': null, 'code': {'recode': recode, 'isExpired': true}, 'createdAt': null}) 
+                        history_count += 1
+                    } else {
+                        window.localStorage.removeItem(key[0])
+                    }
+                } else {
+                    var xhr = new XMLHttpRequest()
                     var remain_hour = parseInt(remain_time / 1000 / 60 / 60).toString()
                     var remain_min = Math.round(remain_time / 1000 / 60 % 60).toString()
-                    this.uploaded_files.push({'recode': {'recode': recode, 'isExpired': false}, 'download_url': recode, 'remain_time': remain_hour + '小时' + remain_min + '分钟', 'code': {'recode': recode, 'isExpired': false}, 'createdAt': createdAt})
+                    var that = this
+                    xhr.withCredentials = true
+                    xhr.open("POST", _global.api_url + "info/" + recode)
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == XMLHttpRequest.DONE) {
+                            if (xhr.status == 200) {
+                                recode = xhr.responseURL.split("/info/")[1]
+                                for (var index in that.uploaded_files) {
+                                    if (that.uploaded_files[index].recode.recode == recode) {
+                                        download_count = JSON.parse(xhr.response).down_count
+                                        if (download_count == 0) {
+                                            that.uploaded_files[index] = {'recode': {'recode': recode, 'isExpired': true}, 'download_url': null, 'remain_downcount': "已用完", 'remain_time': "-1", 'code': {'recode': recode, 'isExpired': true}, 'createdAt': null}
+                                        }
+                                        that.uploaded_files[index].remain_downcount = JSON.parse(xhr.response).down_count
+                                        break
+                                    }
+                                }
+                            }
+                        } 
+                    }
+                    xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
+                    xhr.send(JSON.stringify({"user_token": user_token}))
+                    this.uploaded_files.push({'recode': {'recode': recode, 'isExpired': false}, 'download_url': recode, 'remain_downcount': download_count, 'remain_time': remain_hour + '小时' + remain_min + '分钟', 'code': {'recode': recode, 'isExpired': false}, 'createdAt': createdAt})
                 } 
             }
         }
