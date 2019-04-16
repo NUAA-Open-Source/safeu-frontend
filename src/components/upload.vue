@@ -22,7 +22,7 @@
                     </div>
                     <a  v-on:click.stop="removeFile" :data-uid="item.id" class="upload-files-remove-btn"><img
                         :data-uid="item.id"
-                        src="http://ninjiacoder.oss-cn-beijing.aliyuncs.com/remove.png"/>
+                        src="https://ninjiacoder.oss-cn-beijing.aliyuncs.com/remove.png"/>
                     </a>
 
                 </div>
@@ -226,7 +226,7 @@
                     callback: this.callbackbody,
                 }
                 up.setOption({
-                    url: "http://" + this.host,
+                    url: "https://" + this.host,
                     multipart_params: newMultipartParams,
                 });
                 up.start();
@@ -246,7 +246,7 @@
                     browse_button: 'selectfiles',
                     multi_selection: true,
                     container: that.$refs.container,
-                    url: 'http://oss.aliyuncs.com',
+                    url: 'https://oss.aliyuncs.com',
                     filters: {
                         // 最大只能上传200mb的文件
                         max_file_size: that.maxSize,
@@ -290,7 +290,7 @@
                                 let ext = file.type
                                 let ext_arr = ext.split("\/")
                                 let file_ext = _file.name.split('.').splice(-1)[0]
-                                const icon_default = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/default.png'
+                                const icon_default = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/default.png'
                                 if(that.showPreview){
                                     let _fileExt = ext_arr[0]
                                     if(_fileExt === 'image')
@@ -303,22 +303,22 @@
                                         }
                                         reader.readAsDataURL(file.getNative())
                                     } else if (file_ext == 'pdf'){
-                                        _file.data_base64 = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/pdf.png'
+                                        _file.data_base64 = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/pdf.png'
                                         result_call()
                                     } else if (['doc', 'docx'].indexOf(file_ext) != -1) {
-                                        _file.data_base64 = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/doc.png'
+                                        _file.data_base64 = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/doc.png'
                                         result_call()
                                     } else if (['xls', 'xlsx'].indexOf(file_ext) != -1) {
-                                        _file.data_base64 = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/xls.png'
+                                        _file.data_base64 = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/xls.png'
                                         result_call()
                                     } else if (['ppt', 'pptx'].indexOf(file_ext) != -1) {
-                                        _file.data_base64 = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/ppt.png'
+                                        _file.data_base64 = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/ppt.png'
                                         result_call()
                                     } else if (file_ext == 'zip') {
-                                        _file.data_base64 = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/zip.png'
+                                        _file.data_base64 = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/zip.png'
                                         result_call()
                                     } else if (file_ext == 'rar') {
-                                        _file.data_base64 = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/rar.png'
+                                        _file.data_base64 = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/rar.png'
                                         result_call()
                                     } else {
                                         _file.data_base64 = icon_default
