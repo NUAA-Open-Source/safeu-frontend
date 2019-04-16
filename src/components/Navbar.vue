@@ -2,7 +2,7 @@
     <div id="navbar">
         <div class="logo">
             <a class="logo-name" href="/">SafeU</a>
-            <p style="margin: 0 0 0 2px; padding: 2px 4px; border-radius: 4px; background-color: #ef5350; color: white; font-size: 10px">alpha</p>
+            <p style="margin: 0 0 0 2px; padding: 2px 4px; border-radius: 4px; background-color: #40d34d; color: white; font-size: 10px">beta</p>
             <div class="logo-sub">
                 <p class="logo-subname">云U盘</p>
                 <p class="logo-des">quick &amp; safe for share.</p>

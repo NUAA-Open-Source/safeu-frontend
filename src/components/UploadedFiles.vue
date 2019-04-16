@@ -93,11 +93,11 @@ export default {
     },
     methods: {
         gotoedit(recode) {
-            this.$router.push({path: '/recode', query: {code: recode}})
+            this.$router.push({path: '/recode', query: {code: recode, from: "history"}})
         },
 
         gotodownload(recode) {
-            this.$router.push('/download/' + recode)
+            this.$router.push({path: '/download/' + recode, query: {from: "history"}})
         },
 
         showmodal(recode) {
@@ -117,13 +117,16 @@ export default {
                     break
                 }
             }
+            this.$event("delete_expired_file")
         },
 
         deletefile(recode) {
             var user_token = JSON.parse(window.localStorage.getItem("recode-" + recode)).owner_token
+            var csrf_token = sessionStorage.getItem("csrf_token")
             var xhr = new XMLHttpRequest()
+            xhr.withCredentials = true
             var that = this
-            xhr.open("POST", _global.domain_url + "delete/" + recode)
+            xhr.open("POST", _global.api_url + "delete/" + recode)
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
                     if (xhr.status == 200) {
@@ -137,9 +140,11 @@ export default {
                         }
                         that.to_delete_recode = ''
                         that.$message.success('删除成功')
+                        that.$event("delete_file")
                     }
                 }
             }
+            xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
             xhr.send(JSON.stringify({"user_token": user_token}))
         },
 

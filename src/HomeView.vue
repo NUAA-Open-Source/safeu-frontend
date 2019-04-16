@@ -20,6 +20,7 @@ export default {
         }
     },
     mounted() {
+        this.$event("home")
         var localStorage = window.localStorage
         for (var i = 0; i < localStorage.length; i++) {
             var key = localStorage.key(i)

@@ -102,6 +102,7 @@
     border: 1px solid #cccccc;
     border-radius: 12px;
     font-size: 28px;
+    font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
     font-weight: 800;
     color: #cd365f;
     text-align: center;

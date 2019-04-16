@@ -16,17 +16,15 @@
 
 ## Install & Run
 ### For development
+
 ```
 yarn install
 yarn run serve
 ```
 ### For production
-使用 `webpack` 进行打包。
-
-建议切换分支到 `deploy-test`，在 `deploy-test` 分支上，编写了 `webpack.config.js` 文件并对项目中部分文件进行了修改，如直接通过外部链接引入一些库来减小打包体积，以增加网页的浏览速度。
+通过 `vue.config.js` 配置 `dev & prod` 不同环境的代码
 
 ```
-yarn run serve
 yarn run build
 serve -s dist
 ```
@@ -39,3 +37,33 @@ npm install -g serve
 # 这个模式会处理即将提到的路由问题
 serve -s dist
 ```
+
+## Deployment
+
+### Docker
+
+该项目提供了 `docker.sh` 脚本来进行容器部署的全生命周期管理，包装了如 `build`, `run`, `stop` `rm`, `logs` 命令。
+
+```bash
+$ ./docker.sh help
+
+ Build, up, down, check logs for SafeU front-end development docker container.
+
+ Usage:
+  ./docker.sh [COMMAND]
+  ./docker.sh -h|--help
+
+ Commands:
+   build      Build SafeU front-end container image.
+   help       Show this help message.
+   logs       View output from front-end container.
+   rm         Remove SafeU front-end container.
+   run        Run SafeU front-end container.
+   stop       Stop SafeU front-end container.
+```
+
+> 使用时请进入 `scripts/` 目录！
+
+## Events 数据埋点
+
+[READ MORE](./docs/events.md)
