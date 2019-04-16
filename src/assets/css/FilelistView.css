@@ -32,9 +32,8 @@
 }
 
 .filelist-item {
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 12px;
+    width: 100%;
+    margin-top: 4px;
     display: flex;
     flex-direction: row;
     justify-content: start;
@@ -112,7 +111,7 @@
 }
 
 .zip-download-row {
-    width: 90%;
+    width: 100%;
     margin-top: 40px;
     display:  flex;
     flex-direction: row;
