@@ -45,23 +45,23 @@ export default {
             let file_ext = file.original_name.split('.').splice(-1)[0]
             file.host = file.protocol + "://" + file.bucket + "." + file.endpoint + "/" + file.path
             if (file_ext == 'pdf'){
-                file.image = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/pdf.png'
+                file.image = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/pdf.png'
             } else if (['doc', 'docx'].indexOf(file_ext) != -1) {
-                file.image = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/doc.png'
+                file.image = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/doc.png'
             } else if (['xls', 'xlsx'].indexOf(file_ext) != -1) {
-                file.image = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/xls.png'
+                file.image = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/xls.png'
             } else if (['ppt', 'pptx'].indexOf(file_ext) != -1) {
-                file.image = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/ppt.png'
+                file.image = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/ppt.png'
             } else if (file_ext == 'png') {
-                file.image = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/png.png'
+                file.image = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/png.png'
             } else if (file_ext == 'jpg') {
-                file.image = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/jpg.png'
+                file.image = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/jpg.png'
             } else if (file_ext == 'zip') {
-                file.image = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/zip.png'
+                file.image = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/zip.png'
             } else if (file_ext == 'rar') {
-                file.image = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/rar.png'
+                file.image = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/rar.png'
             } else {
-                file.image = 'http://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/default.png'
+                file.image = 'https://ninjiacoder.oss-cn-beijing.aliyuncs.com/default_upload_icon/default.png'
             }
         }
     },
@@ -82,7 +82,6 @@ export default {
             if (this.is_all_selected) {
                 var selected_files = []
                 for (var item of this.filelist) {
-                    console.log(item)
                     selected_files.push({'host': item.host, 'name': item.original_name})
                 }
                 this.selected_files = selected_files
