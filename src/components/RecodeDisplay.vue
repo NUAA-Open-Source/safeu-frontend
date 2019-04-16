@@ -116,7 +116,6 @@
                 var text = input.value
                 var textLength = 40
                 for (var i = 0; i < text.length; i++) {
-                    console.log(text.charCodeAt(i))
                     if (text.charCodeAt(i) < 256) {
                         textLength += 20
                     } else {
