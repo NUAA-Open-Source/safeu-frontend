@@ -83,7 +83,7 @@
                 default: true
             },
             authServerUrl: {
-                default: _global.domain_url + 'upload/policy'
+                default: _global.api_url + 'upload/policy'
             },
             maxSize: {
                 default: '50mb'
@@ -160,10 +160,10 @@
                 }
             },
             sendRequest() {
-                const xmlhttp = new XMLHttpRequest();
-                xmlhttp.open('GET', this.authServerUrl, false);
-                xmlhttp.send(null);
-                return xmlhttp.responseText;
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', this.authServerUrl, false);
+                xhr.send(null);
+                return xhr.responseText;
             },
             getSignature() {
                 // 可以判断当前expire是否超过了当前时间,如果超过了当前时间,就重新取一下.3s 做为缓冲
@@ -265,7 +265,6 @@
                             var idx = 0
                             var countStatus = false
                             var sizeStatus = false
-                            console.log("233")
                             plupload.each(files, (file) => {
                                 idx++
                                 that.sizeTotal += file.size/1024/1024
@@ -357,8 +356,10 @@
                             that.onFileUploaded(up, file, info)
                         },
                         UploadComplete: (up, files) => {
+                            var csrf_token = sessionStorage.getItem('csrf_token')
                             var xhr = new XMLHttpRequest()
-                            xhr.open("POST", _global.domain_url + "upload/finish", true)
+                            xhr.withCredentials = true
+                            xhr.open("POST", _global.api_url + "upload/finish", true)
                             xhr.onreadystatechange = function() {
                                 if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
                                     var recode = JSON.parse(xhr.response).recode
@@ -366,14 +367,14 @@
                                     var expire_time = "8"
                                     var download_count = "10"
                                     window.localStorage.setItem("recode-" + recode, JSON.stringify({'recode': recode, 'owner_token': owner_token, 'downcount': download_count, 'expiretime': expire_time, 'createdAt': Date.parse(new Date())}))
-                                    that.jumpToRecodeDiplay(recode)
+                                    that.jumpToRecodeDiplay(recode) 
                                 }
                             }
+                            xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                             xhr.send(JSON.stringify({"files": that.fileUUIDList}))
                             that.onUploadComplete(up, files)
                         },
                         Error: (up, err) => {
-                            console.log(err)
                             if (err.code == -600) {
                                 that.$message.error('您上传的文件太大，无法上传')
                             }

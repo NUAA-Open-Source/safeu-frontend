@@ -19,7 +19,7 @@ export default {
         }
     },
     mounted() {
-        
+        this.$event("upload_success")
     },
 }
 </script>

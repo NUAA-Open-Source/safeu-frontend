@@ -96,10 +96,17 @@
     }
 }
 
-.download-files-item-btn a {
+.download-files-btn-download {
     padding: 4px 4px;
     color: white;
     background: #1ab20a;
+    border-radius: 4px;
+}
+
+.download-files-btn-downloading {
+    padding: 4px 4px;
+    color: white;
+    background: gray;
     border-radius: 4px;
 }
 

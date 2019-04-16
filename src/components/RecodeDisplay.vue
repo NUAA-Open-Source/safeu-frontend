@@ -3,14 +3,14 @@
         <div class="recode-container">
             <h1 class="recode-top-hint">您的提取码</h1>
             <div class="recode-input-row">
-                <span class="recode-box" v-clipboard:copy="new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror" v-if="!is_editting_recode">{{new_recode}}</span>    
-                <input id="recode-box" class="recode-box" v-model="new_recode" @focus="inputonfocus" @keyup.enter="finisheditrecode" v-else/>
+                <span class="recode-box" v-clipboard:copy="new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror" v-if="!is_editting_recode">{{new_recode}}</span>
+                <input id="recode-box" class="recode-box" v-model="new_recode" @focus="inputonfocus" @keyup="adaptinput" @keyup.enter="finisheditrecode" v-else/>
                 <a v-on:click="editrecode" v-if="!is_editting_recode">修改</a>
                 <a v-on:click="finisheditrecode" v-else>完成</a>
             </div>
             <p style="font-size: 12px; color: grey; margin: 8px 0" v-if="!is_editting_recode">点击提取码一键复制</p>
             <p style="font-size: 12px; color: grey; margin: 8px 0" v-else>&nbsp;</p>
-            <button class="copy-downloadurl-btn" v-clipboard:copy="'https://safeu.a2os.club/download/' + new_recode" v-clipboard:success="copysuccess" v-clipboard:error="copyerror">拷贝链接</button>
+            <button class="copy-downloadurl-btn" v-clipboard:copy="'https://safeu.a2os.club/download/' + new_recode + '?from=copyurl'" v-clipboard:success="copysuccess" v-clipboard:error="copyerror">拷贝链接</button>
             <a-tooltip trigger="hover" overlayClassName="overlay" placement="bottom" style="margin-top: 12px">
                 <a href="#">分享二维码</a>
                 <div slot="title" style="background: white; width: 100%; height: 100%;">
@@ -49,7 +49,7 @@
                     </a-radio-group>
                 </div>
                 <button class="setting-confirm-btn" v-on:click="submit">确定</button>
-                <a href="/" class="back-btn">返回</a>
+                <a class="back-btn" v-on:click="back">返回</a>
             </div>
         </div>
         </div>
@@ -64,7 +64,7 @@
         },
         data() {
             return {
-                qrcode_url: "https://safeu.a2os.club/download/" + this.recode,
+                qrcode_url: "/download/" + this.recode + "?from=qrcode",
                 is_editting_recode: false,
                 is_show_password: false,
                 is_need_password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != null && JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != "",
@@ -82,7 +82,7 @@
                 if (!this.is_need_password) {
                     this.password = ""
                 }
-            }
+            },
         },
         methods: {
             copysuccess() {
@@ -99,10 +99,30 @@
 
             editrecode() {
                 this.is_editting_recode = true
+                adaptinput()
             },
 
             inputonfocus() {
                 this.alert_style = 0;
+            },
+
+            back() {
+                this.$event("recode_display_backbtn")
+                this.$router.push({path: '/'})
+            },
+
+            adaptinput() {
+                var input = document.getElementsByClassName("recode-box")[0]
+                var text = input.value
+                var textLength = 40
+                for (var i = 0; i < text.length; i++) {
+                    if (text.charCodeAt(i) < 256) {
+                        textLength += 20
+                    } else {
+                        textLength += 40
+                    }
+                }
+                input.style.width = textLength.toString() + "px"
             },
 
             finisheditrecode() {
@@ -113,10 +133,12 @@
                 }
                 this.is_editting_recode = false
                 var that = this
+                var csrf_token = sessionStorage.getItem("csrf_token")
                 if (this.recode != this.new_recode) {
                     var xhr = new XMLHttpRequest()
+                    xhr.withCredentials = true
                     var user_token = JSON.parse(window.localStorage.getItem('recode-'+ this.recode)).owner_token
-                    xhr.open("POST", _global.domain_url + "recode/" + this.recode, true)
+                    xhr.open("POST", _global.api_url + "recode/" + this.recode, true)
                     xhr.onreadystatechange = function() {
                         if (xhr.readyState == XMLHttpRequest.DONE) {
                             if (xhr.status == 200) {
@@ -141,21 +163,26 @@
                             }
                         }
                     }
+                    xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                     xhr.send(JSON.stringify({"new_re_code": this.new_recode, "user_token": user_token}))
                 }
             },
 
             submit() {
+                var csrf_token = sessionStorage.getItem("csrf_token")
                 var xhr_password = new XMLHttpRequest()
+                xhr_password.withCredentials = true
                 var xhr_downloadcount = new XMLHttpRequest()
+                xhr_downloadcount.withCredentials = true
                 var xhr_expiretime = new XMLHttpRequest()
+                xhr_expiretime.withCredentials = true
                 var sha256 = require("js-sha256").sha256
                 var password_sha256 = this.password == "" ? "" : sha256(this.password)
                 var that = this
                 var user_token = JSON.parse(window.localStorage.getItem('recode-' + this.recode)).owner_token
-                xhr_password.open("POST", _global.domain_url + "password/" + this.recode, true)
-                xhr_downloadcount.open("POST", _global.domain_url + "downCount/" + this.recode, true)
-                xhr_expiretime.open("POST", _global.domain_url + "expireTime/" + this.recode, true)
+                xhr_password.open("POST", _global.api_url + "password/" + this.recode, true)
+                xhr_downloadcount.open("POST", _global.api_url + "downCount/" + this.recode, true)
+                xhr_expiretime.open("POST", _global.api_url + "expireTime/" + this.recode, true)
                 xhr_password.onreadystatechange = function() {
                     if (xhr_password.readyState == XMLHttpRequest.DONE) {
                         if (xhr_password.status == 200) {
@@ -213,8 +240,11 @@
                         }
                     }
                 }
+                xhr_password.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                 xhr_password.send(JSON.stringify({"user_token":user_token, "Auth": password_sha256}))
+                xhr_downloadcount.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                 xhr_downloadcount.send(JSON.stringify({"new_down_count": parseInt(that.download_count), "user_token": user_token}))
+                xhr_expiretime.setRequestHeader("X-CSRF-TOKEN", csrf_token)
                 xhr_expiretime.send(JSON.stringify({"user_token": user_token, "new_expire_time": parseInt(that.expire_time)}))
             }
         }

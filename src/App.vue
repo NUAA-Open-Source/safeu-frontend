@@ -5,8 +5,7 @@
       <router-view></router-view>
     </div>
     <div class="footer">
-      <div style="display: flex; flex-direction: row; align-items: center; margin: 10px 4% 2px" class="link-container">
-        <span style="font-size: 30px; font-weight: bold; margin-right: 12px;">A²OS</span>
+      <div class="link-container">
         <a v-on:click="gototerms">使用条款</a>
         <a v-on:click="gotoprivacy">隐私政策</a>
         <a v-on:click="gotoabout">关于</a>
@@ -19,10 +18,24 @@
 </template>
 <script>
 import Navbar from './components/Navbar.vue'
+import _global from './Global.vue'
 export default {
   name: 'app',
   components: {
     Navbar,
+  },
+  mounted() {
+    this.$axios.defaults.withCredentials = true
+    this.$axios.get(_global.domain_url + "csrf")
+    .then(function(response) {
+      var csrf_token = response.headers["x-csrf-token"]
+      sessionStorage.setItem("csrf_token", csrf_token)
+    })
+    this.$axios.get(_global.behavior_domain_url + "csrf")
+    .then(function(response) {
+      var csrf_token = response.headers["x-csrf-token"]
+      sessionStorage.setItem("behavior_csrf_token", csrf_token)
+    })
   },
   methods: {
     gototerms() {
@@ -72,5 +85,17 @@ body {
   margin:0px 1% 0px;
   color: rgb(109, 109, 109);
   font-weight: bold;
+}
+@media (min-width: 700px) {
+  .link-container {
+    margin-left: 40px;
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 700px) {
+  .link-container {
+    text-align:center;
+    margin-bottom: 20px;
+  }  
 }
 </style>
