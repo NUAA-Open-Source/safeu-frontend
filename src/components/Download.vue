@@ -44,15 +44,9 @@ export default {
                         that.$router.push({path: '/filelist', query: {recode: that.recode}})
                     } else if (xhr.status === 401) {
                         that.needpassword = true
-                        var error = JSON.parse(xhr.response).error
-                        if (error == "Cannot get the password") {
-                            that.$message.info("该文件加密，请输入密码")
-                        } else if (error == "The password is not correct") {
-                            that.$message.error("密码输入错误")
-                        }
-                    } else if (xhr.status === 404) {
-                        that.$message.error("提取码错误")
                     }
+                    var error_code = JSON.parse(xhr.response).err_code
+                    that.$error(error_code)
                 }
             }
             xhr.withCredentials = true
