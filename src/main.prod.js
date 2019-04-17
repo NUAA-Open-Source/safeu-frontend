@@ -38,7 +38,7 @@ Vue.prototype.$event = function(event_name, from) {
     if (from == null) {
       xhr.send(JSON.stringify({"name": event_name}))
     } else {
-      xhr.send(JSON.stringify({"event": {"name": event_name, "src": from}}))
+      xhr.send(JSON.stringify({"name": event_name, "src": from}))
     }
   }
 
