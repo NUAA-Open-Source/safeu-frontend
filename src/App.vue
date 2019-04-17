@@ -61,7 +61,7 @@ body {
 }
 #app {
   position: absolute;
-  min-height: calc(100vh-0px);
+  min-height: calc(100vh);
   display: flex;
   flex-direction: column;
   margin-top: 0;
