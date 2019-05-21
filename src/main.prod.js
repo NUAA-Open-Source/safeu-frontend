@@ -43,7 +43,7 @@ Vue.prototype.$event = function(event_name, from) {
   }
 
 Vue.prototype.$error = function(code) {
-  message.error(_global.error_code[code])
+  this.$message.error(_global.error_code[code])
 }
 
 // Vue.config.productionTip = false
