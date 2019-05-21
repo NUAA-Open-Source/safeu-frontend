@@ -64,7 +64,7 @@
         },
         data() {
             return {
-                qrcode_url: "/download/" + this.recode + "?from=qrcode",
+                qrcode_url: "https://safeu.a2os.club/download/" + this.recode + "?from=qrcode",
                 is_editting_recode: false,
                 is_show_password: false,
                 is_need_password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != null && JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != "",
