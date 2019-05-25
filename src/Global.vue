@@ -1,10 +1,14 @@
 <script>
-const domain_url = process.env.NODE_ENV === 'production'
+const domain_url = process.env.VUE_APP_CURRENTMODE === 'production'
     ? 'https://api.safeu.a2os.club/'
-    : 'https://testapi.safeu.a2os.club/'
-const behavior_domain_url = process.env.NODE_ENV === 'production'
+    : process.env.VUE_APP_CURRENTMODE === 'staging'
+    ? 'https://testapi.safeu.a2os.club/'
+    : 'http://114.115.169.206:9000/'
+const behavior_domain_url = process.env.VUE_APP_CURRENTMODE === 'production'
     ? 'https://api.behavior.a2os.club/'
-    : 'https://testapi.behavior.a2os.club/'
+    : process.env.VUE_APP_CURRENTMODE === 'staging'
+    ? 'https://testapi.behavior.a2os.club/'
+    : 'http://114.115.169.206:9005'
 const version = 'v1/'
 const behavior_version = 'v1/'
 const error_code = {
