@@ -6,7 +6,7 @@
                 <input type="checkbox" v-model="is_all_selected" @change="selectall" style="margin-right: 17px">
                 全选
             </div>
-            <div class="filelist-item" v-for="item in filelist" :key="item.ID">
+            <div class="filelist-item" v-for="(item, index) in filelist" :key="item.ID">
                 <input type="checkbox" :value="{'host': item.host, 'name': item.original_name}" v-model="selected_files">
                 <div class="download-files-item-left">
                     <img :src="item.image" />
@@ -15,12 +15,12 @@
                     <p style="margin-bottom: 0">{{item.original_name}}</p>
                 </div>
                 <div class="download-files-item-btn">
-                    <a v-on:click="singleFileDownload(item.host, item.original_name)" class="download-files-btn-download">下载</a>
+                    <button v-on:click="singleFileDownload(index, item.host, item.original_name)" class="download-files-btn-download" :id="'download-btn-'+index">下载</button>
                 </div>
             </div>
             <div class="zip-download-row">
-                <button class="zip-download-btn" v-on:click="zippart" v-if="!is_zip_loading">打包下载</button>
-                <button class="zip-downloading-btn" v-else><a-spin />正在打包中...</button>
+                <button id="zip-download-btn" class="zip-download-btn" v-on:click="zippart" v-if="!is_zip_loading">打包下载</button>
+                <button id="zip-downloading-btn" class="zip-downloading-btn" v-else><a-spin />正在打包中...</button>
             </div>
         </div>
     </div>
@@ -97,15 +97,28 @@ export default {
             }
         },
 
-        downloadfile(url, filename, filetype, iszip) {
+        downloadfile(index, url, filename, filetype, iszip) {
             var xhr = new XMLHttpRequest()
             xhr.open("GET", url)
             xhr.responseType = "blob"
             var csrf_token = sessionStorage.getItem("csrf_token")
             var that = this
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    that.is_zip_loading = false
+            xhr.addEventListener("progress", function(ev) {
+                var max   = ev.total;
+                var value = ev.loaded;
+                var width = value/max*100;
+                if (iszip) {
+                    document.getElementById("zip-downloading-btn").innerText = Math.floor(value*100/max) + "%";
+                    document.getElementById("zip-downloading-btn").disabled = true
+                } else {
+                    document.getElementById("download-btn-" + index).innerText = Math.floor(value*100/max) + "%";
+                    document.getElementById("download-btn-" + index).disabled = true
+                    document.getElementById("download-btn-" + index).className = "download-files-btn-downloading"                    
+                }
+                
+            });
+            xhr.addEventListener("load", function(ev) {
+                if (this.status === 200) {
                     var b = that.getBrowser();
                     if (b=="IE"){
                         var file = new Blob([xhr.response], { type: filetype });
@@ -119,9 +132,12 @@ export default {
                         link.click(); 
                     }
                 }
-            }
+            })
             xhr.addEventListener("loadend", function(ev) {
                 if (iszip) {
+                    that.is_zip_loading = false
+                    document.getElementById("zip-downloading-btn").innerText = "打包下载";
+                    document.getElementById("zip-downloading-btn").disabled = false 
                     var xhr = []
                     var urls = []
                     for (var i in that.selected_files_handled) {
@@ -133,6 +149,9 @@ export default {
                         xhr[i].send(JSON.stringify({"bucket": that.selected_files_handled[i].bucket, "path": that.selected_files_handled[i].path}))
                     }
                 } else {
+                    document.getElementById("download-btn-" + index).innerText = "下载" 
+                    document.getElementById("download-btn-" + index).disabled = false
+                    document.getElementById("download-btn-" + index).className = "download-files-btn-download"
                     var bucket = url.split("://")[1].split(".")[0]
                     var path = url.split("://")[1].split(".").splice(1).join(".").split("/").slice(1).join("/")
                     var downcounturl = _global.api_url + "minusDownCount/" + that.recode
@@ -146,7 +165,7 @@ export default {
             xhr.send()
         },
 
-        singleFileDownload(host, original_name) {
+        singleFileDownload(index, host, original_name) {
             var protocol = host.split("://")[0]
             var url = host.split("://")[1]
             var bucket = url.split(".")[0]
@@ -166,7 +185,7 @@ export default {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status == 200) {
                         var download_url = JSON.parse(xhr.response).url
-                        that.downloadfile(download_url, original_name, '', false)
+                        that.downloadfile(index, download_url, original_name, '', false)
                     } else {
                         that.$message.error('下载失败')
                     }
@@ -210,9 +229,9 @@ export default {
                     if (xhr.status == 200) {
                         var zip_url = JSON.parse(xhr.response).url
                         if (that.selected_files.length == 1) {
-                            that.downloadfile(zip_url, that.selected_files[0].name, '', true)
+                            that.downloadfile(-1, zip_url, that.selected_files[0].name, '', true)
                         } else {
-                            that.downloadfile(zip_url, that.recode + ".zip", '', true)
+                            that.downloadfile(-1, zip_url, that.recode + ".zip", '', true)
                         }
                         that.$event("zip_download")
                     } else {
