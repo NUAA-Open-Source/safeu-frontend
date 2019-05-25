@@ -187,7 +187,8 @@ export default {
                         var download_url = JSON.parse(xhr.response).url
                         that.downloadfile(index, download_url, original_name, '', false)
                     } else {
-                        that.$message.error('下载失败')
+                        var error_code = JSON.parse(xhr.response).err_code
+                        that.$error(error_code)
                     }
                 }
             }
@@ -236,7 +237,8 @@ export default {
                         that.$event("zip_download")
                     } else {
                         that.is_zip_loading = false
-                        that.$message.error('打包失败')
+                        var error_code = JSON.parse(xhr.response).err_code
+                        that.$error(error_code)
                     }
                 }
             }
