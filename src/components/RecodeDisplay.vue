@@ -153,12 +153,14 @@
                                 that.$route.query.code = that.new_recode
                                 that.$message.success('设置成功');
                             } else if (xhr.status == 400) {
-                                if (JSON.parse(xhr.response).message == "reCode Repeat") {
+                                if (JSON.parse(xhr.response).err_code == 20307) {
                                     that.new_recode = that.recode
-                                    that.$message.error('该提取码已存在')
+                                    var error_code = JSON.parse(xhr.response).err_code
+                                    that.$error(error_code)
                                 } else {
                                     that.new_recode = that.recode
-                                    that.$message.error('设置失败')
+                                    var error_code = JSON.parse(xhr.response).err_code
+                                    that.$error(error_code)
                                 }
                             }
                         }
@@ -198,7 +200,8 @@
                                 that.expiretime_setting_status = 0
                             }
                         } else {
-                            that.$message.error('密码设置失败')
+                            var error_code = JSON.parse(xhr.response).err_code
+                            that.$error(error_code)
                         }
                     }
                 }
@@ -217,7 +220,8 @@
                                 that.expiretime_setting_status = 0
                             }
                         } else {
-                            that.$message.error('下载次数设置失败')
+                            var error_code = JSON.parse(xhr.response).err_code
+                            that.$error(error_code)
                         }
                     }
                 }
@@ -236,7 +240,8 @@
                                 that.expiretime_setting_status = 0
                             }
                         } else {
-                            that.$message.error('有效期设置失败')
+                            var error_code = JSON.parse(xhr.response).err_code
+                            that.$error(error_code)
                         }
                     }
                 }

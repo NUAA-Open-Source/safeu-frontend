@@ -45,8 +45,10 @@ export default {
                     } else if (xhr.status === 401) {
                         that.needpassword = true
                     }
-                    var error_code = JSON.parse(xhr.response).err_code
-                    that.$error(error_code)
+                    if (xhr.status != 200) {
+                        var error_code = JSON.parse(xhr.response).err_code
+                        that.$error(error_code)
+                    }
                 }
             }
             xhr.withCredentials = true
