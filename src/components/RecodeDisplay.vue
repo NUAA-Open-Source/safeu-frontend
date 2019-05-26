@@ -166,7 +166,9 @@
                         }
                     }
                     xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
-                    xhr.send(JSON.stringify({"new_re_code": this.new_recode, "user_token": user_token}))
+                    var sha256 = require("js-sha256").sha256
+                    var password_sha256 = this.password == "" ? "" : sha256(this.password)
+                    xhr.send(JSON.stringify({"new_re_code": this.new_recode, "user_token": user_token, "auth": password_sha256}))
                 }
             },
 
