@@ -43,7 +43,11 @@ Vue.prototype.$event = function(event_name, from) {
   }
 
 Vue.prototype.$error = function(code) {
-  this.$message.error(_global.error_code[code])
+  if (_global.error_code[code] == "") {
+    Vue.prototype.$message.error("未知错误") 
+  } else {
+    Vue.prototype.$message.error(_global.error_code[code])
+  }
 }
 
 // Vue.config.productionTip = false
