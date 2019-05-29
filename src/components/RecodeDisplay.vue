@@ -10,7 +10,7 @@
             </div>
             <p style="font-size: 12px; color: grey; margin: 8px 0" v-if="!is_editting_recode">点击提取码一键复制</p>
             <p style="font-size: 12px; color: grey; margin: 8px 0" v-else>&nbsp;</p>
-            <button class="copy-downloadurl-btn" v-clipboard:copy="encodeURL(_global.domain_url + new_recode + '?from=copyurl')" v-clipboard:success="copysuccess" v-clipboard:error="copyerror">拷贝链接</button>
+            <button class="copy-downloadurl-btn" v-clipboard:copy="copy_url" v-clipboard:success="copysuccess" v-clipboard:error="copyerror">拷贝链接</button>
             <a-tooltip trigger="hover" overlayClassName="overlay" placement="bottom" style="margin-top: 12px">
                 <a href="#">分享二维码</a>
                 <div slot="title" style="background: white; width: 100%; height: 100%;">
@@ -64,7 +64,6 @@
         },
         data() {
             return {
-                qrcode_url: "/download/" + this.recode + "?from=qrcode",
                 is_editting_recode: false,
                 is_show_password: false,
                 is_need_password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != null && JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != "",
@@ -76,6 +75,17 @@
                 expiretime_setting_status: 0,
                 password_setting_status: 0,
             }
+        },
+        computed: {
+            copy_url: function() {
+                return  encodeURI(_global.domain_url + "download/" + this.recode + '?from=copyurl')
+            },
+            qrcode_url: function() {
+                return encodeURI(_global.domain_url + "download/" + this.recode + "?from=qrcode")
+            }
+        },
+        mounted() {
+            // updateCopyUrl(this)
         },
         watch: {
             'is_need_password': function() {

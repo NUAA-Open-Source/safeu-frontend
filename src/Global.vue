@@ -13,7 +13,7 @@ const domain_url = process.env.VUE_APP_CURRENTMODE === 'production'
     ? 'https://safeu.a2os.club/'
     : process.env.VUE_APP_CURRENTMODE === 'staging'
     ? 'https://test.safeu.a2os.club/'
-    : ''
+    : 'localhost:8080/'
 const version = 'v1/'
 const behavior_version = 'v1/'
 const error_code = {
@@ -45,5 +45,6 @@ export default {
     behavior_api_domain_url,
     behavior_api_url,
     error_code,
+    domain_url,
 }
 </script>
