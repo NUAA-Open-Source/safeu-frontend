@@ -26,12 +26,12 @@ export default {
   },
   mounted() {
     this.$axios.defaults.withCredentials = true
-    this.$axios.get(_global.domain_url + "csrf")
+    this.$axios.get(_global.api_domain_url + "csrf")
     .then(function(response) {
       var csrf_token = response.headers["x-csrf-token"]
       sessionStorage.setItem("csrf_token", csrf_token)
     })
-    this.$axios.get(_global.behavior_domain_url + "csrf")
+    this.$axios.get(_global.behavior_api_domain_url + "csrf")
     .then(function(response) {
       var csrf_token = response.headers["x-csrf-token"]
       sessionStorage.setItem("behavior_csrf_token", csrf_token)
@@ -61,7 +61,7 @@ body {
 }
 #app {
   position: absolute;
-  min-height: calc(100vh-0px);
+  min-height: calc(100vh);
   display: flex;
   flex-direction: column;
   margin-top: 0;

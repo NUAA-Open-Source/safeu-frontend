@@ -10,7 +10,7 @@
             </div>
             <p style="font-size: 12px; color: grey; margin: 8px 0" v-if="!is_editting_recode">点击提取码一键复制</p>
             <p style="font-size: 12px; color: grey; margin: 8px 0" v-else>&nbsp;</p>
-            <button class="copy-downloadurl-btn" v-clipboard:copy="'https://safeu.a2os.club/download/' + new_recode + '?from=copyurl'" v-clipboard:success="copysuccess" v-clipboard:error="copyerror">拷贝链接</button>
+            <button class="copy-downloadurl-btn" v-clipboard:copy="copy_url" v-clipboard:success="copysuccess" v-clipboard:error="copyerror">拷贝链接</button>
             <a-tooltip trigger="hover" overlayClassName="overlay" placement="bottom" style="margin-top: 12px">
                 <a href="#">分享二维码</a>
                 <div slot="title" style="background: white; width: 100%; height: 100%;">
@@ -64,7 +64,6 @@
         },
         data() {
             return {
-                qrcode_url: "/download/" + this.recode + "?from=qrcode",
                 is_editting_recode: false,
                 is_show_password: false,
                 is_need_password: JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != null && JSON.parse(window.localStorage.getItem("recode-" + this.recode)).password != "",
@@ -76,6 +75,17 @@
                 expiretime_setting_status: 0,
                 password_setting_status: 0,
             }
+        },
+        computed: {
+            copy_url: function() {
+                return  encodeURI(_global.domain_url + "download/" + this.recode + '?from=copyurl')
+            },
+            qrcode_url: function() {
+                return encodeURI(_global.domain_url + "download/" + this.recode + "?from=qrcode")
+            }
+        },
+        mounted() {
+            // updateCopyUrl(this)
         },
         watch: {
             'is_need_password': function() {
@@ -153,18 +163,22 @@
                                 that.$route.query.code = that.new_recode
                                 that.$message.success('设置成功');
                             } else if (xhr.status == 400) {
-                                if (JSON.parse(xhr.response).message == "reCode Repeat") {
+                                if (JSON.parse(xhr.response).err_code == 20307) {
                                     that.new_recode = that.recode
-                                    that.$message.error('该提取码已存在')
+                                    var error_code = JSON.parse(xhr.response).err_code
+                                    that.$error(error_code)
                                 } else {
                                     that.new_recode = that.recode
-                                    that.$message.error('设置失败')
+                                    var error_code = JSON.parse(xhr.response).err_code
+                                    that.$error(error_code)
                                 }
                             }
                         }
                     }
                     xhr.setRequestHeader("X-CSRF-TOKEN", csrf_token)
-                    xhr.send(JSON.stringify({"new_re_code": this.new_recode, "user_token": user_token}))
+                    var sha256 = require("js-sha256").sha256
+                    var password_sha256 = this.password == "" ? "" : sha256(this.password)
+                    xhr.send(JSON.stringify({"new_re_code": this.new_recode, "user_token": user_token, "auth": password_sha256}))
                 }
             },
 
@@ -198,7 +212,8 @@
                                 that.expiretime_setting_status = 0
                             }
                         } else {
-                            that.$message.error('密码设置失败')
+                            var error_code = JSON.parse(xhr.response).err_code
+                            that.$error(error_code)
                         }
                     }
                 }
@@ -217,7 +232,8 @@
                                 that.expiretime_setting_status = 0
                             }
                         } else {
-                            that.$message.error('下载次数设置失败')
+                            var error_code = JSON.parse(xhr.response).err_code
+                            that.$error(error_code)
                         }
                     }
                 }
@@ -236,7 +252,8 @@
                                 that.expiretime_setting_status = 0
                             }
                         } else {
-                            that.$message.error('有效期设置失败')
+                            var error_code = JSON.parse(xhr.response).err_code
+                            that.$error(error_code)
                         }
                     }
                 }
