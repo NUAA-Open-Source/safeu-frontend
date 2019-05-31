@@ -38,9 +38,17 @@ Vue.prototype.$event = function(event_name, from) {
     if (from == null) {
       xhr.send(JSON.stringify({"name": event_name}))
     } else {
-      xhr.send(JSON.stringify({"event": {"name": event_name, "src": from}}))
+      xhr.send(JSON.stringify({"name": event_name, "src": from}))
     }
   }
+
+Vue.prototype.$error = function(code) {
+  if (_global.error_code[code] == "") {
+    Vue.prototype.$message.error("未知错误") 
+  } else {
+    Vue.prototype.$message.error(_global.error_code[code])
+  }
+}
 
 // Vue.config.productionTip = false
 const DownloadView = () => import(/* webpackChunkName: "group-foo" */ './DownloadView.vue')

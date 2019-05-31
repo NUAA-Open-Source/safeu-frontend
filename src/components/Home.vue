@@ -2,7 +2,7 @@
   <div class="home-container">
     <div class="intro">
       <p class="intro-title name">SafeU</p>
-      <p class="intro-title">最便捷、安全</p>
+      <p class="intro-title">隐私、安全、易用</p>
       <p class="intro-title">的文件分享服务</p>
     </div>
     <div class="intro-sub">
