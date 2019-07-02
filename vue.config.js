@@ -2,6 +2,7 @@ module.exports = {
     publicPath: '/',
     outputDir: process.env.outputDir,
     assetsDir: 'static',
+    productionSourceMap: false,
     pages: {
         index: {
             entry: process.env.NODE_ENV === 'production'
