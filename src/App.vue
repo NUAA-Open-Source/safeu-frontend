@@ -24,6 +24,14 @@ export default {
   components: {
     Navbar,
   },
+  created() {
+    this.$notification.open({
+      message: '最新通知',
+      description: '由于备案原因，本站服务暂时不可用，给您带来不便，尽请谅解',
+      duration: 0,
+      icon: <a-icon type="warning" style="color: #ff5555" />,
+    })
+  },
   mounted() {
     this.$axios.defaults.withCredentials = true
     this.$axios.get(_global.api_domain_url + "csrf")
