@@ -25,12 +25,6 @@ export default {
     Navbar,
   },
   created() {
-    this.$notification.open({
-      message: '致歉信',
-      description: '因网站更换提供商备案，很抱歉前段时间 SafeU 停止服务给您带来的不便。在这段时间开发组增强了 SafeU 服务的安全性，只为能给用户提供更安全可靠的服务。[SafeU 全新版本即将上线，感谢您使用 SafeU 产品。]',
-      duration: 0,
-      icon: <a-icon type="warning" style="color: #ff5555" />,
-    })
   },
   mounted() {
     this.$axios.defaults.withCredentials = true
