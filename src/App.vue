@@ -24,6 +24,8 @@ export default {
   components: {
     Navbar,
   },
+  created() {
+  },
   mounted() {
     this.$axios.defaults.withCredentials = true
     this.$axios.get(_global.api_domain_url + "csrf")
