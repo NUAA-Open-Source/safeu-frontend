@@ -1,15 +1,15 @@
 @media (max-width: 700px) {
-    .uploadedfiles-container {
-        width: 90%;
-        margin-top: 20px;
-        margin-bottom: 40px;
-    }
+  .uploadedfiles-container {
+    width: 90%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
 }
 
 @media (min-width: 700px) {
-    .uploadedfiles-container {
-        width: 600px;
-        margin-top: 20px;
-        margin-bottom: 40px;
-    }
+  .uploadedfiles-container {
+    width: 600px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
 }

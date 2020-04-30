@@ -1,20 +1,20 @@
 <template>
-    <div id="uploadview">
-        <upload/>
-    </div>
+  <div id="uploadview">
+    <upload />
+  </div>
 </template>
 <script>
-import upload from './components/upload.vue'
+import upload from "./components/upload.vue";
 
 export default {
-    name: 'uploadview',
-    components: {
-        upload,
-    },
-    mounted() {
-        this.$event("upload", this.$route.query.from)
-    }
-}
+  name: "uploadview",
+  components: {
+    upload,
+  },
+  mounted() {
+    this.$event("upload", this.$route.query.from);
+  },
+};
 </script>
 <style>
 #uploadview {
