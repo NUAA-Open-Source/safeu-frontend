@@ -15,4 +15,7 @@ module.exports = {
           : "./public/index.dev.html",
     },
   },
+  devServer: {
+    disableHostCheck: true
+  }
 };

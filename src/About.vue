@@ -17,6 +17,11 @@
         <li><a href="https://github.com/RayZhao1998">@ninjiacoder</a></li>
         <li><a href="https://github.com/Villivateur">@vvzero</a></li>
       </ul>
+      <p>本项目已在 GitHub 上开源，并提供了私有化部署的模式，欢迎 Star.</p>
+      <ul>
+        <li><a href="https://github.com/NUAA-Open-Source/safeu-frontend">前端仓库</a></li>
+        <li><a href="https://github.com/NUAA-Open-Source/safeu-backend">后端仓库</a></li>
+      </ul>
     </div>
   </div>
 </template>
