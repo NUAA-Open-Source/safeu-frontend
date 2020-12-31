@@ -13,7 +13,7 @@
       <div style="text-align: center; margin: 2px 0px 10px;">
         <p>
           &copy;
-          <a href="https://a2os.club" style="color: #2c3e50;">A²OS</a> 2018-2020
+          <a href="https://a2os.club" style="color: #2c3e50;">A²OS</a> 2018-2021
           All rights reserved.
         </p>
       </div>
