@@ -6424,10 +6424,10 @@ pkg-up@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-plupload@^2.3.6:
-  version "2.3.6"
-  resolved "https://registry.npm.taobao.org/plupload/download/plupload-2.3.6.tgz#2608acf735d5e8db83248724d78d81757bb43866"
-  integrity sha1-Jgis9zXV6NuDJIck142BdXu0OGY=
+plupload@^2.3.9:
+  version "2.3.9"
+  resolved "https://registry.yarnpkg.com/plupload/-/plupload-2.3.9.tgz#09cc879ea4568f0bf340863d5612bb145824e6b2"
+  integrity sha512-IepB6QEuW0vDrHwXBiKx/c+Kou/2QVUwvddbCC+MxMmN3ThNXJEN9bZU2uaEbagLDAE1l+vWPaNVcE5noD1ojA==
 
 pluralize@^7.0.0:
   version "7.0.0"
